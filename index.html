@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Demo</title>
+		<link rel="stylesheet" type="text/css" href="css/game.css">
+		<link rel="stylesheet" type="text/css" href="css/popup.css">
+		<link rel="stylesheet" type="text/css" href="css/interface.css">
+	</head>
+	<body>
+		<div id="interface">
+			<div id="title">Les Veilleurs</div>
+			<div id="HUD">
+				<div id="soundBtn" class="hudBtn"></div>
+				<div id="resizeBtn" class="hudBtn"></div>
+			</div>
+		</div>
+		<div id="rewards">
+			<div id="veilleur1" class="veilleur"></div>
+			<div id="veilleur1" class="veilleur"></div>
+			<div id="veilleur1" class="veilleur"></div>
+			<div id="veilleur1" class="veilleur"></div>
+			<div id="veilleur1" class="veilleur"></div>
+			<div id="veilleur1" class="veilleur"></div>
+		</div>
+		<div id="craonnePop" class="popup">
+			<div id="btnLol"class="close_button"><div class="bar_quit"></div><div class="bar_quit bar_quit_vert"></div></div>
+			<div class="content">
+				<h1 class="popUpTitle">CRAONNE</h1>
+				<div class="innerContent">
+					<p class="popUpDef">Village situé en Picardie,<br/>lieu d’une bataille qui le détruisit<br/>complètement en 1914.</p>
+					<p class="popUpDataOne popUpDatas"><strong>77</strong> Habitants</p>
+					<p class="popUpDataTwo popUpDatas"><strong>8.9</strong> KM²</p>
+				</div>
+					<div class="btnVisite"><strong>Visiter la Ville</strong></div>
+			</div>
+		</div>
+		<div id="craonneGame" class="gamePopUp popup">
+			<div class="close_button">X</div>
+			<div class="content">
+				<h1 class="popUpTitle">CRAONNE</h1>
+				<div id="videos">
+					<video id="video1" controls src="videos/CraonneArriveeMaire.ogg">Votre Navigateur Web ne semble pas supporter cette vidéo</video>
+					<video id="video2" controls src="videos/CraonneBataille.ogg">Votre Navigateur Web ne semble pas supporter cette vidéo</video>
+					<video id="video3" controls src="videos/CraonneChanson.ogg">Votre Navigateur Web ne semble pas supporter cette vidéo</video>
+					<video id="video4" controls src="videos/CraonneMairePres.ogg">Votre Navigateur Web ne semble pas supporter cette vidéo</video>
+					<div id="closeVideo">Close Video</div>
+				</div>
+				<div class="rightFloat">
+					<div class="picture"></div>
+					<div class="question popUpDef">Bonjour, <br/>que veux-tu savoir sur Craonne ?</div>
+				</div>
+				<div class="popUpLinks">
+					<div id="btnPart1" class="btn_part">Arrivée du maire</div>
+					<div id="btnPart2" class="btn_part">Bataille Craonne</div>
+					<div id="btnPart3" class="btn_part">Chanson Craonne</div>
+					<div id="btnPart4" class="btn_part">Maire Presentation Craonne</div>
+				</div>
+			</div>
+		</div>
+		<div id="rootDiv">
+			<canvas id="renderCanvas"></canvas>
+		</div>
+			<canvas style="position: absolute" id="canvasMiniMap"></canvas>
+	</body>
+	<script src="js/lib/babylon.min.js"></script>
+	<script src="js/lib/mouse.js"></script>
+	<script src="js/lib/ground.js"></script>
+	<script src="js/lib/jquery.js"></script>
+
+	<script src="js/tree.swf"></script>
+	<script src="js/game.js"></script>
+	<script src="js/scene.js"></script>
+	<script src="js/interface.js"></script>
+	<script src="js/popup.js"></script>
+
+	<dl id="iTvScroller">
+	    <dt>Sarajevo</dt>
+	    <dd>28 juin 1914: Assassinat de l'Archiduc François-Ferdinand à Sarajevo</dd>
+	    
+	    <dt>Serbie</dt>
+	    <dd>28 juillet 1914: L'Autriche-Hongrie déclare la guerre à la Serbie</dd>
+	    
+	    <dt>Debut de la guerre</dt>
+	    <dd>1 août 1914: L'Allemagne déclare la guerre à la Russie / la France ordonne la mobilisation générale</dd>
+	    
+	    <dt>Allemagne</dt>
+	    <dd>3 août 1914: L'Allemagne déclarera la guerre à la France</dd>
+	    
+	    <dt>Belgique</dt>
+	    <dd>4 août 1914: Les Allemands envahissent la Belgique</dd>
+
+	   	<dt>France</dt>
+	    <dd>22 août 1914: Première bataille des Ardennes</dd>
+
+	    <dt>Pruce</dt>
+	    <dd>30 août 1914: Défaite russe à Tannenberg</dd>
+
+	    <dt>France</dt>
+	    <dd>3 septembre 1914: La Triple-entente officialisée</dd>
+
+	    <dt>France</dt>
+	    <dd>12 septembre 1914: Victoire française sur la Marne</dd>
+
+	    <dt>Allemagne</dt>
+	    <dd>5 octobre 1914: Premier combat aérien</dd>
+
+	    <dt>Belgique</dt>
+	    <dd>17 octobre 1914: Les écluses stoppent l'avancée allemande sur le front de l'Yser</dd>
+
+	    <dt>Chili</dt>
+	    <dd>1 novembre 1914: Victoire allemande dans la bataille de Coronel (bataille navale)</dd>
+
+	    <dt>Turquie</dt>
+	    <dd>5 novembre 1914: La France et la Grande-Bretagne déclarent la guerre à la Turquie</dd>
+
+	    <dt>îles Falkland</dt>
+	    <dd>8 décembre 1914: Bataille des Falkland</dd>
+
+	    <dt>Belgique</dt>
+	    <dd>22 avril 1915: La première utilisation de gaz asphyxiants</dd>
+	</dl>
+
+	<script type="text/javascript">
+	    $(function() {
+	       $('#iTvScroller').iTvScroller();
+	    });
+	</script>
+
+</html>

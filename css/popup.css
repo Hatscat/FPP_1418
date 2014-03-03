@@ -1,0 +1,266 @@
+body
+{
+	color: white;
+}
+.popup
+{
+	position: absolute;
+	padding: 10px;
+	background-color: #545454;
+	margin: 5%;
+	width: 50%;
+	height: 50%;
+	max-width: 500px;
+	max-height: 700px;
+	min-width: 300px;
+	display: none;
+}
+
+.content
+{
+	
+	background-color: #cfcfcf;
+	background: url(../img/craonne.jpg) no-repeat center bottom;
+	-webkit-background-size: cover;
+	/*margin: 15px;*/
+}
+
+
+
+.close_button
+{
+	width: 14px;
+	height: 14px;
+	padding: 2px;
+	background-color: #444;
+	position: absolute;
+	display: inline-block;
+	font-weight: bolder;
+	text-align: center;
+	float: right;
+	-webkit-transition: all 0.3s;
+	cursor: pointer;
+	margin: -10px;
+}
+
+.close_button:hover
+{
+	background-color: #9b9b9b;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3)
+}
+
+.bar_quit
+{
+	-webkit-transform: rotate(45deg);
+	background-color: white;
+	width: 2px;
+	height: 14px;
+	margin-left: 6px;
+	position: absolute;
+}
+
+.bar_quit_vert
+{
+	background-color: white;
+	width: 14px;
+	height: 2px;
+	margin-top: 5px;
+	margin-left: 0px;
+	position: absolute;
+}
+
+h1
+{
+	background-color: #545454;
+	color: white;
+	font-size: 32px;
+	margin: -10px 0 0 0;
+	padding: 16px;
+}
+
+.popUpDef
+{
+	background-color: #545454;
+	font-size: 12px;
+	text-transform: uppercase;
+	width: 270px;
+	height: auto;
+	text-align: right;
+	color: white;
+	padding: 6px;
+	float: right;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5);
+	margin-top: 26px;
+	white-space: normal;
+}
+
+.innerContent
+{
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5) inset
+}
+
+.popUpDataOne
+{
+	top: 160px;
+
+}
+
+.popUpDataTwo
+{
+	top: 230px;
+
+}
+
+.popUpDatas
+{
+	font-size: 20px;
+	text-transform: uppercase;
+	font-weight: bold;
+	position: absolute;
+}
+.popUpDatas strong
+{
+	background-color: #545454;
+	padding: 10px;
+	box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.5)
+}
+
+.btnVisite
+{
+	font-size: 20px;
+	text-align: right;
+	text-transform: uppercase;
+	font-weight: bold;
+	margin-top: -130px;
+	padding-top: 12px;
+	background: url(../img/visitbutton.jpg) repeat-y center #545454;
+	-webkit-transition: all 0.5s;
+	cursor: pointer;
+	color: #959595;
+}
+
+.btnVisite strong
+{
+	margin-right: 20px;
+}
+
+.btnVisite:hover
+{
+	background-position: 110px center;
+	color: white;
+}
+
+
+/* SECOND POP UP */
+
+.gamePopUp
+{
+	position: absolute;
+	display: none;
+	width: 80%;
+	height: 80%;
+	margin: 5% 0 0 25%;
+	padding: 10px;
+
+	max-width: 1200px;
+}
+
+.gamePopUp .close_button
+{
+}
+
+.question
+{
+	width: 100%;
+	margin-top: 0px;
+}
+
+.popUpLinks
+{
+	width: -moz-calc(100% - 310px);
+  	width: -webkit-calc(100% - 310px);
+  	width: calc(100% - 310px);
+  	min-width: 310px;
+  	margin-top: 20px;
+  	height: 80px;
+}
+
+.btn_part
+{
+	width: 100%;
+	height: 20px;
+	background-color: rgba(0, 0, 0, 0.3);
+	padding-left: 1%;
+	cursor: pointer;
+}
+
+.btn_part:hover
+{
+	background-color: rgba(0, 0, 0, 0.5)
+}
+
+#craonneGame .picture
+{
+	background-color: black;
+	width: 100%;
+	height: 200px;
+	margin-top: 20px;
+	background-image: url(../img/maire.png);
+	-webkit-background-size: cover;
+}
+
+.rightFloat
+{
+	float: right;
+	width: 310px;
+	height: 300px;
+}
+
+#videos
+{
+	display: none;
+	position: absolute;
+	width: -webkit-calc(100% - 20px);
+	height: -webkit-calc(100% - 80px);
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+video
+{
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+}
+
+#closeVideo 
+{
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.3);
+	width: 60px;
+	height: 20px;
+}
+
+#rewards
+{
+	height: 50px;
+	position: absolute;
+	margin-top: 30px;
+	float: right;
+}
+
+.veilleur
+{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background-color: rgba(0, 0, 0, 0.3)
+}
+
+.veilleurActive
+{
+	background-image: url(../img/maire.png);
+	-webkit-background-size: cover;
+	box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,23 @@
+
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'F:\VIDEOS~1\PRÉSEN~1.MOV':
+  Metadata:
+    major_brand     : qt  
+    minor_version   : 0
+    compatible_brands: qt  
+    creation_time   : 2013-12-30 11:59:21
+  Duration: 00:00:53.68, start: 0.000000, bitrate: 13356 kb/s
+    Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709), 1920x1080, 13207 kb/s, SAR 1:1 DAR 16:9, 25 fps, 25 tbr, 2500 tbn, 50 tbc (default)
+    Metadata:
+      creation_time   : 2013-12-30 11:59:22
+      handler_name    : Core Media Data Handler
+      timecode        : 00:00:00:00
+    Stream #0:1(und): Audio: aac (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 109 kb/s (default)
+    Metadata:
+      creation_time   : 2013-12-30 11:59:22
+      handler_name    : Core Media Data Handler
+    Stream #0:2(und): Data: none (tmcd / 0x64636D74) (default)
+    Metadata:
+      creation_time   : 2013-12-30 11:59:22
+      handler_name    : Core Media Data Handler
+      timecode        : 00:00:00:00
+At least one output file must be specified

@@ -1,0 +1,43 @@
+#interface
+{
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.3);
+	height: 30px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+#title
+{
+	width: 140px;
+	margin-top: 5px;
+}
+#HUD
+{
+	position: absolute;	
+	margin: -30px;
+	margin-left: 98%;
+}
+
+.hudBtn
+{
+	background: url(../img/icon.png);
+	display: inline-block;
+	height: 12px;
+	width: 12px;
+	cursor: pointer;
+}
+
+#soundBtn
+{
+	background-position : -12px 3px;
+}
+
+#soundBtn:active
+{
+	background-position : -24px 3px;
+}
+
+#resizeBtn
+{
+}
