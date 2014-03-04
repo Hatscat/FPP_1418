@@ -82,10 +82,24 @@ window.onload = function ()
 			X_axis : 0,
 			Y_axis : 0
 		},
-		popUp : false,
-		popUpCraonne : false,
-		videosShown : false
+		popUps : {
+			craonne : {
+				title : "craonne",
+			 	description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+			 	datas : ["8.9", "km²", "76", "habitants"],
+			 	discussion : [
+			 		["Question 1", "Réponse 1"],
+			 		["Question 2", "Réponse 2"],
+			 		["Question 3", "Réponse 3"],
+			 		["Question 4", "Réponse 4"]
+			 	],
+			 	veilleur : ["Noël Genteur", "maire"],
+			 	baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
+			 	video : true
+			}
+		}
 	};
+		initPopUp(config);
 
 	window.onkeydown = function (e)
 	{
@@ -165,10 +179,11 @@ window.onload = function ()
 				{
 					config.scene.render();
 				});
-				window.addEventListener("resize", function ()
+				window.onresize = function ()
 				{
 					config.engine.resize();
-				});
+					centerPopUp();
+				};
 			});
 		});
 	}

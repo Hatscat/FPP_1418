@@ -1,63 +1,52 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>14-18</title>
-		<link rel="stylesheet" type="text/css" href="css/game.css">
-		<link rel="stylesheet" type="text/css" href="css/popup.css">
-		<link rel="stylesheet" type="text/css" href="css/interface.css">
-	</head>
-	<body>
-		<div id="interface">
-			<div id="title">Les Veilleurs</div>
-			<div id="HUD">
-				<div id="soundBtn" class="hudBtn"></div>
-				<div id="resizeBtn" class="hudBtn"></div>
+<head>
+	<meta charset="utf-8">
+	<title>14-18</title>
+	<link rel="stylesheet" type="text/css" href="css/game.css">
+	<link rel="stylesheet" type="text/css" href="css/interface.css">
+</head>
+<body>
+	<div id="interface">
+		<div id="title">Les Veilleurs</div>
+		<div id="HUD">
+			<div id="soundBtn" class="hudBtn"></div>
+			<div id="resizeBtn" class="hudBtn"></div>
+		</div>
+	</div>
+	<div id="pop_up">
+		<div id="pop_content">
+			<div id="step_preview">
+				<h1></h1>
+				<span class="datas" id="datas_one">
+					<span class="number"></span>
+					<span class="value"></span>
+				</span>
+				<span class="datas" id="datas_two">
+					<span class="number"></span>
+					<span class="value"></span>
+				</span>
+				<p></p>
 			</div>
-		</div>
-		<div id="rewards">
-			<div id="veilleur1" class="veilleur"></div>
-			<div id="veilleur1" class="veilleur"></div>
-			<div id="veilleur1" class="veilleur"></div>
-			<div id="veilleur1" class="veilleur"></div>
-			<div id="veilleur1" class="veilleur"></div>
-			<div id="veilleur1" class="veilleur"></div>
-		</div>
-		<div id="craonnePop" class="popup">
-			<div id="btnLol"class="close_button"><div class="bar_quit"></div><div class="bar_quit bar_quit_vert"></div></div>
-			<div class="content">
-				<h1 class="popUpTitle">CRAONNE</h1>
-				<div class="innerContent">
-					<p class="popUpDef">Village situé en Picardie,<br/>lieu d’une bataille qui le détruisit<br/>complètement en 1914.</p>
-					<p class="popUpDataOne popUpDatas"><strong>77</strong> Habitants</p>
-					<p class="popUpDataTwo popUpDatas"><strong>8.9</strong> KM²</p>
+			<div id="step">
+				<div id="leftPart">
+					<div id="popTitle">
+						<h2 id="ville"></h2>
+						<h2 id="veilleur"></h2>
+						<h2 id="statut"></h2>
+					</div>
+					<div id="linkToVideo">
+						<div id="veilleur_photo"></div>
+					</div>
 				</div>
-					<div class="btnVisite"><strong>Visiter la Ville</strong></div>
-			</div>
-		</div>
-		<div id="craonneGame" class="gamePopUp popup">
-			<div class="close_button">X</div>
-			<div class="content">
-				<h1 class="popUpTitle">CRAONNE</h1>
-				<div id="videos">
-					<video id="video1" controls src="videos/CraonneArriveeMaire.ogg">Votre Navigateur Web ne semble pas supporter cette vidéo</video>
-					<video id="video2" controls src="videos/CraonneBataille.ogg">Votre Navigateur Web ne semble pas supporter cette vidéo</video>
-					<video id="video3" controls src="videos/CraonneChanson.ogg">Votre Navigateur Web ne semble pas supporter cette vidéo</video>
-					<video id="video4" controls src="videos/CraonneMairePres.ogg">Votre Navigateur Web ne semble pas supporter cette vidéo</video>
-					<div id="closeVideo">Close Video</div>
-				</div>
-				<div class="rightFloat">
-					<div class="picture"></div>
-					<div class="question popUpDef">Bonjour, <br/>que veux-tu savoir sur Craonne ?</div>
-				</div>
-				<div class="popUpLinks">
-					<div id="btnPart1" class="btn_part">Arrivée du maire</div>
-					<div id="btnPart2" class="btn_part">Bataille Craonne</div>
-					<div id="btnPart3" class="btn_part">Chanson Craonne</div>
-					<div id="btnPart4" class="btn_part">Maire Presentation Craonne</div>
+				<div id="rightPart">
+					<div id="discussion"></div>
 				</div>
 			</div>
+			<div id="quit_button"></div>
+			<div id="go_button">Y Aller</div>
 		</div>
+	</div>
 		<div id="rootDiv">
 			<canvas id="renderCanvas"></canvas>
 		</div>
@@ -71,4 +60,4 @@
 	<script src="js/interface.js"></script>
 	<script src="js/popup.js"></script>
 
-</html>
+	</html>
