@@ -11,7 +11,6 @@ function initPopUp(config)
 {
 	//$(".popup").hide()
 	centerPopUp();
-	console.log(config.popUps.craonne);
 	var actualPopUp = config.popUps.craonne;
 	$("#pop_content h1").text(actualPopUp.title)
 	$("#pop_content p").text(actualPopUp.description);
@@ -26,13 +25,22 @@ function initPopUp(config)
 	$("#ville").text(actualPopUp.title);
 	$("#veilleur").text(actualPopUp.veilleur[0]);
 	$("#statut").text(actualPopUp.veilleur[1]);
+	$("#introduction").text(actualPopUp.baseline);
+	if(actualPopUp.video)
+	{
+		$("#link").append("Voir la vidéo")
+	}
 	$("#veilleur_photo").css("background-image", "url(img/popUp/"+ actualPopUp.title + "/veilleur.png)");
 	//$("#pop_content #people").text(actualPopUp.people + "habitants");
 	$("#pop_content").css("background-image", "url(img/popUp/"+ actualPopUp.title + "/background.png)");
 	for(var i = actualPopUp.discussion.length; i--;)
 	{
-		$("#discussion").append("<div class='question'>" + actualPopUp.discussion[i][0] + "<div class='reponse'>" + actualPopUp.discussion[i][1] + "</div>")
+		$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + actualPopUp.discussion[i][0] + "<div id='reponse_" + i + "'class='reponse'>" + actualPopUp.discussion[i][1] + "</div>")
 	}
+mouse.target_3D = null;
+//config.scene.activeCamera.attachControl(config.canvas); 
+config.inputs.bPause = false;
+//config.popUp = false;
 }
 
 // Input : none
@@ -48,7 +56,12 @@ function centerPopUp()
 	else
 		popup.style.top = $("#interface").innerHeight() + "px";
 }
-/*mouse.target_3D = null;
-config.scene.cameras[0].attachControl(config.canvas); 
-config.inputs.bPause = false;
-config.popUp = false; */
+
+// Inputs : Index de la question cliquée
+// Remonte le volet de toutes les réponses et descendre celui de la question cliquée.
+// @author : Youle
+function reponseToggle(index)
+{
+	$(".reponse").slideUp();
+	$("#reponse_" + index).slideDown();
+}

@@ -183,7 +183,7 @@ html, body, div
 {
     width: 205px;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3)
+    float: left
 }
 
 #popTitle
@@ -191,11 +191,14 @@ html, body, div
     color: #6b5b4a;
     height : auto;
     width: 100%;
+    margin: 10px auto;
+    padding: 10px;
 }
 
 #popTitle h2
 {
     margin : 0;
+    line-height: 13pt
 }
 
 #ville, #statut
@@ -209,17 +212,15 @@ html, body, div
 }
 #ville
 {
-    text-align: left;
     top: 10px;
 }
 #veilleur
 {
-    text-align: center
+    font-size: 15pt;
 }
 #statut
 {
     text-transform: capitalize;
-    text-align: right
 }
 #linkToVideo
 {
@@ -231,12 +232,49 @@ html, body, div
 
 #veilleur_photo
 {
-    background-color: rgba(0, 0, 0, 0.3);
     width: 135px;
     height: 151px;
     margin: 14px 0 0 11px;
+    background-size:100% 100%;
+}
+
+#rightPart
+{
+    width: 415px;
+    height: 100%;
+}
+
+.question
+{
+    height: auto;
+    cursor: pointer;
+    background-color: #e23737;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    font-weight: bold
 }
 .reponse
 {
     display: none;
+    background-color: #c1b3a4;
+    color: #6b5b4a;
+    padding: 10px 0 10px 20px;
+    margin-left: -20px
+}
+
+#introduction
+{
+    height: auto;
+    padding: 10px 20px 10px 0 ;
+    margin-top: 
+}
+
+#link
+{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding-top: 5px
 }
