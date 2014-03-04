@@ -19,7 +19,7 @@ function initPopUp(config)
 	$("#pop_content #datas_two .number").text(actualPopUp.datas[2]);
 	$("#pop_content #datas_two .value").text(actualPopUp.datas[3]);
 	$("#pop_content p").css("margin-top", - $("#pop_content p").innerHeight() + "px")
-	
+	document.getElementById("video").src = "img/popUp/" + actualPopUp.title + "/video.ogg)"
 	$("#go_button").hide();
 
 	$("#ville").text(actualPopUp.title);
@@ -65,3 +65,9 @@ function reponseToggle(index)
 	$(".reponse").slideUp();
 	$("#reponse_" + index).slideDown();
 }
+
+$("#link").click(function()
+{
+	$("#step").slideUp();
+	$("#videoScreen").slideDown();
+})
