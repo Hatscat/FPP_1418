@@ -1,4 +1,4 @@
-function createScene (config, callback)
+function create_globaleMap_scene (config, callback)
 {
 	var scene = new BABYLON.Scene(config.engine);
 	config.light = new BABYLON.PointLight(config.babylon_light.name, new BABYLON.Vector3(config.babylon_light.x, config.babylon_light.y, config.babylon_light.z), scene);
@@ -14,6 +14,7 @@ function createScene (config, callback)
 
 	scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
 	scene.fogDensity = config.fogDensity;
+	
 
 	scene.registerBeforeRender(function ()
 	{
@@ -48,7 +49,7 @@ function createScene (config, callback)
 		{
 			displayPopUp(config);
 		}
-		if (!config.popUp && mouse.target_3D && mouse.target_3D.targeted_mesh.name == "veilleurC")
+		if (!config.popUp && mouse.target_3D && mouse.target_3D.targeted_mesh.name == config.collider_name)
 		{
 			config.popUp = true;
 			config.inputs.bPause = true;
@@ -79,7 +80,7 @@ function createGroundMesh (scene, config)
 {
 	var ground = createGroundFromData("ground", config.mapData, config.ground.mapWidth, config.ground.mapHeight, config.ground.subdivisions, scene, false);
 	var groundMaterial = new BABYLON.StandardMaterial("groundMat", scene);
-	groundMaterial.diffuseTexture = new BABYLON.Texture(config.images.map_texture, scene);
+	groundMaterial.diffuseTexture = new BABYLON.Texture(config.images.globaleMap_texture, scene);
 	groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
 	groundMaterial.bumpTexture = new BABYLON.Texture(config.images.leave_normal, scene);
 	groundMaterial.bumpTexture.uScale = config.ground.bump_width_subdivisions;
@@ -200,9 +201,9 @@ function createBubble (scene, townMesh, data)
 	return bubble;
 };
 
-function createCollider (scene, data)
+function createCollider (scene, data, config)
 {
-	var collider = BABYLON.Mesh.CreateSphere("veilleurC", data.collider_poly, data.collider_size, scene);
+	var collider = BABYLON.Mesh.CreateSphere(config.collider_name, data.collider_poly, data.collider_size, scene);
 	var colliderMaterial = new BABYLON.StandardMaterial("colliderMaterial", scene);
 	colliderMaterial.alpha = 0;
 	collider.position.x = data.x;
@@ -226,7 +227,7 @@ function createVillage (scene, config, data)
 	village.mesh.scaling.y = data.scale;
 	village.mesh.scaling.z = data.scale;
 	village.bubble = createBubble(scene, village.mesh, data);
-	village.collider = createCollider(scene, data);
+	village.collider = createCollider(scene, data, config);
 	return village;
 };
 

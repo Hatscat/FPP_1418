@@ -4,8 +4,8 @@ window.onload = function ()
 	var config = {
 
 		images : {
-			map_texture : "img/satmap.jpg",
-			heightmap : "img/heightMap.jpg",
+			globaleMap_texture : "img/satmap.jpg",
+			globaleMap_heightmap : "img/heightMap.jpg",
 			skybox : "img/skybox/skybox",
 			wood_normal : "img/normal_trunk.jpg",
 			leave_normal : "img/normal_leaves.jpg"
@@ -72,6 +72,15 @@ window.onload = function ()
 			}
 
 		},
+		collider_name : "veilleurC",
+		popUps : {
+	 		craonne : {
+	 			title : "Craonne",
+	 			description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.",
+	 			area : 8.9,
+	 			people : 76
+	 		}
+	 	},
 
 		oldTimestamp : Date.now(),
 		canvas : document.getElementById("renderCanvas"),
@@ -137,39 +146,41 @@ window.onload = function ()
 	{
 		config.engine = new BABYLON.Engine(config.canvas, true);
 
-		extractDataFromHeightMap(config.images.heightmap, config.ground.mapMaxHeight, function (data)
+		extractDataFromHeightMap(config.images.globaleMap_heightmap, config.ground.mapMaxHeight, function (data)
 		{
 			config.mapData = data;
 
-			createScene(config, function (scene)
-			{
-				config.scene = scene;
-				config.scene.activeCamera.attachControl(config.canvas);
-				
-				document.onmouseup = function (e)
-				{
-					var pickResult = config.scene.pick(e.clientX, e.clientY);
-					var normPosDown = mouse.target.x * mouse.target.x + mouse.target.y * mouse.target.y;
-					var normPosUp = mouse.x * mouse.x + mouse.y * mouse.y;
-					var marginRatio = config.moveToMouseUpSensitivity;
-					if (!config.popUp && pickResult.hit && Math.abs(normPosDown - normPosUp) < normPosUp * marginRatio)
-					{
-						mouse.target_3D = {
-							x : pickResult.pickedPoint.x,
-							z : pickResult.pickedPoint.z,
-							targeted_mesh : pickResult.pickedMesh
-						};
-					}
-				};
-				config.engine.runRenderLoop(function ()
-				{
-					config.scene.render();
-				});
-				window.addEventListener("resize", function ()
-				{
-					config.engine.resize();
-				});
-			});
+			create_globaleMap_scene(config, function(scene){newSceneCallback(scene, config)});
 		});
 	}
+};
+
+function newSceneCallback (scene, config)
+{
+	config.scene = scene;
+	config.scene.activeCamera.attachControl(config.canvas);
+	
+	document.onmouseup = function (e)
+	{
+		var pickResult = config.scene.pick(e.clientX, e.clientY);
+		var normPosDown = mouse.target.x * mouse.target.x + mouse.target.y * mouse.target.y;
+		var normPosUp = mouse.x * mouse.x + mouse.y * mouse.y;
+		var marginRatio = config.moveToMouseUpSensitivity;
+		if (!config.popUp && pickResult.hit && Math.abs(normPosDown - normPosUp) < normPosUp * marginRatio)
+		{
+			mouse.target_3D = {
+				x : pickResult.pickedPoint.x,
+				z : pickResult.pickedPoint.z,
+				targeted_mesh : pickResult.pickedMesh
+			};
+		}
+	};
+	config.engine.runRenderLoop(function ()
+	{
+		config.scene.render();
+	});
+	window.onresize = function ()
+	{
+		config.engine.resize();
+	};
 };
