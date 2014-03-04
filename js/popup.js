@@ -1,89 +1,73 @@
 function displayPopUp(config)
 {
-	if(!!config.popUpCraonne)
-	{
-
-		$("#veilleur1").addClass("veilleurActive")
-		$("#craonneGame").slideDown(); // document.getElementById ?
-
-		$("#btnPart1").click(function()
-		{
-			$("#videos").fadeIn(function(){$("#video1").fadeIn()});
-			config.videosShown = true;
-		});
-		$("#btnPart2").click(function()
-		{
-			$("#videos").fadeIn(function(){$("#video2").fadeIn()});
-			config.videosShown = true;
-		});
-		$("#btnPart3").click(function()
-		{
-			$("#videos").fadeIn(function(){$("#video3").fadeIn()});
-			config.videosShown = true;
-		});
-		$("#btnPart4").click(function()
-		{
-			$("#videos").fadeIn(function(){$("#video4").fadeIn()});
-			config.videosShown = true;
-		});
-
-		if(config.videosShown)
-		{
-			$("#closeVideo").click(function()
-			{
-				config.videosShown = false;
-			});
-		}
-		if(!config.videosShown)
-		{
-			$("#videos").fadeOut()
-		}
-	}
-	else if(!!config.popUp)
-	{
-		$("#craonnePop").slideDown();
-
-
-
-		$(".btnVisite").click(function()
-		{
-			$(".popup").slideUp()
-			config.inputs.bPause = false;
-			config.scene.cameras[0].attachControl(config.canvas); 
-		})
-	}
 	
 
-	if(!config.popUp && !config.popUpCraonne)
-	{
-		$(".popup").slideUp(function(event){
-			mouse.target_3D = null;
-			config.inputs.bPause = false;
-		});
-	}
-
-
-	if(config.popUp || config.popUpCraonne)
-	{
-		config.inputs.bPause = true;
-		config.scene.cameras[0].detachControl(config.canvas);
-
-		$(".close_button").click(function(){
-			config.popUp = false;
-			config.popUpCraonne = false;
-			config.scene.cameras[0].attachControl(config.canvas);
-			mouse.target_3D = null;
-		})
-		document.getElementById("renderCanvas").click(function()
-		{
-			config.popUp = false; 
-			config.scene.cameras[0].attachControl(config.canvas); 
-		})
-	}
 }
 
-
+// Input : config (json)
+// Initialise la pop-Up en position et contenu
+// @author : Jules D.
 function initPopUp(config)
 {
-	$(".popup").hide()
+	//$(".popup").hide()
+	centerPopUp();
+	var actualPopUp = config.popUps.craonne;
+	$("#pop_content h1").text(actualPopUp.title)
+	$("#pop_content p").text(actualPopUp.description);
+	$("#pop_content #datas_one .number").text(actualPopUp.datas[0]);
+	$("#pop_content #datas_one .value").text(actualPopUp.datas[1]);
+	$("#pop_content #datas_two .number").text(actualPopUp.datas[2]);
+	$("#pop_content #datas_two .value").text(actualPopUp.datas[3]);
+	$("#pop_content p").css("margin-top", - $("#pop_content p").innerHeight() + "px")
+	document.getElementById("video").src = "img/popUp/" + actualPopUp.title + "/video.ogg)"
+	$("#go_button").hide();
+
+	$("#ville").text(actualPopUp.title);
+	$("#veilleur").text(actualPopUp.veilleur[0]);
+	$("#statut").text(actualPopUp.veilleur[1]);
+	$("#introduction").text(actualPopUp.baseline);
+	if(actualPopUp.video)
+	{
+		$("#link").append("Voir la vidéo")
+	}
+	$("#veilleur_photo").css("background-image", "url(img/popUp/"+ actualPopUp.title + "/veilleur.png)");
+	//$("#pop_content #people").text(actualPopUp.people + "habitants");
+	$("#pop_content").css("background-image", "url(img/popUp/"+ actualPopUp.title + "/background.png)");
+	for(var i = actualPopUp.discussion.length; i--;)
+	{
+		$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + actualPopUp.discussion[i][0] + "<div id='reponse_" + i + "'class='reponse'>" + actualPopUp.discussion[i][1] + "</div>")
+	}
+mouse.target_3D = null;
+//config.scene.activeCamera.attachControl(config.canvas); 
+config.inputs.bPause = false;
+//config.popUp = false;
 }
+
+// Input : none
+// Centre la pop-up au milieu en x et au 1/4 en y
+// @author : Jules D.
+function centerPopUp()
+{
+	var popup = document.getElementById("pop_up");
+	popup.style.left = (window.innerWidth - $("#pop_up").innerWidth()) / 2  + "px";
+
+	if(window.innerHeight > 550)
+		popup.style.top = (window.innerHeight -  $("#pop_up").innerHeight()) / 4  + "px";
+	else
+		popup.style.top = $("#interface").innerHeight() + "px";
+}
+
+// Inputs : Index de la question cliquée
+// Remonte le volet de toutes les réponses et descendre celui de la question cliquée.
+// @author : Youle
+function reponseToggle(index)
+{
+	$(".reponse").slideUp();
+	$("#reponse_" + index).slideDown();
+}
+
+$("#link").click(function()
+{
+	$("#step").slideUp();
+	$("#videoScreen").slideDown();
+})

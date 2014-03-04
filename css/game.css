@@ -5,7 +5,7 @@ html, body, div
 	padding: 0;
 	margin: 0;
 	overflow: hidden;
-	font-family: Verdana;
+	font-family: Helvetica;
 	cursor: default;
 }
 #renderCanvas
@@ -56,4 +56,231 @@ html, body, div
 #iTvScroller dt.second {
     /*Le 2ème titre aura un fond rouge et une partie noire*/
     background:#FF0000 url('img/red-black.png') center left;
+}
+
+/* 
+    88888888ba    ,ad8888ba,   88888888ba         88        88 88888888ba   
+    88      "8b  d8"'    `"8b  88      "8b        88        88 88      "8b  
+    88      ,8P d8'        `8b 88      ,8P        88        88 88      ,8P  
+    88aaaaaa8P' 88          88 88aaaaaa8P'        88        88 88aaaaaa8P'  
+    88""""""'   88          88 88""""""' aaaaaaaa 88        88 88""""""'    
+    88          Y8,        ,8P 88        """""""" 88        88 88           
+    88           Y8a.    .a8P  88                 Y8a.    .a8P 88           
+    88            `"Y8888Y"'   88                  `"Y8888Y"'  88           
+*/
+/* FIRST POP-UP */
+#pop_up
+{
+    position : absolute;
+    width: 636px;
+    height: 435px;
+    color: #6b5b4a;
+
+}
+
+#pop_content
+{
+    width: 620px;
+    height: 419px;
+    border: 3px solid #e23737;
+    background-color: #d8cdc0;
+    margin-top: 10px;
+    background: center center no-repeat;
+    
+}
+#step_preview
+{
+    font-weight: bold;
+    display: none;
+}
+#pop_content h1, #pop_content p
+{
+    text-transform: uppercase;
+}
+
+#pop_content h1
+{
+    font-size: 80pt;
+    margin: 0;
+    text-align: center;
+}
+
+#pop_content p
+{
+    width : 50%;
+    float: right;
+    text-align: right;
+    margin-right: 10px;
+    color: #443527;
+    font-weight: bold
+}
+
+#pop_content span
+{
+    display: block;  
+    margin: 0;
+}
+
+#pop_content .datas
+{
+    text-transform: uppercase;
+    margin-left: 20px
+}
+
+#pop_content .datas .number
+{
+    font-size: 80pt;
+    text-shadow: 0 5px 0 white;
+}
+
+#pop_content .datas .value
+{
+    font-size: 16pt;
+    text-shadow: 0 2px 0 white;
+    margin-top: -15px
+}
+
+#quit_button, #go_button
+{
+    position: absolute;
+    background-color: #e23737;
+    color: white;
+    text-align: center;
+    line-height: 0px;
+    font-size: 14pt;
+    cursor: pointer;
+    -webkit-transition: background-color 0.3s;
+}
+#quit_button
+{
+    width: 44px;
+    height: 44px;
+    background: url(../img/popUp/misc/quit_cross.png) center center #e23737 no-repeat;
+    top: 0px;
+    left: 592px;
+}
+
+#go_button
+{
+    width: 60px;
+    height: auto;
+    padding: 20px 20px 20px 15px;
+    top: 180px;
+    left: 542px;
+}
+
+#go_button:hover, #quit_button:hover
+{
+    background-color: #bc2b2b;
+}
+
+#step
+{
+    
+}
+
+#step #leftPart
+{
+    width: 205px;
+    height: 100%;
+    float: left
+}
+
+#popTitle
+{
+    color: #6b5b4a;
+    height : auto;
+    width: 100%;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+#popTitle h2
+{
+    margin : 0;
+    line-height: 13pt
+}
+
+#ville, #statut
+{
+    opacity: 0.5;
+    font-size: 12pt;
+}
+#ville, #veilleur
+{
+    text-transform: uppercase;
+}
+#ville
+{
+    top: 10px;
+}
+#veilleur
+{
+    font-size: 15pt;
+}
+#statut
+{
+    text-transform: capitalize;
+}
+#linkToVideo
+{
+    background-color: #e23737;
+    width: 158px;
+    height: 196px;
+    margin: 10px auto;
+}
+
+#veilleur_photo
+{
+    width: 135px;
+    height: 151px;
+    margin: 14px 0 0 11px;
+    background-size:100% 100%;
+}
+
+#rightPart
+{
+    width: 415px;
+    height: 100%;
+}
+
+.question
+{
+    height: auto;
+    cursor: pointer;
+    background-color: #e23737;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    font-weight: bold
+}
+.reponse
+{
+    display: none;
+    background-color: #c1b3a4;
+    color: #6b5b4a;
+    padding: 10px 0 10px 20px;
+    margin-left: -20px
+}
+
+#introduction
+{
+    height: auto;
+    padding: 10px 20px 10px 0 ;
+    margin-top: 
+}
+
+#link
+{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+#videoScreen
+{
+    display: none
 }

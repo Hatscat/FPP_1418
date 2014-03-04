@@ -34,6 +34,7 @@ function createScene (config, callback)
 				onMouseHover(villages[v].collider, villages[v].bubble);
 			}
 		}
+		
 		if (!config.inputs.bPause)
 		{
 			camerasBorderFunction(camera, config.babylon_camera);
@@ -44,10 +45,12 @@ function createScene (config, callback)
 				checkPlayerCollisions(player, villages[v].collider, config);
 			}
 		}
+
 		else
 		{
 			displayPopUp(config);
 		}
+
 		if (!config.popUp && mouse.target_3D && mouse.target_3D.targeted_mesh.name == "veilleurC")
 		{
 			config.popUp = true;
