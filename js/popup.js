@@ -21,6 +21,7 @@ function initPopUp(config)
 	$("#pop_content p").css("margin-top", - $("#pop_content p").innerHeight() + "px")
 	
 	$("#go_button").hide();
+	$("#pop_up").hide();
 
 	$("#ville").text(actualPopUp.title);
 	$("#veilleur").text(actualPopUp.veilleur[0]);
