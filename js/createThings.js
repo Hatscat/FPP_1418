@@ -35,7 +35,7 @@ function createTable(config, scene)
 	box5.scaling.z = (config.mapWidth/150)-((config.mapWidth/150)*2/100);
 
 	var materalBois = new BABYLON.StandardMaterial("texture1", scene);
-	materalBois.bumpTexture = new BABYLON.Texture("img/normal_trunk.jpg", scene);
+	materalBois.bumpTexture = new BABYLON.Texture(config.scenes.globalMap.images.wood_normal, scene);
 	materalBois.bumpTexture .uScale = 5;
 	materalBois.bumpTexture .vScale = 5;
 	materalBois.diffuseColor = new BABYLON.Color3(148/255, 130/255, 101/255);

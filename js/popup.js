@@ -30,9 +30,9 @@ function initPopUp(config)
 	{
 		$("#link").append("Voir la vidéo")
 	}
-	$("#veilleur_photo").css("background-image", "url(img/popUp/"+ actualPopUp.title + "/veilleur.png)");
+	$("#veilleur_photo").css("background-image", "url(img/scenes/"+ actualPopUp.title + "/veilleur.png)");
 	//$("#pop_content #people").text(actualPopUp.people + "habitants");
-	$("#pop_content").css("background-image", "url(img/popUp/"+ actualPopUp.title + "/background.png)");
+	$("#pop_content").css("background-image", "url(img/scenes/"+ actualPopUp.title + "/background.png)");
 	for(var i = actualPopUp.discussion.length; i--;)
 	{
 		$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + actualPopUp.discussion[i][0] + "<div id='reponse_" + i + "'class='reponse'>" + actualPopUp.discussion[i][1] + "</div>")
