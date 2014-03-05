@@ -1,68 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>14-18</title>
-	<link rel="stylesheet" type="text/css" href="css/game.css">
-	<link rel="stylesheet" type="text/css" href="css/interface.css">
-</head>
-<body>
-	<div id="interface">
-		<div id="title">Les Veilleurs</div>
-		<div id="HUD">
-			<div id="soundBtn" class="hudBtn"></div>
-			<div id="resizeBtn" class="hudBtn"></div>
-		</div>
-	</div>
-	<div id="pop_up">
-		<div id="pop_content">
-			<div id="step_preview">
-				<h1></h1>
-				<span class="datas" id="datas_one">
-					<span class="number"></span>
-					<span class="value"></span>
-				</span>
-				<span class="datas" id="datas_two">
-					<span class="number"></span>
-					<span class="value"></span>
-				</span>
-				<p></p>
+	<head>
+		<meta charset="utf-8">
+		<title>14-18</title>
+		<link rel="stylesheet" type="text/css" href="css/game.css">
+		<link rel="stylesheet" type="text/css" href="css/interface.css">
+	</head>
+	<body>
+		<div id="interface">
+			<div id="title">Les Veilleurs</div>
+			<div id="HUD">
+				<div id="soundBtn" class="hudBtn"></div>
+				<div id="resizeBtn" class="hudBtn"></div>
 			</div>
-			<div id="step">
-				<div id="leftPart">
-					<div id="popTitle">
-						<h2 id="ville"></h2>
-						<h2 id="veilleur"></h2>
-						<h2 id="statut"></h2>
+		</div>
+		<div id="pop_up">
+			<div id="pop_content">
+				<div id="step_preview">
+					<h1></h1>
+					<span class="datas" id="datas_one">
+						<span class="number"></span>
+						<span class="value"></span>
+					</span>
+					<span class="datas" id="datas_two">
+						<span class="number"></span>
+						<span class="value"></span>
+					</span>
+					<p></p>
+				</div>
+				<div id="step">
+					<div id="leftPart">
+						<div id="popTitle">
+							<h2 id="ville"></h2>
+							<h2 id="veilleur"></h2>
+							<h2 id="statut"></h2>
+						</div>
+						<div id="linkToVideo">
+							<div id="veilleur_photo"></div>
+							<span id="link"></span>
+						</div>
 					</div>
-					<div id="linkToVideo">
-						<div id="veilleur_photo"></div>
-						<span id="link"></span>
+					<div id="rightPart">
+						<div id="introduction"></div>
+						<div id="discussion"></div>
 					</div>
 				</div>
-				<div id="rightPart">
-					<div id="introduction"></div>
-					<div id="discussion"></div>
-				</div>
+				<div id="quit_button"></div>
+				<div id="go_button">Y Aller</div>
 			</div>
-			<div id="quit_button"></div>
-			<div id="go_button">Y Aller</div>
 		</div>
-	</div>
-	<div id="rootDiv">
-		<canvas id="renderCanvas"></canvas>
-	</div>
-</body>
-<script src="js/lib/babylon.min.js"></script>
-<script src="js/lib/mouse.js"></script>
-<script src="js/lib/ground.js"></script>
-<script src="js/lib/jquery.js"></script>
-<script src="js/main.js"></script>
-<script src="js/scene.js"></script>
-<script src="js/config.js"></script>
-<script src="js/createThings.js"></script>
-<script src="js/miscFunction.js"></script>
-<script src="js/interface.js"></script>
-<script src="js/popup.js"></script>
+		<div id="rootDiv">
+			<canvas id="renderCanvas"></canvas>
+		</div>
+	</body>
+
+	<script src="js/lib/babylon.min.js"></script>
+	<script src="js/lib/mouse.js"></script>
+	<script src="js/lib/ground.js"></script>
+	<script src="js/lib/jquery.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/scene.js"></script>
+	<script src="js/createThings.js"></script>
+	<script src="js/miscFunction.js"></script>
+	<script src="js/interface.js"></script>
+	<script src="js/popup.js"></script>
+	<script src="js/main.js"></script>
 
 </html>

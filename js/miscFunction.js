@@ -1,6 +1,6 @@
-function onMouseHover (mesh, bubble)
+function onMouseOver (mesh, bubble) // a changer, plus de bubble
 {
-	if (mouse.target_onHover_3D.targeted_mesh.name == mesh.name || mouse.target_onHover_3D.targeted_mesh.name == "bubble") 
+	if (mouse.target_onOver_3D.targeted_mesh.name == mesh.name || mouse.target_onOver_3D.targeted_mesh.name == "bubble") 
 	{
 		if (bubble.scaling.x < bubble.render_size)
 		{
@@ -16,7 +16,7 @@ function onMouseHover (mesh, bubble)
 	}
 }
 
-function camerasBorderFunction (camera, data)
+function cameraBordersFunction (camera, data)
 {
 	if (camera.beta < data.beta_min)
 		camera.beta = data.beta_min;
@@ -29,16 +29,15 @@ function camerasBorderFunction (camera, data)
 		camera.radius = data.zoom_max;
 };
 
-
 function playerMove (config, camera, player)
 {
 	var speed = config.player.speed;
 	var moveX = 0;
 	var moveZ = 0;
 	
-	if (!mouse.target_3D || config.inputs.X_axis || config.inputs.Y_axis)
+	if (!mouse.target_onClick_3D || config.inputs.X_axis || config.inputs.Y_axis)
 	{ /* keyboard inputs */
-		mouse.target_3D = null;
+		mouse.target_onClick_3D = null;
 
 		var direction = Math.atan2(camera.position.z - player.position.z, camera.position.x - player.position.x);
 		var normalisationRatio = Math.abs(config.inputs.X_axis) + Math.abs(config.inputs.Y_axis);
@@ -50,8 +49,8 @@ function playerMove (config, camera, player)
 	}
 	else
 	{ /* mouse inputs */
-		var distanceX = mouse.target_3D.x - player.position.x + 0.5 | 0;
-		var distanceZ = mouse.target_3D.z - player.position.z + 0.5 | 0;
+		var distanceX = mouse.target_onClick_3D.x - player.position.x + 0.5 | 0;
+		var distanceZ = mouse.target_onClick_3D.z - player.position.z + 0.5 | 0;
 		var normalisationRatio = Math.abs(distanceX) + Math.abs(distanceZ);
 		normalisationRatio = normalisationRatio ? normalisationRatio : 1;
 		moveX = distanceX / normalisationRatio;
@@ -82,7 +81,7 @@ function checkPlayerCollisions (player, veilleur, config)
 			config.playerCanCollide = false;
 			config.inputs.bPause = true;
 			config.popUpCraonne = true;
-			mouse.target_3D = null;
+			mouse.target_onClick_3D = null;
 			config.popUp = false;
 		}
 	}

@@ -5,32 +5,35 @@ AUTHOR : LUCIEN, MAX */
 
 function getConfig ()
 {
-	var config = {
-
-		videos : {
-
+	var config =
+	{
+		images :
+		{
+			icones : "img/misc/icon.png",
+			quit_cross : "img/misc/quit_cross.png",
+			simple_texture : "img/misc/textureSimple.jpg",
+			wood_normal : "img/misc/normal_trunk.jpg",
+			leave_normal : "img/misc/normal_leaves.jpg"
 		},
-
 		scenes : 
 		{
 			globalMap : 
 			{
-				mapMaxHeight : 10,
+				mapMaxHeight : 15,
 				mapWidth : 500,
 				mapHeight : 500,
-				subdivisions : 255,
+				subdivisions : 150,
 				bump_width_subdivisions : 200,
 				bump_height_subdivisions : 200,
 				y_margin: -2.1,
-
 				images : {
-					map_texture : "img/scenes/craonne/satmap.jpg",
-					heightmap : "img/scenes/craonne/heightMap.jpg",
-					skybox : "img/global/skybox/skybox",
-					wood_normal : "img/misc/normal_trunk.jpg",
-					leave_normal : "img/misc/normal_leaves.jpg"
+					map_texture : "scenes/global/img/map.jpg",
+					heightmap : "scenes/global/img/heightmap.jpg",
+					bumpmap : "img/misc/normal_leaves.jpg"
 				},
+				popUps : {
 
+				},
 				villages : 
 				[
 					{
@@ -48,8 +51,7 @@ function getConfig ()
 					}
 				],
 			},
-
-			craonne : 
+			craonne :
 			{
 				mapMaxHeight : 10,
 				mapWidth : 500,
@@ -58,15 +60,32 @@ function getConfig ()
 				bump_width_subdivisions : 200,
 				bump_height_subdivisions : 200,
 				y_margin: -2.1,
-
 				images : {
-					map_texture : "img/scenes/craonne/satmap.jpg",
-					heightmap : "img/scenes/craonne/heightMap.jpg",
-					skybox : "img/global/skybox/skybox",
-					wood_normal : "img/misc/normal_trunk.jpg",
-					leave_normal : "img/misc/normal_leaves.jpg"
+					map_texture : "scenes/craonne/img/map.jpg",
+					heightmap : "scenes/craonne/img/heightmap.jpg",
+					bumpmap : "img/misc/normal_leaves.jpg"
 				},
-
+				popUps : {
+					title : "craonne",
+					description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+					datas : ["8.9", "km²", "76", "habitants"],
+					discussion : [
+						["Question 1", "Réponse 1"],
+						["Question 2", "Réponse 2"],
+						["Question 3", "Réponse 3"],
+						["Question 4", "Réponse 4"]
+					],
+					veilleur : ["Noël Genteur", "maire"],
+					baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
+					images : {
+						background : "scenes/craonne/img/background.png",
+						veilleur : "scenes/craonne/img/veilleur.png"
+					},
+					videos : {
+						arrivee : "scenes/craonne/videos/1.OGG",
+						//chanson : ""
+					}
+				},
 				villages : 
 				[
 					{
@@ -83,7 +102,6 @@ function getConfig ()
 						collider_size : 50
 					}
 				],
-
 				ArbresPos :	
 				[
 					[48.667 , -125 , 13.667 , 14.669], 
@@ -107,22 +125,10 @@ function getConfig ()
 				],
 			},
 		},
-
 		skybox : {
-			size : 2000.0,
-
-			images : {
-				map_texture : "img/craonne/satmap.jpg",
-				heightmap : "img/craonne/heightMap.jpg",
-				skybox : "img/global/skybox/skybox",
-				wood_normal : "img/misc/normal_trunk.jpg",
-				leave_normal : "img/misc/normal_leaves.jpg"
-			},
+			size : 1000.0,
+			images : "img/skybox/skybox"
 		},
-
-		moveToMouseUpSensitivity : 0.04,
-		fogDensity : 0.001,
-
 		player : {
 			speed : 1.4,
 			y_margin: -1.5,
@@ -148,6 +154,10 @@ function getConfig ()
 			y : 11,
 			z : 0
 		},
+		veilleurColliderName : "veilleurC",
+		mapActuelle : "globaleMap",
+		moveToMouseUpSensitivity : 0.04,
+		fogDensity : 0.001,
 
 		oldTimestamp : Date.now(),
 		canvas : document.getElementById("renderCanvas"),
@@ -165,24 +175,7 @@ function getConfig ()
 		numberMapDataToLoad : 2,
 		cpt : 0,
 		coolDown : 0,
-		pas : [],
-		popUps : {
-			craonne : {
-				title : "craonne",
-			 	description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
-			 	datas : ["8.9", "km²", "76", "habitants"],
-			 	discussion : [
-			 		["Question 1", "Réponse 1"],
-			 		["Question 2", "Réponse 2"],
-			 		["Question 3", "Réponse 3"],
-			 		["Question 4", "Réponse 4"]
-			 	],
-			 	veilleur : ["Noël Genteur", "maire"],
-			 	baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
-			 	video : true
-			}
-		}
+		pas : []
 	};
-	
 	return config;
 }

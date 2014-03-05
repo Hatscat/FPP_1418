@@ -3,7 +3,7 @@
 // --------------------- FONCTION : cree une table sur laquelle est posé le plateau de jeu ------------------------
 // --------------------- AUTEUR : Maxime ------------------------
 
-function createTable(config, scene)
+function createTable(config, scene, bumpTexture)
 {
 	var box1 = BABYLON.Mesh.CreateBox("Box1", 5.0, scene);
 	box1.position = new BABYLON.Vector3(0,0,-(config.mapWidth/2));
@@ -35,7 +35,7 @@ function createTable(config, scene)
 	box5.scaling.z = (config.mapWidth/150)-((config.mapWidth/150)*2/100);
 
 	var materalBois = new BABYLON.StandardMaterial("texture1", scene);
-	materalBois.bumpTexture = new BABYLON.Texture(config.scenes.globalMap.images.wood_normal, scene);
+	materalBois.bumpTexture = new BABYLON.Texture(bumpTexture, scene);
 	materalBois.bumpTexture .uScale = 5;
 	materalBois.bumpTexture .vScale = 5;
 	materalBois.diffuseColor = new BABYLON.Color3(148/255, 130/255, 101/255);
@@ -143,7 +143,7 @@ function createGroundMesh (scene, config)
 	var groundMaterial = new BABYLON.StandardMaterial("groundMat", scene);
 	groundMaterial.diffuseTexture = new BABYLON.Texture(config.images.map_texture, scene);
 	groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-	groundMaterial.bumpTexture = new BABYLON.Texture(config.images.leave_normal, scene);
+	groundMaterial.bumpTexture = new BABYLON.Texture(config.images.bumpmap, scene);
 	groundMaterial.bumpTexture.uScale = config.bump_width_subdivisions;
 	groundMaterial.bumpTexture.vScale = config.bump_height_subdivisions;
 	ground.mesh.position.y = config.y_margin;
@@ -161,7 +161,7 @@ function createSkybox (scene, config)
 	var skybox = BABYLON.Mesh.CreateBox("skyBox", config.skybox.size, scene);
 	var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
 	skyboxMaterial.backFaceCulling = false;
-	skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(config.skybox.images.skybox, scene);
+	skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(config.skybox.images, scene);
 	skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 	skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
 	skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
@@ -214,7 +214,7 @@ function createEvenement (config)
 		var marginRatio = config.moveToMouseUpSensitivity;
 		if (!config.popUp && pickResult.hit && Math.abs(normPosDown - normPosUp) < normPosUp * marginRatio)
 		{
-			mouse.target_3D = {
+			mouse.target_onClick_3D = {
 				x : pickResult.pickedPoint.x,
 				z : pickResult.pickedPoint.z,
 				targeted_mesh : pickResult.pickedMesh

@@ -1,4 +1,4 @@
-function displayPopUp(config)
+function displayPopUp (config)
 {
 	
 
@@ -7,18 +7,18 @@ function displayPopUp(config)
 // Input : config (json)
 // Initialise la pop-Up en position et contenu
 // @author : Jules D.
-function initPopUp(config)
+function initPopUp (config) // doit initialiser TOUTES les popups ! (pas juste Craonne)
 {
 	//$(".popup").hide()
 	centerPopUp();
-	var actualPopUp = config.popUps.craonne;
-	$("#pop_content h1").text(actualPopUp.title)
+	var actualPopUp = config.scenes[config.mapActuelle].popUps;
+	$("#pop_content h1").text(actualPopUp.title);
 	$("#pop_content p").text(actualPopUp.description);
 	$("#pop_content #datas_one .number").text(actualPopUp.datas[0]);
 	$("#pop_content #datas_one .value").text(actualPopUp.datas[1]);
 	$("#pop_content #datas_two .number").text(actualPopUp.datas[2]);
 	$("#pop_content #datas_two .value").text(actualPopUp.datas[3]);
-	$("#pop_content p").css("margin-top", - $("#pop_content p").innerHeight() + "px")
+	$("#pop_content p").css("margin-top", - $("#pop_content p").innerHeight() + "px");
 	
 	$("#go_button").hide();
 	$("#pop_up").hide();
@@ -38,10 +38,10 @@ function initPopUp(config)
 	{
 		$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + actualPopUp.discussion[i][0] + "<div id='reponse_" + i + "'class='reponse'>" + actualPopUp.discussion[i][1] + "</div>")
 	}
-mouse.target_3D = null;
-//config.scene.activeCamera.attachControl(config.canvas); 
-config.inputs.bPause = false;
-//config.popUp = false;
+	mouse.target_onClick_3D = null;
+	//config.scene.activeCamera.attachControl(config.canvas); 
+	config.inputs.bPause = false;
+	//config.popUp = false;
 }
 
 // Input : none
@@ -61,7 +61,7 @@ function centerPopUp()
 // Inputs : Index de la question cliquée
 // Remonte le volet de toutes les réponses et descendre celui de la question cliquée.
 // @author : Youle
-function reponseToggle(index)
+function reponseToggle (index)
 {
 	$(".reponse").slideUp();
 	$("#reponse_" + index).slideDown();
