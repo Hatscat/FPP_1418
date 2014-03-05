@@ -1,5 +1,5 @@
 /* return a complete data array with all Y coords */
-function extractDataFromHeightMap (url, maxHeight, callback)
+function extractDataFromHeightMap (url, maxHeight,id, callback)
 {
 	var img = new Image();
 
@@ -34,7 +34,7 @@ function extractDataFromHeightMap (url, maxHeight, callback)
 				data[i / (heightMapWidth * 4)].push(gradient * maxHeight);
 			}
 		}
-		callback(data);
+		callback(data, id);
 	}
 	img.src = url;
 }
@@ -114,11 +114,3 @@ function getPosOnHeightMap (x, z, data, width, height)
 /* ------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------------------------------------- */
 
-function importMeshFromBlender (name, folderSrc, fileSrc, scene)
-{
-	BABYLON.SceneLoader.ImportMesh(name, folderSrc + "/", fileSrc, scene, function (newMeshes, particleSystems)
-	{
-		console.log(newMeshes);
-		return newMeshes[0];
-	});
-}
