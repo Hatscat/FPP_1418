@@ -28,7 +28,7 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 	var isGlobalMap = id == "globalMap";
 	var player = createPlayer(scene, config.player, !isGlobalMap);
 	scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-	scene.fogDensity = config.fogDensity;
+	scene.fogDensity = config.scenes[id].fogDensity;
 	createTable(config.scenes[id], scene, config.images.wood_normal);
 	
 	if (config.scenes[id].ArbresPos)

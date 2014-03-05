@@ -26,6 +26,7 @@ function getConfig ()
 				bump_width_subdivisions : 200,
 				bump_height_subdivisions : 200,
 				y_margin: -2.1,
+				fogDensity : 0.001,
 				images : {
 					map_texture : "scenes/global/img/map.jpg",
 					heightmap : "scenes/global/img/heightmap.jpg",
@@ -44,8 +45,55 @@ function getConfig ()
 						bubble_render_size : 4.6,
 						bubble_alpha : 0.15,
 						collider_poly : 6.0,
-						collider_size : 50
-					}
+						collider_size : 50,
+						typeVillage : "create_mesh_39"
+					},
+
+					{
+						name : "test1",
+						x : -100,
+						z : -50,
+						y_margin : 3.5,
+						scale : 0.5,
+						bubble_poly : 10.0,
+						bubble_collider_size : 10.0,
+						bubble_render_size : 4.6,
+						bubble_alpha : 0.15,
+						collider_poly : 6.0,
+						collider_size : 50,
+						typeVillage : "create_mesh_30"
+					},
+
+
+					{
+						name : "test2",
+						x : 120,
+						z : 150,
+						y_margin : 3.5,
+						scale : 0.5,
+						bubble_poly : 10.0,
+						bubble_collider_size : 10.0,
+						bubble_render_size : 4.6,
+						bubble_alpha : 0.15,
+						collider_poly : 6.0,
+						collider_size : 50,
+						typeVillage : "create_mesh_30"
+					},
+
+					{
+						name : "test3",
+						x : 100,
+						z : 220,
+						y_margin : 3.5,
+						scale : 0.5,
+						bubble_poly : 10.0,
+						bubble_collider_size : 10.0,
+						bubble_render_size : 4.6,
+						bubble_alpha : 0.15,
+						collider_poly : 6.0,
+						collider_size : 50,
+						typeVillage : "create_mesh_30"
+					},
 				],
 			},
 			craonne :
@@ -57,6 +105,7 @@ function getConfig ()
 				bump_width_subdivisions : 200,
 				bump_height_subdivisions : 200,
 				y_margin: -2.1,
+				fogDensity : 0.001,
 				images : {
 					map_texture : "scenes/craonne/img/map.jpg",
 					heightmap : "scenes/craonne/img/heightmap.jpg",
@@ -96,7 +145,8 @@ function getConfig ()
 						bubble_render_size : 4.6,
 						bubble_alpha : 0.15,
 						collider_poly : 6.0,
-						collider_size : 50
+						collider_size : 50,
+						typeVillage : "create_mesh_39"
 					}
 				],
 				ArbresPos :	
@@ -154,7 +204,7 @@ function getConfig ()
 		veilleurColliderName : "veilleurC",
 		mapActuelle : "globalMap",
 		moveToMouseUpSensitivity : 0.04,
-		fogDensity : 0.001,
+		
 
 		oldTimestamp : Date.now(),
 		canvas : document.getElementById("renderCanvas"),
