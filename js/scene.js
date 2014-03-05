@@ -105,6 +105,7 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 
 		});
 	}
+	initPopUp(config);
     createEvenement(config); // TODO if (evenement non init)
     return scene;
 }

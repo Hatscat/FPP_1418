@@ -31,9 +31,6 @@ function getConfig ()
 					heightmap : "scenes/global/img/heightmap.jpg",
 					bumpmap : "img/misc/normal_leaves.jpg"
 				},
-				popUps : {
-
-				},
 				villages : 
 				[
 					{
@@ -155,7 +152,7 @@ function getConfig ()
 			z : 0
 		},
 		veilleurColliderName : "veilleurC",
-		mapActuelle : "globaleMap",
+		mapActuelle : "globalMap",
 		moveToMouseUpSensitivity : 0.04,
 		fogDensity : 0.001,
 

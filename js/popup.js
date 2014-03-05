@@ -11,7 +11,8 @@ function initPopUp (config) // doit initialiser TOUTES les popups ! (pas juste C
 {
 	//$(".popup").hide()
 	centerPopUp();
-	var actualPopUp = config.scenes[config.mapActuelle].popUps;
+	var actualPopUp = config.scenes[config.mapActuelle].popUps || 0;
+	if (!actualPopUp) return;
 	$("#pop_content h1").text(actualPopUp.title);
 	$("#pop_content p").text(actualPopUp.description);
 	$("#pop_content #datas_one .number").text(actualPopUp.datas[0]);

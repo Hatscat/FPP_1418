@@ -2,7 +2,6 @@ Date.now = Date.now || function(){return new Date().getTime()}
 window.onload = function ()
 {
 	var config = getConfig();
-	//initPopUp(config); // doit initialiser TOUTES les popups ! (pas juste Craonne)
 
 	window.onkeydown = function (e)
 	{
