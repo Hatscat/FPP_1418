@@ -276,11 +276,5 @@ html, body, div
     text-align: center;
     color: white;
     font-weight: bold;
-    padding-top: 5px;
-    cursor: pointer;
-}
-
-#videoScreen
-{
-    display: none
+    padding-top: 5px
 }
