@@ -5,6 +5,9 @@ AUTHOR : LUCIEN, MAX */
 
 function getConfig ()
 {
+	var big_village = "create_mesh_39";
+	var small_village = "create_mesh_30";
+
 	var config =
 	{
 		images :
@@ -19,14 +22,14 @@ function getConfig ()
 		{
 			globalMap : 
 			{
-				mapMaxHeight : 15,
-				mapWidth : 500,
-				mapHeight : 500,
-				subdivisions : 150,
-				bump_width_subdivisions : 200,
-				bump_height_subdivisions : 200,
-				y_margin: -2.1,
-				fogDensity : 0.001,
+				mapMaxHeight : 2,
+				mapWidth : 50,
+				mapHeight : 50,
+				subdivisions : 20,
+				bump_width_subdivisions : 20,
+				bump_height_subdivisions : 20,
+				y_margin: 0,
+				fogDensity : 0,
 				images : {
 					map_texture : "scenes/global/img/map.jpg",
 					heightmap : "scenes/global/img/heightmap.jpg",
@@ -36,74 +39,72 @@ function getConfig ()
 				[
 					{
 						name : "craonne",
-						x : -120,
-						z : -150,
+						x : -12,
+						z : -15,
 						y_margin : 3.5,
-						scale : 0.5,
+						scale : 0.25,
 						bubble_poly : 10.0,
 						bubble_collider_size : 10.0,
 						bubble_render_size : 4.6,
 						bubble_alpha : 0.15,
 						collider_poly : 6.0,
 						collider_size : 50,
-						typeVillage : "create_mesh_39"
+						mesh_kind : big_village
 					},
-
 					{
 						name : "test1",
-						x : -100,
+						x : -10,
 						z : -50,
 						y_margin : 3.5,
-						scale : 0.5,
+						scale : 0.25,
 						bubble_poly : 10.0,
 						bubble_collider_size : 10.0,
 						bubble_render_size : 4.6,
 						bubble_alpha : 0.15,
 						collider_poly : 6.0,
 						collider_size : 50,
-						typeVillage : "create_mesh_30"
+						mesh_kind : small_village
 					},
 
 
 					{
 						name : "test2",
-						x : 120,
-						z : 150,
+						x : 21,
+						z : 15,
 						y_margin : 3.5,
-						scale : 0.5,
+						scale : 0.25,
 						bubble_poly : 10.0,
 						bubble_collider_size : 10.0,
 						bubble_render_size : 4.6,
 						bubble_alpha : 0.15,
 						collider_poly : 6.0,
 						collider_size : 50,
-						typeVillage : "create_mesh_30"
+						mesh_kind : small_village
 					},
-
 					{
 						name : "test3",
-						x : 100,
-						z : 220,
+						x : 10,
+						z : 22,
 						y_margin : 3.5,
-						scale : 0.5,
+						scale : 0.25,
 						bubble_poly : 10.0,
 						bubble_collider_size : 10.0,
 						bubble_render_size : 4.6,
 						bubble_alpha : 0.15,
 						collider_poly : 6.0,
 						collider_size : 50,
-						typeVillage : "create_mesh_30"
+						mesh_kind : small_village
 					},
-				],
+				]
 			},
 			craonne :
 			{
 				mapMaxHeight : 10,
-				mapWidth : 500,
-				mapHeight : 500,
-				subdivisions : 255,
-				bump_width_subdivisions : 200,
-				bump_height_subdivisions : 200,
+				mapWidth : 250,
+				mapHeight : 250,
+				subdivisions : 200,
+				bump_width_subdivisions : 100,
+				bump_height_subdivisions : 100,
 				y_margin: -2.1,
 				fogDensity : 0.001,
 				images : {
@@ -146,7 +147,7 @@ function getConfig ()
 						bubble_alpha : 0.15,
 						collider_poly : 6.0,
 						collider_size : 50,
-						typeVillage : "create_mesh_39"
+						mesh_kind : big_village
 					}
 				],
 				ArbresPos :	
@@ -173,7 +174,7 @@ function getConfig ()
 			},
 		},
 		skybox : {
-			size : 1000.0,
+			size : 750.0,
 			images : "img/skybox/skybox"
 		},
 		player : {
@@ -192,11 +193,11 @@ function getConfig ()
 			name : "Camera",
 			alpha : 44.5,
 			beta : 1.0,
-			radius : 300,
+			radius : 250,
 			beta_min : 0.1,
 			beta_max : (Math.PI / 2) * 0.75,
 			zoom_min : 50,
-			zoom_max : 500,
+			zoom_max : 250,
 			x : 0,
 			y : 11,
 			z : 0

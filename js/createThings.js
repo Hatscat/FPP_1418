@@ -3,7 +3,7 @@
 // --------------------- FONCTION : cree une table sur laquelle est posé le plateau de jeu ------------------------
 // --------------------- AUTEUR : Maxime ------------------------
 
-function createTable(config, scene, bumpTexture)
+function createTable (config, scene, bumpTexture)
 {
 	var box1 = BABYLON.Mesh.CreateBox("Box1", 5.0, scene);
 	box1.position = new BABYLON.Vector3(0,0,-(config.mapWidth/2));
@@ -48,7 +48,7 @@ function createTable(config, scene, bumpTexture)
 // --------------------- FONCTION : crée des "traces" où le joueur est passé et suprime les anciennes ------------------------
 // --------------------- AUTEUR : Maxime ------------------------
 
-function createPas(config, x,y,z, bool, scene)
+function createPas (config, x,y,z, bool, scene)
 {
 	if(config.oldTimestamp - config.coolDown > 0 && bool)
 	{
@@ -88,7 +88,7 @@ function createVillages (scene, config)
 	for(var i=0; i<config.villages.length; i++)
 	{
 		var village = {};
-		village.mesh = window[config.villages[i].typeVillage](scene);
+		village.mesh = window[config.villages[i].mesh_kind](scene);
 		var village_Material = new BABYLON.StandardMaterial("villageMaterial", scene);
 		village_Material.diffuseColor = new BABYLON.Color3(1.0, 0.0, 0.0);
 		village.mesh.material = village_Material;
