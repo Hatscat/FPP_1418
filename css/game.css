@@ -71,6 +71,7 @@ html, body, div
 /* FIRST POP-UP */
 #pop_up
 {
+    display: none;
     position : absolute;
     width: 636px;
     height: 435px;
