@@ -68,7 +68,7 @@ window.onload = function ()
 		else
 		{
 			config.engine = new BABYLON.Engine(config.canvas, true);
-			config.scene = createScene(config, "globalMap");
+			createScene(config, "globalMap");
 			config.scene.activeCamera.attachControl(config.canvas);
 			
 			config.engine.runRenderLoop(function ()

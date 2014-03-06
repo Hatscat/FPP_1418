@@ -5,31 +5,36 @@ AUTHOR : LUCIEN, MAX */
 
 function createScene (config) // TODO en faire une scene globale (pions tout ça tout ça)
 {
-	config.mapActuelle = config.mapSuivante; // -------------------------------------------------------------------------------------- NEW;
-	var scene = new BABYLON.Scene(config.engine);
-	config.light = new BABYLON.PointLight(config.babylon_light.name, new BABYLON.Vector3(config.babylon_light.x, config.babylon_light.y, config.babylon_light.z), scene);
-	config.camera = new BABYLON.ArcRotateCamera(config.babylon_camera.name, config.babylon_camera.alpha, config.babylon_camera.beta, config.babylon_camera.radius, new BABYLON.Vector3(config.babylon_camera.x, config.babylon_camera.y, config.babylon_camera.z), scene);
-	var skybox = createSkybox(scene, config);
-	var ground = createGroundMesh(scene, config.scenes[config.mapActuelle]);
-	config.groundMesh = ground.mesh;
-	config.groundData = ground.data;
-	var villages = createVillages(scene, config.scenes[config.mapActuelle]);
+	config.mapActuelle = config.mapSuivante;
+
+	if(!config.scene)
+	{
+		config.scene = new BABYLON.Scene(config.engine);
+		config.light = new BABYLON.PointLight(config.babylon_light.name, new BABYLON.Vector3(config.babylon_light.x, config.babylon_light.y, config.babylon_light.z), config.scene);
+		config.camera = new BABYLON.ArcRotateCamera(config.babylon_camera.name, config.babylon_camera.alpha, config.babylon_camera.beta, config.babylon_camera.radius, new BABYLON.Vector3(config.babylon_camera.x, config.babylon_camera.y, config.babylon_camera.z), config.scene);
+		var skybox = createSkybox(config);
+	}
+
+	config.ground = createGroundMesh(config.scene, config.scenes[config.mapActuelle]);
+	config.groundMesh = config.ground.mesh;
+	config.groundData = config.ground.data;
+	var villages = createVillages(config.scene, config.scenes[config.mapActuelle]);
 	var isGlobalMap = config.mapActuelle == "globalMap";
-	config.player.mesh = createPlayer(scene, config.player, !isGlobalMap); // -------------------------------------------------------------------------------------- NEW;
-	scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-	scene.fogDensity = config.scenes[config.mapActuelle].fogDensity;
-	createTable(config.scenes[config.mapActuelle], scene, config.images.wood_normal);
+	config.player.mesh = createPlayer(config.scene, config.player, !isGlobalMap);
+	config.scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
+	config.scene.fogDensity = config.scenes[config.mapActuelle].fogDensity;
+	createTable(config);
 	
 	if (config.scenes[config.mapActuelle].ArbresPos)
-		createForet(config.scenes[config.mapActuelle], scene, config.images);
+		createForet(config.scenes[config.mapActuelle], config.scene, config.images);
 	
 	if (isGlobalMap)
 	{
-		scene.registerBeforeRender(function ()
+		config.scene.registerBeforeRender(function ()
 		{
 			commonSceneUpdate(config, config.player.mesh, villages);
 
-			if (mouse.doubleClicks && mouse.target_onOver_3D)
+			if (mouse.doubleClicks && mouse.target_onOver_3D) // || zoom > ... // ---------------------------------------------------------------------------
 			{
 				for (var v in villages)
 				{
@@ -38,9 +43,8 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 						console.log("go to village : " + villages[v].mesh.name);
 						mouse.doubleClicks = false;
 						config.ready2ChangeScene = true;
-						config.mapSuivante = villages[v].mesh.name;  // ------------------------------------------------------ NEW
-						config.player.mesh.position = villages[v].mesh.position; // ------------------------------------------------------ NEW
-						// changeScene(config, villages[v].mesh.name);  // ------------------------------------------------------ DELETE
+						config.mapSuivante = villages[v].mesh.name;
+						config.player.mesh.position = villages[v].mesh.position;
 					}
 				}
 			}
@@ -53,8 +57,10 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 	}
 	else
 	{
-		scene.registerBeforeRender(function ()
+		config.scene.registerBeforeRender(function ()
 		{
+			commonSceneUpdate(config, config.player.mesh, villages);
+			
 			if (config.inputs.bPause)
 			{
 				displayPopUp(config);
@@ -93,7 +99,6 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 	}
 	initPopUp(config);
     createEvenement(config); // TODO if (evenement non init)
-    return scene;
 }
 
 // les éléments communs à l'update d'une scene : le calcul du deltaTime + definition de la target_onOver_3D + le déplacement du player
@@ -141,7 +146,8 @@ function commonSceneUpdate (config, player, villages)
 		{
 			config.camera.radius = config.babylon_camera.zoom_max;
 			config.ready2ChangeScene = false;
-			config.scene = createScene(config); // ----------------------------------------------------- NEW
+			config.ground.mesh.dispose(true);
+			createScene(config);
 		}
 	}
 }

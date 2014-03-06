@@ -3,64 +3,77 @@
 // --------------------- FONCTION : cree une table sur laquelle est posé le plateau de jeu ------------------------
 // --------------------- AUTEUR : Maxime ------------------------
 
-function createTable (config, scene, bumpTexture)
+function createTable (config)
 {
-	var box1 = BABYLON.Mesh.CreateBox("Box1", 5.0, scene);
-	box1.position = new BABYLON.Vector3(0,0,-(config.mapWidth/2));
-	box1.scaling.z = 0.4*(config.mapWidth/100);
-	box1.scaling.y = 25*(config.mapMaxHeight/100);
-	box1.scaling.x = config.mapWidth/5;
+	if(!config.table)
+		config.table = {};
 
-	var box2 = BABYLON.Mesh.CreateBox("Box2", 5.0, scene);
-	box2.position = new BABYLON.Vector3(-(config.mapWidth/2),0,0);
-	box2.scaling.x = 0.4*(config.mapWidth/100);
-	box2.scaling.y = 25*(config.mapMaxHeight/100);
-	box2.scaling.z = config.mapWidth/5;
+	if(!config.table.box1)
+	{
+		config.table.box1 = BABYLON.Mesh.CreateBox("Box1", 5.0, config.scene);
+	}
+	config.table.box1.position = new BABYLON.Vector3(0,0,-(config.scenes[config.mapActuelle].mapWidth/2));
+	config.table.box1.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+	config.table.box1.scaling.y = 25*(config.scenes[config.mapActuelle].mapMaxHeight/100);
+	config.table.box1.scaling.x = config.scenes[config.mapActuelle].mapWidth/5;
 
-	var box3 = BABYLON.Mesh.CreateBox("Box3", 5.0, scene);
-	box3.position = new BABYLON.Vector3(0,0,(config.mapWidth/2));
-	box3.scaling.z = 0.4*(config.mapWidth/100);
-	box3.scaling.y = 25*(config.mapMaxHeight/100);
-	box3.scaling.x = config.mapWidth/5;
+	if(!config.table.box2)
+	{
+		config.table.box2 = BABYLON.Mesh.CreateBox("Box2", 5.0, config.scene);
+	}
+	config.table.box2.position = new BABYLON.Vector3(-(config.scenes[config.mapActuelle].mapWidth/2),0,0);
+	config.table.box2.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+	config.table.box2.scaling.y = 25*(config.scenes[config.mapActuelle].mapMaxHeight/100);
+	config.table.box2.scaling.z = config.scenes[config.mapActuelle].mapWidth/5;
 
-	var box4 = BABYLON.Mesh.CreateBox("Box4", 5.0, scene);
-	box4.position = new BABYLON.Vector3((config.mapWidth/2),0,0);
-	box4.scaling.x = 0.4*(config.mapWidth/100);
-	box4.scaling.y = 25*(config.mapMaxHeight/100);
-	box4.scaling.z = config.mapWidth/5;
+	if(!config.table.box3)
+	{
+		config.table.box3 = BABYLON.Mesh.CreateBox("Box3", 5.0, config.scene);
+	}
+	config.table.box3.position = new BABYLON.Vector3(0,0,(config.scenes[config.mapActuelle].mapWidth/2));
+	config.table.box3.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+	config.table.box3.scaling.y = 25*(config.scenes[config.mapActuelle].mapMaxHeight/100);
+	config.table.box3.scaling.x = config.scenes[config.mapActuelle].mapWidth/5;
 
-	var box5 = BABYLON.Mesh.CreateBox("box5", 150, scene);
-	box5.position = new BABYLON.Vector3(0,-((0.6*(config.mapWidth/100)*150)/2 - config.y_margin + 1),0);
-	box5.scaling.x = (config.mapWidth/150)-((config.mapWidth/150)*2/100);
-	box5.scaling.y = 0.6*(config.mapWidth/100);
-	box5.scaling.z = (config.mapWidth/150)-((config.mapWidth/150)*2/100);
+	if(!config.table.box4)
+	{
+		config.table.box4 = BABYLON.Mesh.CreateBox("Box4", 5.0, config.scene);
+	}
+	config.table.box4.position = new BABYLON.Vector3((config.scenes[config.mapActuelle].mapWidth/2),0,0);
+	config.table.box4.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+	config.table.box4.scaling.y = 25*(config.scenes[config.mapActuelle].mapMaxHeight/100);
+	config.table.box4.scaling.z = config.scenes[config.mapActuelle].mapWidth/5;
 
-	var materalBois = new BABYLON.StandardMaterial("texture1", scene);
-	materalBois.bumpTexture = new BABYLON.Texture(bumpTexture, scene);
+	if(!config.table.box5)
+	{
+		config.table.box5 = BABYLON.Mesh.CreateBox("Box5", 150.0, config.scene);
+	}
+	config.table.box5.position = new BABYLON.Vector3(0,-((0.6*(config.scenes[config.mapActuelle].mapWidth/100)*150)/2 - config.scenes[config.mapActuelle].y_margin + 1),0);
+	config.table.box5.scaling.x = (config.scenes[config.mapActuelle].mapWidth/150)-((config.scenes[config.mapActuelle].mapWidth/150)*2/100);
+	config.table.box5.scaling.y = 0.6*(config.scenes[config.mapActuelle].mapWidth/100);
+	config.table.box5.scaling.z = (config.scenes[config.mapActuelle].mapWidth/150)-((config.scenes[config.mapActuelle].mapWidth/150)*2/100);
+
+	var materalBois = new BABYLON.StandardMaterial("texture1", config.scene);
+	materalBois.bumpTexture = new BABYLON.Texture(config.images.wood_normal, config.scene);
 	materalBois.bumpTexture .uScale = 5;
 	materalBois.bumpTexture .vScale = 5;
 	materalBois.diffuseColor = new BABYLON.Color3(148/255, 130/255, 101/255);
 	materalBois.specularColor = new BABYLON.Color3(0,0,0);
-	box1.material = box2.material = box3.material = box4.material = materalBois;
+	config.table.box1.material = config.table.box2.material = config.table.box3.material = config.table.box4.material = materalBois;
 
-	var materialSupport = new BABYLON.StandardMaterial("texture1", scene);
-	materialSupport.bumpTexture = new BABYLON.Texture(bumpTexture, scene);
+	var materialSupport = new BABYLON.StandardMaterial("texture1", config.scene);
+	materialSupport.bumpTexture = new BABYLON.Texture(config.images.wood_normal, config.scene);
 	materialSupport.bumpTexture .uScale = 5;
 	materialSupport.bumpTexture .vScale = 5;
 	materialSupport.emissiveColor = new BABYLON.Color3(53/255, 65/255, 68/255);
-	box5.material = materialSupport;	
+	config.table.box5.material = materialSupport;	
 };
 
-
 // --------------------- INPUTS : config : la structure fourre tout; coordonée xyz ou mettre la trace, bool créer ou non une nouvelle trace ------------------------------
 // ---------------------  OUTPUR : NONE -----------------------------
 // --------------------- FONCTION : crée des "traces" où le joueur est passé et suprime les anciennes ------------------------
 // --------------------- AUTEUR : Maxime ------------------------
 
-// --------------------- INPUTS : config : la structure fourre tout; coordonée xyz ou mettre la trace, bool créer ou non une nouvelle trace ------------------------------
-// ---------------------  OUTPUR : NONE -----------------------------
-// --------------------- FONCTION : crée des "traces" où le joueur est passé et suprime les anciennes ------------------------
-// --------------------- AUTEUR : Maxime ------------------------
 
 function createPas (config, x,y,z, bool, scene)
 {
@@ -169,12 +182,12 @@ function createGroundMesh (scene, config)
 	FONCTION : crée la skybox
 	AUTHOR : LUCIEN, MAX*/
 
-function createSkybox (scene, config)
+function createSkybox (config)
 {
-	var skybox = BABYLON.Mesh.CreateBox("skyBox", config.skybox.size, scene);
-	var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+	var skybox = BABYLON.Mesh.CreateBox("skyBox", config.skybox.size, config.scene);
+	var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", config.scene);
 	skyboxMaterial.backFaceCulling = false;
-	skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(config.skybox.images, scene);
+	skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(config.skybox.images, config.scene);
 	skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 	skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
 	skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
