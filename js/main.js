@@ -1,7 +1,6 @@
 Date.now = Date.now || function(){return new Date().getTime()}
 window.onload = function ()
 {
-
 	var config = getConfig();
 
 	window.onkeydown = function (e)
@@ -51,9 +50,7 @@ window.onload = function ()
 			config.scenes[p_scene].mapData = data;
 			config.numberMapDataLoaded++;
 			if(config.numberMapDataLoaded === config.numberMapDataToLoad)
-			{
 				init(config);
-			}
 		});
 	}
 
@@ -73,8 +70,7 @@ window.onload = function ()
 			config.engine = new BABYLON.Engine(config.canvas, true);
 			config.scene = createScene(config, "globalMap");
 			config.scene.activeCamera.attachControl(config.canvas);
-			loadingBar.style.display = "none";
-			document.body.removeChild(loadingBar)
+			
 			config.engine.runRenderLoop(function ()
 			{
 				config.scene.render();

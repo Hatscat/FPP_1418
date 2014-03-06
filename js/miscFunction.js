@@ -1,4 +1,4 @@
-function onMouseOver (mesh, bubble) // a changer, plus de bubble
+/*function onMouseOver (mesh, bubble) // a changer, plus de bubble // ----------------------------------------------------------------------------------------------
 {
 	if (mouse.target_onOver_3D.targeted_mesh.name == mesh.name || mouse.target_onOver_3D.targeted_mesh.name == "bubble") 
 	{
@@ -14,7 +14,7 @@ function onMouseOver (mesh, bubble) // a changer, plus de bubble
 			bubble.scaling.x = bubble.scaling.y = bubble.scaling.z -= 0.5;
 		}
 	}
-}
+}*/
 
 function cameraBordersFunction (camera, data)
 {

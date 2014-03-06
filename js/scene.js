@@ -25,6 +25,7 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 	config.groundMesh = ground.mesh;
 	config.groundData = ground.data;
 	var villages = createVillages(scene, config.scenes[id]);
+	//console.log(villages[0].mesh.name) //------------------------------------------------------------------------------------------------
 	var isGlobalMap = id == "globalMap";
 	var player = createPlayer(scene, config.player, !isGlobalMap);
 	scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
@@ -32,7 +33,7 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 	createTable(config.scenes[id], scene, config.images.wood_normal);
 	
 	if (config.scenes[id].ArbresPos)
-		createForet(config.scenes[id], scene);
+		createForet(config.scenes[id], scene, config.images);
 	
 	if (isGlobalMap)
 	{
@@ -44,15 +45,17 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 			{
 				for (var v in villages)
 				{
-					if (mouse.target_onOver_3D.targeted_mesh == villages[v].name) // || == "bubble"
+					//console.log("targeted villages : " + mouse.target_onOver_3D.targeted_mesh.name);
+					//console.log("villages name : " + v);
+					if (mouse.target_onOver_3D.targeted_mesh.name == villages[v].mesh.name) // || == "bubble"
 					{
-						console.log(v);
-						onMouseOver(villages[v].collider, villages[v].bubble); // à changer ça, plus de bubble
+						//onMouseOver(villages[v].collider, villages[v].bubble); // à changer ça, plus de bubble //--------------------------------------------------------------------------------------------------------
 						
 						if (mouse.doubleClicks) // || zoom > ...
 						{
+							console.log("go to village : " + villages[v].mesh.name);
 							mouse.doubleClicks = false;
-							changeScene(config, villages[v].name);
+							changeScene(config, villages[v].mesh.name);
 						}
 					}
 				}
@@ -87,7 +90,7 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 			{
 				for (var v in villages)
 				{
-					checkPlayerCollisions(player, villages[v].collider, config);
+					checkPlayerCollisions(player, villages[v].mesh, config);
 				}
 			}
 

@@ -43,14 +43,14 @@ function getConfig ()
 						z : -15,
 						y_margin : 3.5,
 						scale : 0.25,
-						bubble_poly : 10.0,
-						bubble_collider_size : 10.0,
-						bubble_render_size : 4.6,
-						bubble_alpha : 0.15,
+						//bubble_poly : 10.0, //------------------------------------------------------------------------------
+						//bubble_collider_size : 10.0,
+						//bubble_render_size : 4.6,
+						//bubble_alpha : 0.15,
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : big_village
-					},
+					}/*, //------------------------------------------------------------------------------
 					{
 						name : "test1",
 						x : -10,
@@ -94,7 +94,7 @@ function getConfig ()
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : small_village
-					},
+					},*/
 				]
 			},
 			craonne :
@@ -141,10 +141,10 @@ function getConfig ()
 						z : -150,
 						y_margin : 3.5,
 						scale : 0.5,
-						bubble_poly : 10.0,
-						bubble_collider_size : 10.0,
-						bubble_render_size : 4.6,
-						bubble_alpha : 0.15,
+						// bubble_poly : 10.0, //------------------------------------------------------------------------------
+						// bubble_collider_size : 10.0,
+						// bubble_render_size : 4.6,
+						// bubble_alpha : 0.15,
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : big_village
@@ -178,10 +178,10 @@ function getConfig ()
 			images : "img/skybox/skybox"
 		},
 		player : {
-			speed : 1.4,
+			speed : 0.4, //------------------------------------------------------------------------------
 			y_margin: -1.5,
 			origin_x : 0,
-			origin_z : 150
+			origin_z : 0 //------------------------------------------------------------------------------
 		},
 		babylon_light : {
 			name : "Omni",
@@ -193,16 +193,16 @@ function getConfig ()
 			name : "Camera",
 			alpha : 44.5,
 			beta : 1.0,
-			radius : 250,
+			radius : 50, //------------------------------------------------------------------------------
 			beta_min : 0.1,
 			beta_max : (Math.PI / 2) * 0.75,
 			zoom_min : 50,
-			zoom_max : 250,
+			zoom_max : 100, //------------------------------------------------------------------------------
 			x : 0,
 			y : 11,
 			z : 0
 		},
-		veilleurColliderName : "veilleurC",
+		//veilleurColliderName : "veilleurC", //------------------------------------------------------------------------------
 		mapActuelle : "globalMap",
 		moveToMouseUpSensitivity : 0.04,
 		
