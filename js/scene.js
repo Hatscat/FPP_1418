@@ -39,24 +39,17 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 	{
 		scene.registerBeforeRender(function ()
 		{
-			commonSceneUpdate(config, player);
+			commonSceneUpdate(config, player, villages); // ---------------------------------------------------------------------------
 
-			if (mouse.target_onOver_3D)
+			if (mouse.doubleClicks && mouse.target_onOver_3D) // || zoom > ... // ---------------------------------------------------------------------------
 			{
 				for (var v in villages)
 				{
-					//console.log("targeted villages : " + mouse.target_onOver_3D.targeted_mesh.name);
-					//console.log("villages name : " + v);
 					if (mouse.target_onOver_3D.targeted_mesh.name == villages[v].mesh.name) // || == "bubble"
 					{
-						//onMouseOver(villages[v].collider, villages[v].bubble); // à changer ça, plus de bubble //--------------------------------------------------------------------------------------------------------
-						
-						if (mouse.doubleClicks) // || zoom > ...
-						{
-							console.log("go to village : " + villages[v].mesh.name);
-							mouse.doubleClicks = false;
-							changeScene(config, villages[v].mesh.name);
-						}
+						console.log("go to village : " + villages[v].mesh.name);
+						mouse.doubleClicks = false;
+						changeScene(config, villages[v].mesh.name);
 					}
 				}
 			}
@@ -105,7 +98,6 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 				changeScene(config, "globalMap");
 			}
 			*/
-
 		});
 	}
 	initPopUp(config);
@@ -114,7 +106,7 @@ function createScene (config, id) // TODO en faire une scene globale (pions tout
 }
 
 // les éléments communs à l'update d'une scene : le calcul du deltaTime + definition de la target_onOver_3D + le déplacement du player
-function commonSceneUpdate (config, player)
+function commonSceneUpdate (config, player, villages)
 {
 	var onOverResult = config.scene.pick(mouse.x, mouse.y);
 	var timeSinceLastFrame = Date.now() - config.oldTimestamp;
@@ -128,6 +120,21 @@ function commonSceneUpdate (config, player)
 			z : onOverResult.pickedPoint.z,
 			targeted_mesh : onOverResult.pickedMesh
 		};
+	}
+
+	if (mouse.target_onOver_3D) // -------------------------------------------------------------------------------------------------------------------------------
+	{
+		for (var v in villages)
+		{
+			if (mouse.target_onOver_3D.targeted_mesh.name == villages[v].mesh.name && villages[v].mesh.material.emissiveColor.r < 1)
+			{
+				villages[v].mesh.material.emissiveColor.r += 0.05 * config.deltaTime;
+			}
+			else if (villages[v].mesh.material.emissiveColor.r > 0)
+			{
+				villages[v].mesh.material.emissiveColor.r -= 0.05 * config.deltaTime;
+			}
+		}
 	}
 
 	if (!config.inputs.bPause)

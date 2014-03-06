@@ -98,19 +98,16 @@ function createGroundFromData (name, data, width, height, subdivisions, scene, u
 }
 
 // return coords from x and z positions with the heightmap data array
-function getPosOnHeightMap (x, z, data, width, height)
+function getPosOnHeightMap (x, z, data, width, height) // -------------------------------------------------------------------------------------------------- NEW
 {
 	var pos = {};
 	
 	pos.x = (((x + width / 2) / width) * (data.length - 1)) | 0;
 	pos.z = ((1.0 - (z + height / 2) / height) * (data[0].length - 1)) | 0;
-	pos.y = pos.x < 0 || pos.x >= data.length || pos.z < 0 || pos.z >= data[0].length ? -1 : data[pos.x][pos.z];
-	
+
+	if (pos.x < 0 || pos.x >= data.length || pos.z < 0 || pos.z >= data[0].length)
+		return 0;
+	else
+		pos.y = data[pos.x][pos.z];
 	return pos;
 }
-
-
-/* ------------------------------------------------------------------------------------------------------------------- */
-/* ------------------------------------------------------------------------------------------------------------------- */
-/* ------------------------------------------------------------------------------------------------------------------- */
-

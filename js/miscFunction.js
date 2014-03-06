@@ -1,21 +1,3 @@
-/*function onMouseOver (mesh, bubble) // a changer, plus de bubble // ----------------------------------------------------------------------------------------------
-{
-	if (mouse.target_onOver_3D.targeted_mesh.name == mesh.name || mouse.target_onOver_3D.targeted_mesh.name == "bubble") 
-	{
-		if (bubble.scaling.x < bubble.render_size)
-		{
-			bubble.scaling.x = bubble.scaling.y = bubble.scaling.z += 0.5;
-		}
-	}
-	else
-	{
-		if (bubble.scaling.x > 0.1)
-		{
-			bubble.scaling.x = bubble.scaling.y = bubble.scaling.z -= 0.5;
-		}
-	}
-}*/
-
 function cameraBordersFunction (camera, data)
 {
 	if (camera.beta < data.beta_min)
@@ -59,13 +41,22 @@ function playerMove (config, camera, player)
 
 	if (!config.bReady && moveX + moveZ != 0) config.bReady = true;
 
-	player.position.x += moveX * speed * config.deltaTime;
-	player.position.z += moveZ * speed * config.deltaTime;
-	config.posHeightMap = getPosOnHeightMap(player.position.x, player.position.z, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight);
-	player.position.y = config.posHeightMap.y - config.player.y_margin;
+	 // -------------------------------------------------------------------------------------------------- NEW
 
-	createPas(config, player.position.x, player.position.y, player.position.z, ((moveX * speed * config.deltaTime != 0 || moveZ * speed * config.deltaTime != 0)), config.scene)
+	var stepX = moveX * speed * config.deltaTime;
+	var stepZ = moveZ * speed * config.deltaTime;
+	
+	var posHM = getPosOnHeightMap(player.position.x + stepX, player.position.z + stepZ, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight);
+	if (posHM)
+	{
+		config.posHeightMap = posHM; // -------------------------------------------------------------------------------------------------- NEW
+		player.position.y = config.posHeightMap.y - config.player.y_margin;
+		player.position.x += stepX;
+		player.position.z += stepZ;
+	}
+	
 
+	createPas(config, player.position.x, player.position.y, player.position.z, ((moveX * speed * config.deltaTime != 0 || moveZ * speed * config.deltaTime != 0)), config.scene);
 
 	camera.target.x = player.position.x;
 	camera.target.z = player.position.z;
