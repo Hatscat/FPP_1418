@@ -41,8 +41,8 @@ function getConfig ()
 						name : "craonne",
 						x : -12,
 						z : -15,
-						y_margin : 3.5,
-						scale : 0.25,
+						y_margin : 0.4,
+						scale : 0.05,
 						//bubble_poly : 10.0, //------------------------------------------------------------------------------
 						//bubble_collider_size : 10.0,
 						//bubble_render_size : 4.6,
@@ -50,6 +50,7 @@ function getConfig ()
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : big_village
+
 					}/*, //------------------------------------------------------------------------------
 					{
 						name : "test1",
@@ -178,10 +179,10 @@ function getConfig ()
 			images : "img/skybox/skybox"
 		},
 		player : {
-			speed : 0.4, //------------------------------------------------------------------------------
+			speed : 0.28,
 			y_margin: -1.5,
 			origin_x : 0,
-			origin_z : 0 //------------------------------------------------------------------------------
+			origin_z : 0
 		},
 		babylon_light : {
 			name : "Omni",
@@ -191,13 +192,13 @@ function getConfig ()
 		},
 		babylon_camera : {
 			name : "Camera",
-			alpha : 44.5,
-			beta : 1.0,
-			radius : 50, //------------------------------------------------------------------------------
+			alpha : 199.5,
+			beta : 0.5,
+			radius : 80,
 			beta_min : 0.1,
 			beta_max : (Math.PI / 2) * 0.75,
-			zoom_min : 50,
-			zoom_max : 100, //------------------------------------------------------------------------------
+			zoom_min : 20,
+			zoom_max : 80,
 			x : 0,
 			y : 11,
 			z : 0
