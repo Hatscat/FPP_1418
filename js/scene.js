@@ -41,10 +41,8 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 					if (mouse.target_onOver_3D.targeted_mesh.name == villages[v].mesh.name) // || == "bubble"
 					{
 						console.log("go to village : " + villages[v].mesh.name);
-						mouse.doubleClicks = false;
-						config.ready2ChangeScene = true;
-						config.mapSuivante = villages[v].mesh.name;
-						config.player.mesh.position = villages[v].mesh.position;
+						initPrePopUp(config, villages[v])
+						/**/
 					}
 				}
 			}
@@ -55,15 +53,16 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 			}*/
 		});
 	}
+
 	else
 	{
-		config.scene.registerBeforeRender(function ()
+		/*config.scene.registerBeforeRender(function ()
 		{
 			commonSceneUpdate(config, config.player.mesh, villages);
 			
 			if (config.inputs.bPause)
 			{
-				displayPopUp(config);
+				
 			}
 			else if (!config.popUp && mouse.target_onClick_3D)
 			{
@@ -77,12 +76,13 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 				}
 			}
 			else
-			{
+			{*/
 				for (var v in villages)
 				{
 					checkPlayerCollisions(config.player.mesh, villages[v].mesh, config);
+					initPopUp(config);
 				}
-			}
+			//}
 
 			/* 
 			if(PlayerFirstTimeOnThisFuckingScene && firstScene)
@@ -95,9 +95,9 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 				changeScene(config, "globalMap");
 			}
 			*/
-		});
+		//});
 	}
-	initPopUp(config);
+	
     createEvenement(config); // TODO if (evenement non init)
 }
 

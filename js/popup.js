@@ -5,25 +5,57 @@ function displayPopUp (config)
 }
 
 // Input : config (json)
-// Initialise la pop-Up en position et contenu
+// Initialise la prePop-Up en position et contenu (lancé via un if(isGlobal))
 // @author : Jules D.
-function initPopUp (config) // doit initialiser TOUTES les popups ! (pas juste Craonne)
+function initPrePopUp (config, village)
 {
 	//$(".popup").hide()
+	mouse.doubleClicks = false;
 	centerPopUp();
-	var actualPopUp = config.scenes[config.mapActuelle].popUps || 0;
-	if (!actualPopUp) return;
-	$("#pop_content h1").text(actualPopUp.title);
-	$("#pop_content p").text(actualPopUp.description);
-	$("#pop_content #datas_one .number").text(actualPopUp.datas[0]);
-	$("#pop_content #datas_one .value").text(actualPopUp.datas[1]);
-	$("#pop_content #datas_two .number").text(actualPopUp.datas[2]);
-	$("#pop_content #datas_two .value").text(actualPopUp.datas[3]);
+	console.log(mouse.target_onClick_3D.targeted_mesh.name)
+	var mapActuelle = config.scenes[mouse.target_onClick_3D.targeted_mesh.name] || 0;
+	if(mapActuelle)
+		mapActuellePopUp = mapActuelle.popUps
+
+	else return;
+	//$("#go_button").show()
+	$("#pop_content h1").text(mapActuellePopUp.title);
+	$("#pop_content p").text(mapActuellePopUp.description);
+	$("#pop_content #datas_one .number").text(mapActuellePopUp.datas[0]);
+	$("#pop_content #datas_one .value").text(mapActuellePopUp.datas[1]);
+	$("#pop_content #datas_two .number").text(mapActuellePopUp.datas[2]);
+	$("#pop_content #datas_two .value").text(mapActuellePopUp.datas[3]);
 	$("#pop_content p").css("margin-top", - $("#pop_content p").innerHeight() + "px");
 	
-	$("#go_button").hide();
-	$("#pop_up").hide();
+	$("#pop_up").fadeIn();
 
+
+	$("#quit_button").click(function()
+	{
+		$('#pop_up').fadeOut()			
+	})
+
+	$("#go_button").click(function()
+	{
+		$("#pop_up").fadeOut();
+
+		initPopUp(config);
+		config.ready2ChangeScene = true;
+		config.mapSuivante = village.mesh.name;
+		config.player.mesh.position = village.mesh.position;
+	})
+}
+
+// Input : config (json)
+// Initialise la Pop-Up en position et contenu (lancé si non global)
+// @author : Jules D.
+function initPrePopUp (config, village)
+function initPopUp (config)
+{
+	$("#go_button").css("display", "none")
+	$("#discussion").html("")
+	var actualPopUp = config.scenes[config.mapActuelle].popUps || 0;
+	if (!actualPopUp) return;
 	$("#ville").text(actualPopUp.title);
 	$("#veilleur").text(actualPopUp.veilleur[0]);
 	$("#statut").text(actualPopUp.veilleur[1]);
@@ -38,6 +70,7 @@ function initPopUp (config) // doit initialiser TOUTES les popups ! (pas juste C
 	for(var i = actualPopUp.discussion.length; i--;)
 	{
 		$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + actualPopUp.discussion[i][0] + "<div id='reponse_" + i + "'class='reponse'>" + actualPopUp.discussion[i][1] + "</div>")
+
 	}
 	mouse.target_onClick_3D = null;
 	//config.scene.activeCamera.attachControl(config.canvas); 
