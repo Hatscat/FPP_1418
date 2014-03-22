@@ -10,6 +10,7 @@ function getConfig ()
 
 	var config =
 	{
+		villages : [],
 		images :
 		{
 			icones : "img/misc/icon.png",
@@ -45,7 +46,7 @@ function getConfig ()
 						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
-						mesh_kind : big_village
+						mesh_kind : small_village
 
 					}/*, //------------------------------------------------------------------------------
 					{
@@ -96,13 +97,13 @@ function getConfig ()
 			},
 			craonne :
 			{
-				mapMaxHeight : 10,
-				mapWidth : 250,
-				mapHeight : 250,
-				subdivisions : 200,
-				bump_width_subdivisions : 100,
-				bump_height_subdivisions : 100,
-				y_margin: -2.1,
+				mapMaxHeight : 3,
+				mapWidth : 50,
+				mapHeight : 50,
+				subdivisions : 20,
+				bump_width_subdivisions : 50,
+				bump_height_subdivisions : 50,
+				y_margin: 0,
 				fogDensity : 0.001,
 				images : {
 					map_texture : "scenes/craonne/img/map.jpg",
@@ -134,10 +135,10 @@ function getConfig ()
 				[
 					{
 						name : "craonne",
-						x : -120,
-						z : -150,
-						y_margin : 3.5,
-						scale : 0.5,
+						x : -12,
+						z : -15,
+						y_margin : 0.4,
+						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : big_village
@@ -145,24 +146,14 @@ function getConfig ()
 				],
 				ArbresPos :	
 				[
-					[48.667 , -125 , 13.667 , 14.669], 
-					[25.667 , -50 , 13.667 , 14.669], 
-					[0 , -115 , 13.667 , 14.669], 
-					[-30 , -55 , 13.667 , 14.669], 
-					[-60 , -135 , 13.667 , 14.669], 
-					[75 , -110 , 13.667 , 18], 
-					[60 , -50 , 13.667 , 14.669], 
-					[125 , -120 , 13.667 , 14], 
-					[100 , -60 , 13.667 , 14], 
-					[160 , -115 , 18 , 14], 
-					[150 , -50 , 18 , 14], 
-					[50 , -3 , 20 , 15], 
-					[-42 , 65 , 16 , 18], 
-					[-39 , 85 , 16 , 15], 
-					[-38 , 122 , 12 , 13], 
-					[-60 , 179 , 19 , 15], 
-					[-80 , 51 , 33 , 40], 
-					[67 , 170 , 35 , 45], 
+					[-8 , -16, 5 , 9], 
+					[-3 , -20, 3 , 6], 
+					[-1 , -12, 7 , 8], 
+					[8 , -9, 6 , 4], 
+					[-9 , 4.5 , 7 , 4.5], 
+					[-23 , 13 , 5 , 7], 
+					[-17 , 17 , 2 , 4], 
+					[5 , 16 , 4 , 5], 
 				],
 			},
 		},
@@ -203,7 +194,7 @@ function getConfig ()
 		canvas : document.getElementById("renderCanvas"),
 		playerCanCollide : true,
 		bReady : false,
-		ready2ChangeScene : false,  // -------------------------------------------------------------------------------------- NEW
+		ready2ChangeScene : false, 
 		inputs : {
 			bPause : false,
 			X_axis : 0,
@@ -216,7 +207,30 @@ function getConfig ()
 		numberMapDataToLoad : 2,
 		cpt : 0,
 		coolDown : 0,
-		pas : []
+		pas : [],
+
+		toufu :
+		{
+			rgbTronc : [148, 130, 101, 126, 107, 78, 99, 87, 68, 54, 47, 37],
+			rgbFeuiles :
+			[
+				[123, 157, 80,102, 136, 60,72, 97, 41,49, 66, 28],
+				[143, 157, 80,137, 151, 74,109, 120, 57,82, 90, 42],
+				[89, 149, 106,81, 130, 95,53, 101, 67,34, 74, 46]
+
+			]
+		},
+
+		sapin :
+		{
+			rgbTronc : [148, 130, 101,126, 107, 78, 99, 87, 68, 54, 47, 37],
+			rgbFeuiles :
+			[
+				[123, 157, 80,102, 136, 60,72, 97, 41,49, 66, 28],
+				[143, 157, 80,137, 151, 74,109, 120, 57,82, 90, 42],
+				[89, 149, 106,81, 130, 95,53, 101, 67,34, 74, 46]
+			]
+		},
 	};
 	return config;
 }

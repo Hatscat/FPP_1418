@@ -77,6 +77,9 @@ function createTable (config)
 
 function createPas (config, x,y,z, bool, scene)
 {
+	if(bool)
+		console.log(x, z)
+
 	if(config.oldTimestamp - config.coolDown > 0 && bool)
 	{
 		config.coolDown = config.oldTimestamp + 100;
@@ -108,28 +111,25 @@ OUTPUT : tableau de villages
 FONCTION : crée les villages de la scenne
 AUTHOR : LUCIEN, MAX */
 
-function createVillages (scene, config)
+function createVillages (config)
 {
-	var villages = [];
-
-	for (var i = config.villages.length; i--;)  // ---------------------------------------------------------------------------
+	for (var i = config.scenes[config.mapActuelle].villages.length; i--;)  
 	{
 		var village = {};
-		village.mesh = window[config.villages[i].mesh_kind](scene, config.villages[i].name); // ----------------------------------------------------------------------------------------
-		var village_Material = new BABYLON.StandardMaterial("villageMaterial", scene);
+		village.mesh = window[config.scenes[config.mapActuelle].villages[i].mesh_kind](config.scene, config.scenes[config.mapActuelle].villages[i].name); 
+		var village_Material = new BABYLON.StandardMaterial("villageMaterial", config.scene);
 		village_Material.diffuseColor = new BABYLON.Color3(1.0, 0.0, 0.0);
 		village.mesh.material = village_Material;
-		village.mesh.position.x = config.villages[i].x;
-		village.mesh.position.z = config.villages[i].z;
-		village.mesh.position.y = getPosOnHeightMap(village.mesh.position.x, village.mesh.position.z, config.mapData, config.mapWidth, config.mapHeight).y + config.villages[i].y_margin;
-		village.mesh.scaling.x = config.villages[i].scale;
-		village.mesh.scaling.y = config.villages[i].scale;
-		village.mesh.scaling.z = config.villages[i].scale;
+		village.mesh.position.x = config.scenes[config.mapActuelle].villages[i].x;
+		village.mesh.position.z = config.scenes[config.mapActuelle].villages[i].z;
+		village.mesh.position.y = getPosOnHeightMap(village.mesh.position.x, village.mesh.position.z, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight).y + config.scenes[config.mapActuelle].villages[i].y_margin;
+		village.mesh.scaling.x = config.scenes[config.mapActuelle].villages[i].scale;
+		village.mesh.scaling.y = config.scenes[config.mapActuelle].villages[i].scale;
+		village.mesh.scaling.z = config.scenes[config.mapActuelle].villages[i].scale;
 		//village.bubble = createBubble(scene, village.mesh, config.villages[i]); // ----------------------------------------------------------------------------------------
 		//village.collider = createCollider(scene, config.villages[i]); // ----------------------------------------------------------------------------------------
-		villages.push(village);
+		config.villages.push(village);
 	}
-	return villages;
 };
 
 
@@ -137,20 +137,20 @@ function createVillages (scene, config)
 	OUTPUT : none
 	FONCTION : crée les arbres de la scene
 	AUTHOR : MAX*/
-function createForet (config, scene, images)  // ---------------------------------------------------------------------------
+function createForet (config)  // ---------------------------------------------------------------------------
 {
 	var t = 0
-	for(k=0; k<config.ArbresPos.length; k++)
+	for(k=0; k<config.scenes[config.mapActuelle].ArbresPos.length; k++)
 	{
-		for(i=config.ArbresPos[k][0]; i<config.ArbresPos[k][0]+config.ArbresPos[k][2]; i+=(Math.random()*10)+2)
+		for(i=config.scenes[config.mapActuelle].ArbresPos[k][0]; i<config.scenes[config.mapActuelle].ArbresPos[k][0]+config.scenes[config.mapActuelle].ArbresPos[k][2]; i+=((Math.random()*10)+2)*0.4*(config.scenes[config.mapActuelle].mapWidth/100))
 		{
-			for(j=config.ArbresPos[k][1]; j<config.ArbresPos[k][1]+config.ArbresPos[k][3]; j+=(Math.random()*15)+3)
+			for(j=config.scenes[config.mapActuelle].ArbresPos[k][1]; j<config.scenes[config.mapActuelle].ArbresPos[k][1]+config.scenes[config.mapActuelle].ArbresPos[k][3]; j+=((Math.random()*15)+3)*0.4*(config.scenes[config.mapActuelle].mapWidth/100))
 			{
 				if(t%2 == 0)
-					createArbreToufu(config, i, getPosOnHeightMap(i, j, config.mapData, config.mapWidth, config.mapHeight).y, j, (Math.random()*5 + 3)/50, scene, images);
+					createArbreToufu(config, i, getPosOnHeightMap(i, j, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight).y, j, (Math.random()*5 + 3)/50);
 
 				else
-					createArbreSapin(config.scene, i, getPosOnHeightMap(i, j, config.mapData, config.mapWidth, config.mapHeight).y, j, (Math.random()*5 + 3)/50, scene, images);
+					createArbreSapin(config, i, getPosOnHeightMap(i, j, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight).y, j, (Math.random()*5 + 3)/50);
 
 			}
 		}
@@ -200,15 +200,22 @@ function createSkybox (config)
 	FONCTION : crée la bouboule qui nous sert de perso
 	AUTHOR : LUCIEN, MAX*/
 
-function createPlayer (scene, playerConfig, alpha)
+function createPlayer (config, bool)
 {
-	var player = BABYLON.Mesh.CreateSphere("player", 5.0, 1, scene);
-	var playerMaterial = new BABYLON.StandardMaterial("playerMaterial", scene);
-	playerMaterial.alpha = alpha;
-	player.position.x = playerConfig.origin_x;
-	player.position.z = playerConfig.origin_z;
-	player.material = playerMaterial;
-	return player;
+	if(!config.player.mesh)
+	{
+		config.player.mesh = BABYLON.Mesh.CreateSphere("player", 5.0, 1, config.scene);
+		var playerMaterial = new BABYLON.StandardMaterial("playerMaterial", config.scene);
+		config.player.mesh.material = playerMaterial;
+	}
+
+	if(bool)
+		config.player.mesh.material.alpha = 0;
+	else
+		config.player.mesh.material.alpha = 1;
+
+	config.player.mesh.position.x = config.player.origin_x;
+	config.player.mesh.position.z = config.player.origin_z;
 };
 
 /*function createBubble (scene, townMesh, data)  // ---------------------------------------------------------------------------
@@ -267,45 +274,39 @@ function createEvenement (config)
 	OUTPUT :  NONE
 	FONCTION : crée un touffu
 	AUTHOR :MAX*/
-function createArbreToufu (config, x, y, z, scale, scene, images)  // ---------------------------------------------------------------------------
+function createArbreToufu (config, x, y, z, scale) 
 {
 	var scale = scale || 1;
 
-		var rgbTronc = [148, 130, 101, 126, 107, 78, 99, 87, 68, 54, 47, 37]
-		var rgbFeuiles = 
-		[
-			[123, 157, 80,102, 136, 60,72, 97, 41,49, 66, 28],
-			[143, 157, 80,137, 151, 74,109, 120, 57,82, 90, 42],
-			[89, 149, 106,81, 130, 95,53, 101, 67,34, 74, 46]
-
-		];
 		var troncColor = Math.floor(Math.random()*4)
 		var typeFeuilles = Math.floor(Math.random()*3)
 		var colorFeuilles = Math.floor(Math.random()*4)
 
-		var cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 60*scale, 10*scale, 6*scale, 5, scene, false);
-
+		var cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 60*scale, 10*scale, 6*scale, 5, config.scene, false);
+		cylinder.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+		cylinder.scaling.y = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+		cylinder.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
 		cylinder.position = new BABYLON.Vector3(x,y,z);
 		
-		var sphere = BABYLON.Mesh.CreateSphere("shpere", 5, 20*scale,scene);
-		sphere.position = new BABYLON.Vector3(cylinder.position.x,cylinder.position.y+(50*scale),cylinder.position.z);
-		sphere.scaling.x = 2.5;
-		sphere.scaling.y = 2.6;
-		sphere.scaling.z = 2.1;
+		var sphere = BABYLON.Mesh.CreateSphere("shpere", 5, 20*scale,config.scene);
+		sphere.position = new BABYLON.Vector3(cylinder.position.x,cylinder.position.y+(50*scale*cylinder.scaling.y),cylinder.position.z);
+		sphere.scaling.x = 1*(config.scenes[config.mapActuelle].mapWidth/100);
+		sphere.scaling.y = 1.04*(config.scenes[config.mapActuelle].mapWidth/100);
+		sphere.scaling.z = 0.84*(config.scenes[config.mapActuelle].mapWidth/100);
 		
-		var materialtronc = new BABYLON.StandardMaterial("texture1", scene);
-		materialtronc.bumpTexture = new BABYLON.Texture(images.wood_normal, scene);  // ---------------------------------------------------------------------------
+		var materialtronc = new BABYLON.StandardMaterial("texture1", config.scene);
+		materialtronc.bumpTexture = new BABYLON.Texture(config.images.wood_normal, config.scene);  // ---------------------------------------------------------------------------
 		materialtronc.bumpTexture .uScale = 5;
 		materialtronc.bumpTexture .vScale = 5;
-		materialtronc.diffuseColor = new BABYLON.Color3(rgbTronc[troncColor*3]/255, rgbTronc[troncColor*3+1]/255, rgbTronc[troncColor*3+2]/255);
+		materialtronc.diffuseColor = new BABYLON.Color3(config.toufu.rgbTronc[troncColor*3]/255, config.toufu.rgbTronc[troncColor*3+1]/255, config.toufu.rgbTronc[troncColor*3+2]/255);
 		materialtronc.specularColor = new BABYLON.Color3(0,0,0);
 		cylinder.material =  materialtronc;
 
-		var materialfeuilles = new BABYLON.StandardMaterial("texture1", scene);
-		materialfeuilles.bumpTexture = new BABYLON.Texture(images.leave_normal, scene);  // ---------------------------------------------------------------------------
+		var materialfeuilles = new BABYLON.StandardMaterial("texture1", config.scene);
+		materialfeuilles.bumpTexture = new BABYLON.Texture(config.images.leave_normal, config.scene);  // ---------------------------------------------------------------------------
 		materialfeuilles.bumpTexture .uScale = 5;
 		materialfeuilles.bumpTexture .vScale = 5;
-		materialfeuilles.diffuseColor = new BABYLON.Color3(rgbFeuiles[typeFeuilles][colorFeuilles*3]/255, rgbFeuiles[typeFeuilles][colorFeuilles*3+1]/255, rgbFeuiles[typeFeuilles][colorFeuilles*3+2]/255);
+		materialfeuilles.diffuseColor = new BABYLON.Color3(config.toufu.rgbFeuiles[typeFeuilles][colorFeuilles*3]/255, config.toufu.rgbFeuiles[typeFeuilles][colorFeuilles*3+1]/255, config.toufu.rgbFeuiles[typeFeuilles][colorFeuilles*3+2]/255);
 		materialfeuilles.specularColor = new BABYLON.Color3(0, 0, 0);
 		sphere.material = materialfeuilles;
 };
@@ -315,43 +316,39 @@ function createArbreToufu (config, x, y, z, scale, scene, images)  // ----------
 	FONCTION : crée un sapin
 	AUTHOR :MAX*/
 
-function createArbreSapin (scene, x, y, z, scale, scene, images)  // ---------------------------------------------------------------------------
+function createArbreSapin (config, x, y, z, scale)  // ---------------------------------------------------------------------------
 {
 	var scale = scale || 1;
 
-	var rgbTronc = [148, 130, 101,126, 107, 78, 99, 87, 68, 54, 47, 37]
-	var rgbFeuiles = 
-	[
-		[123, 157, 80,102, 136, 60,72, 97, 41,49, 66, 28],
-		[143, 157, 80,137, 151, 74,109, 120, 57,82, 90, 42],
-		[89, 149, 106,81, 130, 95,53, 101, 67,34, 74, 46]
-	];
 	var troncColor = Math.floor(Math.random()*4)
 	var typeFeuilles = Math.floor(Math.random()*3)
 	var colorFeuilles = Math.floor(Math.random()*4)
 
-	var cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 15*scale, 12*scale, 12*scale, 5, scene, false);
-	var cylinder2 = BABYLON.Mesh.CreateCylinder("cylinder", 24*scale, 60*scale, 30*scale, 5, scene, false);
-	var cylinder3 = BABYLON.Mesh.CreateCylinder("cylinder", 24*scale, 45*scale, 15*scale, 5, scene, false);
-	var cylinder4 = BABYLON.Mesh.CreateCylinder("cylinder", 30*scale, 30*scale, 0*scale, 6, scene, false);
+	var cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 15*scale, 12*scale, 12*scale, 5, config.scene, false);
+	var cylinder2 = BABYLON.Mesh.CreateCylinder("cylinder", 24*scale, 60*scale, 30*scale, 5, config.scene, false);
+	var cylinder3 = BABYLON.Mesh.CreateCylinder("cylinder", 24*scale, 45*scale, 15*scale, 5, config.scene, false);
+	var cylinder4 = BABYLON.Mesh.CreateCylinder("cylinder", 30*scale, 30*scale, 0*scale, 6, config.scene, false);
+	cylinder.scaling.x = cylinder2.scaling.x = cylinder3.scaling.x = cylinder4.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+	cylinder.scaling.y = cylinder2.scaling.y = cylinder3.scaling.y = cylinder4.scaling.y = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+	cylinder.scaling.z = cylinder2.scaling.z = cylinder3.scaling.z = cylinder4.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
 	cylinder.position = new BABYLON.Vector3(x,y,z);
-	cylinder2.position = new BABYLON.Vector3(cylinder.position.x,cylinder.position.y+(15*scale),cylinder.position.z);
-	cylinder3.position = new BABYLON.Vector3(cylinder2.position.x,cylinder2.position.y+(24*scale),cylinder.position.z);
-	cylinder4.position = new BABYLON.Vector3(cylinder3.position.x,cylinder3.position.y+(24*scale),cylinder.position.z);
+	cylinder2.position = new BABYLON.Vector3(cylinder.position.x,cylinder.position.y+(15*scale*cylinder.scaling.y),cylinder.position.z);
+	cylinder3.position = new BABYLON.Vector3(cylinder2.position.x,cylinder2.position.y+(24*scale*cylinder.scaling.y),cylinder.position.z);
+	cylinder4.position = new BABYLON.Vector3(cylinder3.position.x,cylinder3.position.y+(24*scale*cylinder.scaling.y),cylinder.position.z);
 
-	var materialtronc = new BABYLON.StandardMaterial("texture1", scene);
-	materialtronc.bumpTexture = new BABYLON.Texture(images.wood_normal, scene);  // ---------------------------------------------------------------------------
+	var materialtronc = new BABYLON.StandardMaterial("texture1", config.scene);
+	materialtronc.bumpTexture = new BABYLON.Texture(config.images.wood_normal, config.scene);  // ---------------------------------------------------------------------------
 	materialtronc.bumpTexture .uScale = 5;
 	materialtronc.bumpTexture .vScale = 5;
-	materialtronc.diffuseColor = new BABYLON.Color3(rgbTronc[troncColor*3]/255, rgbTronc[troncColor*3+1]/255, rgbTronc[troncColor*3+2]/255);
+	materialtronc.diffuseColor = new BABYLON.Color3(config.sapin.rgbTronc[troncColor*3]/255, config.sapin.rgbTronc[troncColor*3+1]/255, config.sapin.rgbTronc[troncColor*3+2]/255);
 	materialtronc.specularColor = new BABYLON.Color3(0, 0, 0);
 	cylinder.material =  materialtronc;
 
-	var materialfeuilles = new BABYLON.StandardMaterial("texture1", scene);
-	materialfeuilles.bumpTexture = new BABYLON.Texture(images.leave_normal, scene);  // ---------------------------------------------------------------------------
+	var materialfeuilles = new BABYLON.StandardMaterial("texture1", config.scene);
+	materialfeuilles.bumpTexture = new BABYLON.Texture(config.images.leave_normal, config.scene);  // ---------------------------------------------------------------------------
 	materialfeuilles.bumpTexture .uScale = 5;
 	materialfeuilles.bumpTexture .vScale = 5;
-	materialfeuilles.diffuseColor = new BABYLON.Color3(rgbFeuiles[typeFeuilles][colorFeuilles*3]/255, rgbFeuiles[typeFeuilles][colorFeuilles*3+1]/255, rgbFeuiles[typeFeuilles][colorFeuilles*3+2]/255);
+	materialfeuilles.diffuseColor = new BABYLON.Color3(config.sapin.rgbFeuiles[typeFeuilles][colorFeuilles*3]/255, config.sapin.rgbFeuiles[typeFeuilles][colorFeuilles*3+1]/255, config.sapin.rgbFeuiles[typeFeuilles][colorFeuilles*3+2]/255);
 	materialfeuilles.specularColor = new BABYLON.Color3(0, 0, 0);
 	cylinder2.material = cylinder3.material = cylinder4.material = materialfeuilles;	
 };
