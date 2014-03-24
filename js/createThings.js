@@ -78,15 +78,15 @@ function createTable (config)
 function createPas (config, x,y,z, bool, scene)
 {
 	if(bool)
-		console.log(x, z)
+		//console.log(x, z)
 
-	if(config.oldTimestamp - config.coolDown > 0 && bool)
+	if(bool && config.oldTimestamp - config.coolDown > 0) //  && !config.mapActuelle == "globalMap"
 	{
 		config.coolDown = config.oldTimestamp + 100;
-		var box1 = BABYLON.Mesh.CreateBox("Trace" + config.cpt, 0.5*(config.scenes[config.mapActuelle].mapWidth/100), scene);
+		var box1 = BABYLON.Mesh.CreateSphere("Trace" + config.cpt, 5.0, 0.5*(config.scenes[config.mapActuelle].mapWidth/100), scene);
 		box1.position = new BABYLON.Vector3(x,y,z);
 		var materalPas = new BABYLON.StandardMaterial("texture1", scene);
-		materalPas.emissiveColor = new BABYLON.Color3(1, 1, 1);
+		materalPas.emissiveColor = new BABYLON.Color3(1, 1, 1, 1);
 		materalPas.alpha = 1.0;
 		box1.scaling.y = 0.1;
 		box1.material = materalPas;
@@ -100,7 +100,7 @@ function createPas (config, x,y,z, bool, scene)
 
 		if(config.pas[i].material.alpha <= 0)
 		{
-			config.pas[i].dispose(true)
+			config.pas[i].dispose(true);
 			config.pas.splice(i, 1);	
 		}
 	}
@@ -204,15 +204,16 @@ function createPlayer (config, bool)
 {
 	if(!config.player.mesh)
 	{
-		config.player.mesh = BABYLON.Mesh.CreateSphere("player", 5.0, 1, config.scene);
+		config.player.mesh = BABYLON.Mesh.CreateSphere("player", 5.0, 0.5, config.scene);
 		var playerMaterial = new BABYLON.StandardMaterial("playerMaterial", config.scene);
+		playerMaterial.emissiveColor = new BABYLON.Color4(1, 1, 1, 1);
 		config.player.mesh.material = playerMaterial;
 	}
 
 	if(bool)
-		config.player.mesh.material.alpha = 0;
-	else
 		config.player.mesh.material.alpha = 1;
+	else
+		config.player.mesh.material.alpha = 0;
 
 	config.player.mesh.position.x = config.player.origin_x;
 	config.player.mesh.position.z = config.player.origin_z;

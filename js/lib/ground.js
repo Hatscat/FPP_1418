@@ -97,8 +97,15 @@ function createGroundFromData (name, data, width, height, subdivisions, scene, u
 	return ground;
 }
 
+function normalize (distanceX, distanceZ) // --------------------------------------------------------------------------- ADDED
+{
+	var normalisationRatio = Math.abs(distanceX) + Math.abs(distanceZ);
+	normalisationRatio = normalisationRatio ? normalisationRatio : 1;
+	return { x: distanceX / normalisationRatio, z: distanceZ / normalisationRatio };
+}
+
 // return coords from x and z positions with the heightmap data array
-function getPosOnHeightMap (x, z, data, width, height) // -------------------------------------------------------------------------------------------------- NEW
+function getPosOnHeightMap (x, z, data, width, height) // -------------------------------------------------------------------------------------------------- CHANGED
 {
 	var pos = {};
 	

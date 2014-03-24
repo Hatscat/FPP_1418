@@ -22,40 +22,32 @@ function playerMove (config, camera, player)
 		mouse.target_onClick_3D = null;
 
 		var direction = Math.atan2(camera.position.z - player.position.z, camera.position.x - player.position.x);
-		var normalisationRatio = Math.abs(config.inputs.X_axis) + Math.abs(config.inputs.Y_axis);
-		normalisationRatio = normalisationRatio ? normalisationRatio : 1;
-		moveX = config.inputs.Y_axis / normalisationRatio * Math.cos(direction)
-			+ config.inputs.X_axis / normalisationRatio * Math.cos(direction + Math.PI / 2);
-		moveZ = config.inputs.Y_axis / normalisationRatio * Math.sin(direction)
-			+ config.inputs.X_axis / normalisationRatio * Math.sin(direction + Math.PI / 2);
+		var distancesXY = normalize(config.inputs.X_axis, config.inputs.Y_axis); // --------------------------------------------------------------------------- ADDED
+		moveX = distancesXY.z * Math.cos(direction) + distancesXY.x * Math.cos(direction + Math.PI / 2); // --------------------------------------------------------------------------- CHANGED
+		moveZ = distancesXY.z * Math.sin(direction) + distancesXY.x * Math.sin(direction + Math.PI / 2); // --------------------------------------------------------------------------- CHANGED
 	}
 	else
 	{ /* mouse inputs */
 		var distanceX = mouse.target_onClick_3D.x - player.position.x + 0.5 | 0;
 		var distanceZ = mouse.target_onClick_3D.z - player.position.z + 0.5 | 0;
-		var normalisationRatio = Math.abs(distanceX) + Math.abs(distanceZ);
-		normalisationRatio = normalisationRatio ? normalisationRatio : 1;
-		moveX = distanceX / normalisationRatio;
-		moveZ = distanceZ / normalisationRatio;
+		var distancesXZ = normalize(distanceX, distanceZ); // --------------------------------------------------------------------------- CHANGED
+		moveX = distancesXZ.x; // --------------------------------------------------------------------------- CHANGED
+		moveZ = distancesXZ.z; // --------------------------------------------------------------------------- CHANGED
 	}
-
 	if (!config.bReady && moveX + moveZ != 0) config.bReady = true;
-
-	 // -------------------------------------------------------------------------------------------------- NEW
 
 	var stepX = moveX * speed * config.deltaTime;
 	var stepZ = moveZ * speed * config.deltaTime;
-	
-	var posHM = getPosOnHeightMap(player.position.x + stepX, player.position.z + stepZ, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight);
+	var posHM = getPosOnHeightMap(player.position.x + stepX, player.position.z + stepZ, config.scenes[config.mapActuelle].mapData,
+									 config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight);
 	if (posHM)
 	{
-		config.posHeightMap = posHM; // -------------------------------------------------------------------------------------------------- NEW
+		config.posHeightMap = posHM;
 		player.position.y = config.posHeightMap.y - config.player.y_margin;
 		player.position.x += stepX;
 		player.position.z += stepZ;
 	}
 	
-
 	createPas(config, player.position.x, player.position.y, player.position.z, ((moveX * speed * config.deltaTime != 0 || moveZ * speed * config.deltaTime != 0)), config.scene);
 
 	camera.target.x = player.position.x;
