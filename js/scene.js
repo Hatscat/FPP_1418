@@ -32,18 +32,15 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 		{
 			commonSceneUpdate(config);
 
-			if (mouse.doubleClicks && mouse.target_onOver_3D) // || zoom > ... // ---------------------------------------------------------------------------
+			for (var v in config.villages)
 			{
-				for (var v in config.villages)
+				if ((mouse.doubleClicks) && mouse.target_onOver_3D.targeted_mesh.name == config.villages[v].mesh.name) // || == "bubble"
 				{
-					if (mouse.target_onOver_3D.targeted_mesh.name == config.villages[v].mesh.name) // || == "bubble"
-					{
-						console.log("go to village : " + config.villages[v].mesh.name);
-						mouse.doubleClicks = false;
-						config.ready2ChangeScene = true;
-						config.mapSuivante = config.villages[v].mesh.name;
-						config.player.mesh.position = config.villages[v].mesh.position;
-					}
+					console.log("go to village : " + config.villages[v].mesh.name);
+					mouse.doubleClicks = false;
+					config.ready2ChangeScene = true;
+					config.mapSuivante = config.villages[v].mesh.name;
+					config.player.mesh.position = config.villages[v].mesh.position;
 				}
 			}
 

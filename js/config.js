@@ -134,7 +134,7 @@ function getConfig ()
 				villages : 
 				[
 					{
-						name : "craonne",
+						name : "globalMap", // ------------------------------- CHANGED
 						x : -12,
 						z : -15,
 						y_margin : 0.4,
