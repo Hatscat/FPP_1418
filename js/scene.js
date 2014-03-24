@@ -89,6 +89,13 @@ function set_scene_run_loop (config)
 				{
 					config.villages[v].mesh.dispose(true);
 				}
+
+				for(a in config.arbres)
+				{
+					for(b in config.arbres[a])
+						config.arbres[a].arbre[b].dispose(true);
+				}
+
 				createScene(config);
 			}
 		}

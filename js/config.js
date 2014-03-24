@@ -11,6 +11,7 @@ function getConfig ()
 	var config =
 	{
 		villages : [],
+		arbres: [],
 		images :
 		{
 			icones : "img/misc/icon.png",
@@ -40,59 +41,64 @@ function getConfig ()
 				[
 					{
 						name : "craonne",
-						x : -12,
-						z : -15,
+						x : 2,
+						z : 3,
 						y_margin : 0.4,
 						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : small_village
 
-					}/*, //------------------------------------------------------------------------------
+					},
+
 					{
-						name : "test1",
-						x : -10,
-						z : -50,
-						y_margin : 3.5,
-						scale : 0.25,
-						bubble_poly : 10.0,
-						bubble_collider_size : 10.0,
-						bubble_render_size : 4.6,
-						bubble_alpha : 0.15,
+						name : "Pozières",
+						x : -1,
+						z : 6,
+						y_margin : 0.4,
+						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : small_village
+
 					},
 
-
 					{
-						name : "test2",
-						x : 21,
-						z : 15,
-						y_margin : 3.5,
-						scale : 0.25,
-						bubble_poly : 10.0,
-						bubble_collider_size : 10.0,
-						bubble_render_size : 4.6,
-						bubble_alpha : 0.15,
+						name : "Vauquois",
+						x : 7,
+						z : 1,
+						y_margin : 0,
+						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : small_village
+
 					},
+					
 					{
-						name : "test3",
+						name : "Verdun",
 						x : 10,
-						z : 22,
-						y_margin : 3.5,
-						scale : 0.25,
-						bubble_poly : 10.0,
-						bubble_collider_size : 10.0,
-						bubble_render_size : 4.6,
-						bubble_alpha : 0.15,
+						z : -1,
+						y_margin : 0,
+						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : small_village
-					},*/
+
+					},
+
+					{
+						name : "Eparges",
+						x : 11,
+						z : -3,
+						y_margin : 0.6,
+						scale : 0.05,
+						collider_poly : 6.0,
+						collider_size : 50,
+						mesh_kind : small_village
+
+					},
+
 				]
 			},
 			craonne :
@@ -154,6 +160,63 @@ function getConfig ()
 					[-23 , 13 , 5 , 7], 
 					[-17 , 17 , 2 , 4], 
 					[5 , 16 , 4 , 5], 
+				],
+			},
+
+			machin:
+			{
+				mapMaxHeight : 3,
+				mapWidth : 50,
+				mapHeight : 50,
+				subdivisions : 20,
+				bump_width_subdivisions : 50,
+				bump_height_subdivisions : 50,
+				y_margin: 0,
+				fogDensity : 0,
+				images : {
+					map_texture : "scenes/global/img/map.jpg",
+					heightmap : "scenes/global/img/heightmap.jpg",
+					bumpmap : "img/misc/normal_leaves.jpg"
+				},
+				villages : 
+				[
+					{
+						name : "craonne",
+						x : 2,
+						z : 3,
+						y_margin : 0.4,
+						scale : 0.05,
+						collider_poly : 6.0,
+						collider_size : 50,
+						mesh_kind : small_village
+
+					},
+
+					{
+						name : "Pozières",
+						x : -1,
+						z : 6,
+						y_margin : 0.4,
+						scale : 0.05,
+						collider_poly : 6.0,
+						collider_size : 50,
+						mesh_kind : small_village
+
+					},
+
+					{
+						name : "Vauquois",
+						x : 7,
+						z : 1,
+						y_margin : 0,
+						scale : 0.05,
+						collider_poly : 6.0,
+						collider_size : 50,
+						mesh_kind : small_village
+
+					},
+					
+
 				],
 			},
 		},
