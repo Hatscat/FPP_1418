@@ -186,8 +186,9 @@ function getConfig ()
 			y : 11,
 			z : 0
 		},
+		isGlobalMap : false, // ------------------------------------------------------------------------- NEW
 		mapActuelle : "globalMap",
-		mapSuivante : "globalMap",  // -------------------------------------------------------------------------------------- NEW
+		mapSuivante : "globalMap",  // -------------------------------------------------------------------------------------- ???
 		moveToMouseUpSensitivity : 0.04,
 
 		oldTimestamp : Date.now(),

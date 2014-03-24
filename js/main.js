@@ -79,8 +79,10 @@ window.onload = function ()
 			window.onresize = function ()
 			{
 				config.engine.resize();
-				centerPopUp();
+				//centerPopUp(); // ----------------------------------------------------- Commented
 			};
+
+			set_scene_run_loop(config);
 		}	
 	}
 };
