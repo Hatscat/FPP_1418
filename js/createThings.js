@@ -210,11 +210,7 @@ function createPlayer (config, bool)
 		config.player.mesh.material = playerMaterial;
 	}
 
-	if(bool)
-		config.player.mesh.material.alpha = 0;
-	else
-		config.player.mesh.material.alpha = 1;
-
+	config.player.mesh.material.alpha = +!bool;
 	config.player.mesh.position.x = config.player.origin_x;
 	config.player.mesh.position.z = config.player.origin_z;
 };
@@ -253,7 +249,7 @@ function createEvenement (config)
 				z : pickResult.pickedPoint.z,
 				targeted_mesh : pickResult.pickedMesh
 			};
-			console.log(mouse.target_onClick_3D.targeted_mesh.name);
+			//console.log(mouse.target_onClick_3D.targeted_mesh.name);
 		}
 	};
 }

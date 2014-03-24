@@ -8,7 +8,7 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 {
 	config.mapActuelle = config.mapSuivante;
 
-	if(!config.scene)
+	if (!config.scene)
 	{
 		config.scene = new BABYLON.Scene(config.engine);
 		config.light = new BABYLON.PointLight(config.babylon_light.name, new BABYLON.Vector3(config.babylon_light.x, config.babylon_light.y, config.babylon_light.z), config.scene);
@@ -59,7 +59,7 @@ function set_scene_run_loop (config)
 		else
 		{
 			if (config.camera.radius > config.babylon_camera.zoom_max)
-				scene_transition(config, "globalMap", config.player.position);
+				scene_transition(config, "globalMap", config.player.mesh.position);
 		}
 
 		if (mouse.target_onOver_3D)
@@ -93,24 +93,21 @@ function set_scene_run_loop (config)
 		else if (config.ready2ChangeScene)
 		{
 			// ANIM de transition
-			if ((config.isGlobalMap && (config.camera.radius -= config.deltaTime) < 0)
-			||	(!config.isGlobalMap && (config.camera.radius += config.deltaTime) > config.babylon_camera.zoom_max * 1.2))
+			if ((config.isGlobalMap && (config.camera.radius -= config.deltaTime) < 1)
+			||	(!config.isGlobalMap && (config.camera.radius += config.deltaTime) > config.babylon_camera.zoom_max * 1.5))
 			{
 				config.camera.radius = config.babylon_camera.zoom_max * 0.8;
-				config.ready2ChangeScene = false;
 				config.ground.mesh.dispose(true);
 
 				for (v in config.villages)
-				{
 					config.villages[v].mesh.dispose(true);
-				}
 
-				for (a in config.arbres)
-				{
+				/*for (a in config.arbres)
 					for (b in config.arbres[a])
 						config.arbres[a].arbre[b].dispose(true);
-				}
+				*/
 
+				config.ready2ChangeScene = false;
 				createScene(config);
 			}
 		}
