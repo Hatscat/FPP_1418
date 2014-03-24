@@ -78,7 +78,7 @@ function createTable (config)
 function createPas (config, x,y,z, bool, scene)
 {
 	if(bool)
-		console.log(x, z)
+		//console.log(x, z)
 
 	if(config.oldTimestamp - config.coolDown > 0 && bool) //  && !config.mapActuelle == "globalMap"
 	{
@@ -211,9 +211,9 @@ function createPlayer (config, bool)
 	}
 
 	if(bool)
-		config.player.mesh.material.alpha = 1;
-	else
 		config.player.mesh.material.alpha = 0;
+	else
+		config.player.mesh.material.alpha = 1;
 
 	config.player.mesh.position.x = config.player.origin_x;
 	config.player.mesh.position.z = config.player.origin_z;

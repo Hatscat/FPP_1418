@@ -82,6 +82,7 @@ window.onload = function ()
 				//centerPopUp(); // ----------------------------------------------------- Commented
 			};
 
+			createPlayer(config, 1);
 			set_scene_run_loop(config);
 		}	
 	}

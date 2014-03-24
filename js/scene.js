@@ -19,7 +19,7 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 	config.ground = createGroundMesh(config.scene, config.scenes[config.mapActuelle]);
 	createVillages(config);
 	config.isGlobalMap = config.mapActuelle == "globalMap";
-	createPlayer(config, !config.isGlobalMap);
+	createPlayer(config, config.isGlobalMap);
 	config.scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
 	config.scene.fogDensity = config.scenes[config.mapActuelle].fogDensity;
 	createTable(config);
@@ -48,13 +48,27 @@ function set_scene_run_loop (config)
 				targeted_mesh : onOverResult.pickedMesh
 			};
 		}
+
+		if (config.isGlobalMap)
+		{
+			var nearestVillage = checkNearestVillage(config);
+
+			if (config.camera.radius < config.babylon_camera.zoom_min)
+				scene_transition(config, nearestVillage.mesh.name, nearestVillage.mesh.position);
+		}
+		else
+		{
+			if (config.camera.radius > config.babylon_camera.zoom_max)
+				scene_transition(config, "globalMap", config.player.position);
+		}
+
 		if (mouse.target_onOver_3D)
 		{
 			for (var v in config.villages)
 			{
 				if (mouse.target_onOver_3D.targeted_mesh.name == config.villages[v].mesh.name)
 				{
-					if ((mouse.doubleClicks))
+					if (config.isGlobalMap && (mouse.doubleClicks))
 					{
 						console.log("go to village : " + config.villages[v].mesh.name);
 						scene_transition(config, config.villages[v].mesh.name, config.villages[v].mesh.position);
@@ -71,28 +85,29 @@ function set_scene_run_loop (config)
 				}
 			}
 		}
-		if (!config.inputs.bPause)
+		if (!config.inputs.bPause && !config.ready2ChangeScene)
 		{
 			cameraBordersFunction(config.camera, config.babylon_camera);
 			playerMove(config, config.camera, config.player.mesh);
 		}
-		if (config.ready2ChangeScene)
+		else if (config.ready2ChangeScene)
 		{
 			// ANIM de transition
-			if ((config.camera.radius -= config.deltaTime) < config.babylon_camera.zoom_min)
+			if ((config.isGlobalMap && (config.camera.radius -= config.deltaTime) < 0)
+			||	(!config.isGlobalMap && (config.camera.radius += config.deltaTime) > config.babylon_camera.zoom_max * 1.2))
 			{
-				config.camera.radius = config.babylon_camera.zoom_max;
+				config.camera.radius = config.babylon_camera.zoom_max * 0.8;
 				config.ready2ChangeScene = false;
 				config.ground.mesh.dispose(true);
 
-				for(v in config.villages)
+				for (v in config.villages)
 				{
 					config.villages[v].mesh.dispose(true);
 				}
 
-				for(a in config.arbres)
+				for (a in config.arbres)
 				{
-					for(b in config.arbres[a])
+					for (b in config.arbres[a])
 						config.arbres[a].arbre[b].dispose(true);
 				}
 
@@ -148,5 +163,6 @@ function scene_transition (config, next_scene, village_position)
 	config.ready2ChangeScene = true;
 	config.mapSuivante = next_scene;
 	config.player.mesh.position = village_position;
+	playerMove(config, config.camera, config.player.mesh);
 	mouse.target_onClick_3D = null;
 }

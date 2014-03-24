@@ -118,3 +118,10 @@ function getPosOnHeightMap (x, z, data, width, height) // ----------------------
 		pos.y = data[pos.x][pos.z];
 	return pos;
 }
+
+function distanceCarre (a, b) // ------------------ NEW
+{
+	var x = a.x - b.x;
+	var y = a.y - b.y;
+	return x * x + y * y;
+}

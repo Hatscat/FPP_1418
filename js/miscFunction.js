@@ -55,6 +55,24 @@ function playerMove (config, camera, player)
 	camera.target.y = player.position.y;
 }
 
+function checkNearestVillage (config) // ---------------------------------------------- NEW
+{
+	var smaller_distance = 10000;
+	var nearestVillage;
+
+	for (v in config.villages)
+	{
+		//console.log(config.player)
+		var d = distanceCarre(config.player.mesh.position, config.villages[v].mesh.position);
+		if (d < smaller_distance)
+		{
+			smaller_distance = d;
+			nearestVillage = config.villages[v];
+		}
+	}
+	return nearestVillage;
+}
+
 function checkPlayerCollisions (player, veilleur, config)
 {
 	if (config.bReady && player.intersectsMesh(veilleur, false))
