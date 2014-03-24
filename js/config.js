@@ -52,7 +52,7 @@ function getConfig ()
 					},
 
 					{
-						name : "Pozières",
+						name : "Pozieres",
 						x : -1,
 						z : 6,
 						y_margin : 0.4,
@@ -162,8 +162,7 @@ function getConfig ()
 					[5 , 16 , 4 , 5], 
 				],
 			},
-
-			machin:
+			Pozieres :
 			{
 				mapMaxHeight : 3,
 				mapWidth : 50,
@@ -172,51 +171,242 @@ function getConfig ()
 				bump_width_subdivisions : 50,
 				bump_height_subdivisions : 50,
 				y_margin: 0,
-				fogDensity : 0,
+				fogDensity : 0.001,
 				images : {
-					map_texture : "scenes/global/img/map.jpg",
-					heightmap : "scenes/global/img/heightmap.jpg",
+					map_texture : "scenes/craonne/img/map.jpg",
+					heightmap : "scenes/craonne/img/heightmap.jpg",
 					bumpmap : "img/misc/normal_leaves.jpg"
+				},
+				popUps : {
+					title : "craonne",
+					description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+					datas : ["8.9", "km²", "76", "habitants"],
+					discussion : [
+						["Question 1", "Réponse 1"],
+						["Question 2", "Réponse 2"],
+						["Question 3", "Réponse 3"],
+						["Question 4", "Réponse 4"]
+					],
+					veilleur : ["Noël Genteur", "maire"],
+					baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
+					images : {
+						background : "scenes/craonne/img/background.png",
+						veilleur : "scenes/craonne/img/veilleur.png"
+					},
+					videos : {
+						arrivee : "scenes/craonne/videos/1.OGG",
+						//chanson : ""
+					}
 				},
 				villages : 
 				[
 					{
-						name : "craonne",
-						x : 2,
-						z : 3,
+						name : "globalMap", // ------------------------------- CHANGED
+						x : -12,
+						z : -15,
 						y_margin : 0.4,
 						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
-						mesh_kind : small_village
+						mesh_kind : big_village
+					}
+				],
+				ArbresPos :	
+				[
+					[-8 , -16, 5 , 9], 
+					[-3 , -20, 3 , 6], 
+					[-1 , -12, 7 , 8], 
+					[8 , -9, 6 , 4], 
+					[-9 , 4.5 , 7 , 4.5], 
+					[-23 , 13 , 5 , 7], 
+					[-17 , 17 , 2 , 4], 
+					[5 , 16 , 4 , 5], 
+				],
+			},
 
+			Vauquois :
+			{
+				mapMaxHeight : 3,
+				mapWidth : 50,
+				mapHeight : 50,
+				subdivisions : 20,
+				bump_width_subdivisions : 50,
+				bump_height_subdivisions : 50,
+				y_margin: 0,
+				fogDensity : 0.001,
+				images : {
+					map_texture : "scenes/craonne/img/map.jpg",
+					heightmap : "scenes/craonne/img/heightmap.jpg",
+					bumpmap : "img/misc/normal_leaves.jpg"
+				},
+				popUps : {
+					title : "craonne",
+					description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+					datas : ["8.9", "km²", "76", "habitants"],
+					discussion : [
+						["Question 1", "Réponse 1"],
+						["Question 2", "Réponse 2"],
+						["Question 3", "Réponse 3"],
+						["Question 4", "Réponse 4"]
+					],
+					veilleur : ["Noël Genteur", "maire"],
+					baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
+					images : {
+						background : "scenes/craonne/img/background.png",
+						veilleur : "scenes/craonne/img/veilleur.png"
 					},
-
+					videos : {
+						arrivee : "scenes/craonne/videos/1.OGG",
+						//chanson : ""
+					}
+				},
+				villages : 
+				[
 					{
-						name : "Pozières",
-						x : -1,
-						z : 6,
+						name : "globalMap", // ------------------------------- CHANGED
+						x : -12,
+						z : -15,
 						y_margin : 0.4,
 						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
-						mesh_kind : small_village
+						mesh_kind : big_village
+					}
+				],
+				ArbresPos :	
+				[
+					[-8 , -16, 5 , 9], 
+					[-3 , -20, 3 , 6], 
+					[-1 , -12, 7 , 8], 
+					[8 , -9, 6 , 4], 
+					[-9 , 4.5 , 7 , 4.5], 
+					[-23 , 13 , 5 , 7], 
+					[-17 , 17 , 2 , 4], 
+					[5 , 16 , 4 , 5], 
+				],
+			},
 
+			Verdun :
+			{
+				mapMaxHeight : 3,
+				mapWidth : 50,
+				mapHeight : 50,
+				subdivisions : 20,
+				bump_width_subdivisions : 50,
+				bump_height_subdivisions : 50,
+				y_margin: 0,
+				fogDensity : 0.001,
+				images : {
+					map_texture : "scenes/craonne/img/map.jpg",
+					heightmap : "scenes/craonne/img/heightmap.jpg",
+					bumpmap : "img/misc/normal_leaves.jpg"
+				},
+				popUps : {
+					title : "craonne",
+					description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+					datas : ["8.9", "km²", "76", "habitants"],
+					discussion : [
+						["Question 1", "Réponse 1"],
+						["Question 2", "Réponse 2"],
+						["Question 3", "Réponse 3"],
+						["Question 4", "Réponse 4"]
+					],
+					veilleur : ["Noël Genteur", "maire"],
+					baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
+					images : {
+						background : "scenes/craonne/img/background.png",
+						veilleur : "scenes/craonne/img/veilleur.png"
 					},
-
+					videos : {
+						arrivee : "scenes/craonne/videos/1.OGG",
+						//chanson : ""
+					}
+				},
+				villages : 
+				[
 					{
-						name : "Vauquois",
-						x : 7,
-						z : 1,
-						y_margin : 0,
+						name : "globalMap", // ------------------------------- CHANGED
+						x : -12,
+						z : -15,
+						y_margin : 0.4,
 						scale : 0.05,
 						collider_poly : 6.0,
 						collider_size : 50,
-						mesh_kind : small_village
+						mesh_kind : big_village
+					}
+				],
+				ArbresPos :	
+				[
+					[-8 , -16, 5 , 9], 
+					[-3 , -20, 3 , 6], 
+					[-1 , -12, 7 , 8], 
+					[8 , -9, 6 , 4], 
+					[-9 , 4.5 , 7 , 4.5], 
+					[-23 , 13 , 5 , 7], 
+					[-17 , 17 , 2 , 4], 
+					[5 , 16 , 4 , 5], 
+				],
+			},
 
+			Eparges :
+			{
+				mapMaxHeight : 3,
+				mapWidth : 50,
+				mapHeight : 50,
+				subdivisions : 20,
+				bump_width_subdivisions : 50,
+				bump_height_subdivisions : 50,
+				y_margin: 0,
+				fogDensity : 0.001,
+				images : {
+					map_texture : "scenes/craonne/img/map.jpg",
+					heightmap : "scenes/craonne/img/heightmap.jpg",
+					bumpmap : "img/misc/normal_leaves.jpg"
+				},
+				popUps : {
+					title : "craonne",
+					description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+					datas : ["8.9", "km²", "76", "habitants"],
+					discussion : [
+						["Question 1", "Réponse 1"],
+						["Question 2", "Réponse 2"],
+						["Question 3", "Réponse 3"],
+						["Question 4", "Réponse 4"]
+					],
+					veilleur : ["Noël Genteur", "maire"],
+					baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
+					images : {
+						background : "scenes/craonne/img/background.png",
+						veilleur : "scenes/craonne/img/veilleur.png"
 					},
-					
-
+					videos : {
+						arrivee : "scenes/craonne/videos/1.OGG",
+						//chanson : ""
+					}
+				},
+				villages : 
+				[
+					{
+						name : "globalMap", // ------------------------------- CHANGED
+						x : -12,
+						z : -15,
+						y_margin : 0.4,
+						scale : 0.05,
+						collider_poly : 6.0,
+						collider_size : 50,
+						mesh_kind : big_village
+					}
+				],
+				ArbresPos :	
+				[
+					[-8 , -16, 5 , 9], 
+					[-3 , -20, 3 , 6], 
+					[-1 , -12, 7 , 8], 
+					[8 , -9, 6 , 4], 
+					[-9 , 4.5 , 7 , 4.5], 
+					[-23 , 13 , 5 , 7], 
+					[-17 , 17 , 2 , 4], 
+					[5 , 16 , 4 , 5], 
 				],
 			},
 		},
@@ -268,7 +458,7 @@ function getConfig ()
 		popUpCraonne : false,
 		videosShown : false,
 		numberMapDataLoaded : 0,
-		numberMapDataToLoad : 2,
+		numberMapDataToLoad : 6,
 		cpt : 0,
 		coolDown : 0,
 		pas : [],
