@@ -97,7 +97,7 @@ function createGroundFromData (name, data, width, height, subdivisions, scene, u
 	return ground;
 }
 
-function normalize (distanceX, distanceZ) // --------------------------------------------------------------------------- ADDED
+function normalize (distanceX, distanceZ)
 {
 	var normalisationRatio = Math.abs(distanceX) + Math.abs(distanceZ);
 	normalisationRatio = normalisationRatio ? normalisationRatio : 1;
@@ -105,23 +105,57 @@ function normalize (distanceX, distanceZ) // -----------------------------------
 }
 
 // return coords from x and z positions with the heightmap data array
-function getPosOnHeightMap (x, z, data, width, height) // -------------------------------------------------------------------------------------------------- CHANGED
+function getPosOnHeightMap (x, z, mapData, width, height)
 {
 	var pos = {};
 	
-	pos.x = (((x + width / 2) / width) * (data.length - 1)) | 0;
-	pos.z = ((1.0 - (z + height / 2) / height) * (data[0].length - 1)) | 0;
+	pos.x = (((x + width / 2) / width) * (mapData.length - 1)) | 0;
+	pos.z = ((1.0 - (z + height / 2) / height) * (mapData[0].length - 1)) | 0;
 
-	if (pos.x < 0 || pos.x >= data.length || pos.z < 0 || pos.z >= data[0].length)
+	if (pos.x < 0 || pos.x >= mapData.length || pos.z < 0 || pos.z >= mapData[0].length)
 		return 0;
 	else
-		pos.y = data[pos.x][pos.z];
+		pos.y = mapData[pos.x][pos.z];
 	return pos;
 }
 
-function distanceCarre (a, b) // ------------------ NEW
+function getYPosOnMesh (x, z, meshData, width, height, subdivisions) // --------------------------- NEW
+{	
+	var s = subdivisions + 1;
+	// var p = { x: x, z: z }; // pour calculer les distances, si besoin
+	var margin = 50 / subdivisions;
+	var x_in_array = (x + 25) / margin;
+	var z_in_array = (25 - z) / margin;
+	var floor_x_in_array = x_in_array | 0; // + 0.5 si on doit chercher le + proche
+	var floor_z_in_array = z_in_array | 0;
+	var ratio_x = x_in_array - floor_x_in_array;
+	var ratio_z = z_in_array - floor_z_in_array;
+	var inv_ratio_x = 1 - ratio_x;
+	var inv_ratio_z = 1 - ratio_z;
+	var xz_pos_1 = floor_x_in_array + floor_z_in_array * s;
+	var xz_pos_2 = xz_pos_1 + 1;
+
+	var xz_point_top_left	= meshData[xz_pos_1];
+	var xz_point_top_right	= meshData[xz_pos_2];
+	var xz_point_bot_left	= meshData[xz_pos_1 + s];
+	var xz_point_bot_right	= meshData[xz_pos_2 + s];
+
+	var xz_value_top_left	= inv_ratio_x * inv_ratio_z * xz_point_top_left.y;
+	var xz_value_top_right	= inv_ratio_x * ratio_z * xz_point_top_right.y;
+	var xz_value_bot_left	= ratio_x * inv_ratio_z * xz_point_bot_left.y;
+	var xz_value_bot_right	= ratio_x * ratio_z * xz_point_bot_right.y;
+	
+	return xz_value_top_left + xz_value_top_right + xz_value_bot_left + xz_value_bot_right;
+}
+
+function marginRound (number, margin)  // -------------------------------------- NEW
+{
+	return (number / margin | 0) * margin;
+}
+
+function distanceCarre (a, b)
 {
 	var x = a.x - b.x;
-	var y = a.y - b.y;
-	return x * x + y * y;
+	var z = a.z - b.z;
+	return x * x + z * z;
 }
