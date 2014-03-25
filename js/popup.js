@@ -1,7 +1,19 @@
 function displayPopUp (config)
 {
-	
+	$("#go_button").fadeIn();
+	$("#pop_up").fadeIn();
+	mouse.target_onClick_3D = null;
+	config.inputs.bPause = true;
+	config.camera.detachControl(config.canvas);
+}
 
+function hidePopUp(config)
+{
+	$("#go_button").fadeOut();
+	$("#pop_up").fadeOut();
+	config.inputs.bPause = false;
+	config.camera.attachControl(config.canvas);
+	mouse.target_onClick_3D = null;
 }
 
 // Input : config (json)
@@ -35,6 +47,7 @@ function initPopUp (config) // doit initialiser TOUTES les popups ! (pas juste C
 	$("#veilleur_photo").css("background-image", "url(img/scenes/"+ actualPopUp.title + "/veilleur.png)");
 	//$("#pop_content #people").text(actualPopUp.people + "habitants");
 	$("#pop_content").css("background-image", "url(img/scenes/"+ actualPopUp.title + "/background.png)");
+
 	for(var i = actualPopUp.discussion.length; i--;)
 	{
 		$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + actualPopUp.discussion[i][0] + "<div id='reponse_" + i + "'class='reponse'>" + actualPopUp.discussion[i][1] + "</div>")

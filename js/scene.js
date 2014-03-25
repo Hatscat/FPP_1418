@@ -27,7 +27,7 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 	if (config.scenes[config.mapActuelle].ArbresPos)
 		createForet(config);
 	
-	//initPopUp(config);
+	initPopUp(config);
     createEvenement(config); // TODO if (evenement non init)
 }
 
@@ -51,6 +51,11 @@ function set_scene_run_loop (config)
 
 		if (config.isGlobalMap)
 		{
+/*			if(config.scenes[config.mapActuelle].isFisrtTime)
+			{
+				pop up tuto
+				config.scenes[config.mapActuelle].isFisrtTime = false;
+			}*/
 			var nearestVillage = checkNearestVillage(config);
 
 			if (config.camera.radius < config.babylon_camera.zoom_min)
@@ -68,6 +73,12 @@ function set_scene_run_loop (config)
 			{
 				if (mouse.target_onOver_3D.targeted_mesh.name == config.villages[v].mesh.name)
 				{
+/*					if(config.isGlobalMap)
+					{
+						pop up village
+
+					}
+*/
 					if (config.isGlobalMap && (mouse.doubleClicks))
 					{
 						console.log("go to village : " + config.villages[v].mesh.name);
@@ -108,41 +119,30 @@ function set_scene_run_loop (config)
 
 		/*if (!config.isGlobalMap) // POPUP
 		{
-			console.log("isGlobalMap  : " + isGlobalMap);
-			
-			if (config.inputs.bPause)
+			if(config.scenes[config.mapActuelle].isFisrtTime && config.firstlocal)
 			{
-				displayPopUp(config);
+				config.firstlocal = false;
+				pop up tuto local
 			}
-			else if (!config.popUp && mouse.target_onClick_3D)
+
+			if (mouse.target_onClick_3D && !config.inputs.bPause)
 			{
 				for (v in config.villages)
 				{
 					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].name)
 					{
-						config.popUp = true;
-						config.inputs.bPause = true;
+						pop up click village
 					}
 				}
 			}
-			else
+
+			else if(config.inputs.bPause == false)
 			{
 				for (var v in config.villages)
 				{
 					checkPlayerCollisions(config.player.mesh, config.villages[v].mesh, config);
 				}
 			}
-
-			/* 
-			if(PlayerFirstTimeOnThisFuckingScene && firstScene)
-			{
-				showPopUpTuto();
-			}
-
-			if (PlayerIsOutOfMap || zoom >= tooLess)
-			{
-				changeScene(config, "globalMap");
-			}///
 			
 		}*/
 	});

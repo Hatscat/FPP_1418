@@ -11,6 +11,7 @@ function getConfig ()
 	var config =
 	{
 		villages : [],
+		firstlocal: true,
 		arbres: [],
 		images :
 		{
@@ -24,6 +25,7 @@ function getConfig ()
 		{
 			globalMap : 
 			{
+				isFisrtTime: true,
 				mapMaxHeight : 3,
 				mapWidth : 50,
 				mapHeight : 50,
@@ -103,6 +105,7 @@ function getConfig ()
 			},
 			craonne :
 			{
+				isFisrtTime: true,
 				mapMaxHeight : 3,
 				mapWidth : 50,
 				mapHeight : 50,
@@ -164,6 +167,7 @@ function getConfig ()
 			},
 			Pozieres :
 			{
+				isFisrtTime: true,
 				mapMaxHeight : 3,
 				mapWidth : 50,
 				mapHeight : 50,
@@ -179,7 +183,7 @@ function getConfig ()
 				},
 				popUps : {
 					title : "craonne",
-					description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+					description : "village dans ton cul, magnifique et fier habitants qui quand ils ne se vide pas de leurs entrailles déjeunent au feu de bois", 
 					datas : ["8.9", "km²", "76", "habitants"],
 					discussion : [
 						["Question 1", "Réponse 1"],
@@ -187,7 +191,7 @@ function getConfig ()
 						["Question 3", "Réponse 3"],
 						["Question 4", "Réponse 4"]
 					],
-					veilleur : ["Noël Genteur", "maire"],
+					veilleur : ["machin", "machine"],
 					baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
 					images : {
 						background : "scenes/craonne/img/background.png",
@@ -226,6 +230,7 @@ function getConfig ()
 
 			Vauquois :
 			{
+				isFisrtTime: true,
 				mapMaxHeight : 3,
 				mapWidth : 50,
 				mapHeight : 50,
@@ -288,6 +293,7 @@ function getConfig ()
 
 			Verdun :
 			{
+				isFisrtTime: true,
 				mapMaxHeight : 3,
 				mapWidth : 50,
 				mapHeight : 50,
@@ -350,6 +356,7 @@ function getConfig ()
 
 			Eparges :
 			{
+				isFisrtTime: true,
 				mapMaxHeight : 3,
 				mapWidth : 50,
 				mapHeight : 50,
