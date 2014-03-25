@@ -50,7 +50,11 @@ function playerMove (config, camera, player)
 	if (posHM)
 	{
 		config.posHeightMap = posHM;
-		player.position.y = config.posHeightMap.y - config.player.y_margin;
+		//player.position.y = config.posHeightMap.y - config.player.y_margin;
+		player.position.y = getYPosOnMesh(player.position.x, player.position.z, config.ground.data, config.scenes[config.mapActuelle].mapWidth,
+											 config.scenes[config.mapActuelle].mapHeight, config.scenes[config.mapActuelle].subdivisions)
+							;//- config.player.y_margin;
+		//console.log(player.position.y);
 		player.position.x += stepX;
 		player.position.z += stepZ;
 	}
@@ -82,7 +86,6 @@ function checkNearestVillage (config)
 
 	for (v in config.villages)
 	{
-		//console.log(config.player)
 		var d = distanceCarre(config.player.mesh.position, config.villages[v].mesh.position);
 		if (d < smaller_distance)
 		{
