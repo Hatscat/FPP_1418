@@ -93,19 +93,25 @@ function set_scene_run_loop (config)
 		else if (config.ready2ChangeScene)
 		{
 			// ANIM de transition
-			if ((config.isGlobalMap && (config.camera.radius -= config.deltaTime) < 1)
-			||	(!config.isGlobalMap && (config.camera.radius += config.deltaTime) > config.babylon_camera.zoom_max * 1.5))
+			if ((config.isGlobalMap && (config.camera.radius -= config.deltaTime*0.8) < 1)
+			||	(!config.isGlobalMap && (config.camera.radius += config.deltaTime*0.8) > config.babylon_camera.zoom_max * 1.5))
 			{
 				config.camera.radius = config.babylon_camera.zoom_max * 0.8;
-				config.ground.mesh.dispose(true);
+				config.ground.mesh.dispose(false);
+				for( var c in config.table)
+				{
+					config.table[c].dispose(false);
+				}
+				for (var i = 0; i<config.villages.length;i++)
+					config.villages[i].mesh.dispose(false);
 
-				for (v in config.villages)
-					config.villages[v].mesh.dispose(true);
-
-				/*for (a in config.arbres)
-					for (b in config.arbres[a])
-						config.arbres[a].arbre[b].dispose(true);
-				*/
+				for (var i = 0; i<config.arbres.length;i++)
+					for (b in config.arbres[i])
+					{
+						if(config.arbres[i][b])
+							config.arbres[i][b].dispose(false);
+					}
+				
 
 				config.ready2ChangeScene = false;
 				createScene(config);
