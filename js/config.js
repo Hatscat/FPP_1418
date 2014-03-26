@@ -106,10 +106,10 @@ function getConfig ()
 			craonne :
 			{
 				isFisrtTime: true,
-				mapMaxHeight : 3,
+				mapMaxHeight : 2,
 				mapWidth : 50,
 				mapHeight : 50,
-				subdivisions : 20,
+				subdivisions : 50,
 				bump_width_subdivisions : 50,
 				bump_height_subdivisions : 50,
 				y_margin: 0,
@@ -423,7 +423,7 @@ function getConfig ()
 		},
 		player : {
 			speed : 0.1,
-			y_margin: 0,
+			y_margin: -0.25,
 			origin_x : 0,
 			origin_z : 0
 		},

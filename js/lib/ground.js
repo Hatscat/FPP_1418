@@ -135,7 +135,7 @@ function getYPosOnMesh (x, z, meshData, width, height, subdivisions) // --------
 	var xz_pos_1 = floor_x_in_array + floor_z_in_array * s;
 	var xz_pos_2 = xz_pos_1 + 1;
 
-	var xz_point_top_left	= meshData[xz_pos_1];
+	var xz_point_top_left	= meshData[xz_pos_1]; // WARNING
 	var xz_point_top_right	= meshData[xz_pos_2];
 	var xz_point_bot_left	= meshData[xz_pos_1 + s];
 	var xz_point_bot_right	= meshData[xz_pos_2 + s];
@@ -146,6 +146,18 @@ function getYPosOnMesh (x, z, meshData, width, height, subdivisions) // --------
 	var xz_value_bot_right	= ratio_x * ratio_z * xz_point_bot_right.y;
 	
 	return xz_value_top_left + xz_value_top_right + xz_value_bot_left + xz_value_bot_right;
+}
+
+function getYFromMesh (scene, player_pos, ground_mesh)
+{
+	var origin = new BABYLON.Vector3(player_pos.x, player_pos.y + 50, player_pos.z);
+	var direction = new BABYLON.Vector3(player_pos.x, player_pos.y - 50, player_pos.z);
+	var distance = direction.length();
+	direction.normalize();
+	var ray = new BABYLON.Ray(origin, direction);
+	var pickInfo = scene.pickWithRay(ray, function(m){return m == ground_mesh}, 1);
+	//console.log(pickInfo);
+	return pickInfo.pickedPoint.y;
 }
 
 function marginRound (number, margin)  // -------------------------------------- NEW

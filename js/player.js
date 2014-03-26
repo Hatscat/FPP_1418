@@ -16,6 +16,9 @@ function createPlayer (config, bool)
 	config.player.mesh.material.alpha = +!bool;
 	config.player.mesh.position.x = config.player.origin_x;
 	config.player.mesh.position.z = config.player.origin_z;
+	//config.player.mesh.position.y = 10;
+
+	//console.log(getYFromMesh(config.scene, config.player.mesh.position, config.ground.mesh));
 };
 
 function playerMove (config, camera, player)
@@ -50,10 +53,11 @@ function playerMove (config, camera, player)
 	if (posHM)
 	{
 		config.posHeightMap = posHM;
-		//player.position.y = config.posHeightMap.y - config.player.y_margin;
-		player.position.y = getYPosOnMesh(player.position.x, player.position.z, config.ground.data, config.scenes[config.mapActuelle].mapWidth,
-											 config.scenes[config.mapActuelle].mapHeight, config.scenes[config.mapActuelle].subdivisions)
-							;//- config.player.y_margin;
+		player.position.y = config.posHeightMap.y - config.player.y_margin;
+		//player.position.y = getYPosOnMesh(player.position.x, player.position.z, config.ground.data, config.scenes[config.mapActuelle].mapWidth,
+											 //config.scenes[config.mapActuelle].mapHeight, config.scenes[config.mapActuelle].subdivisions)
+							//+ config.player.y_margin;
+		//player.position.y = getYFromMesh(config.scene, config.player.mesh.position, config.ground.mesh);
 		//console.log(player.position.y);
 		player.position.x += stepX;
 		player.position.z += stepZ;
