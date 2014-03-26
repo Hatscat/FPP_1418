@@ -12,6 +12,15 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 	{
 		config.scene = new BABYLON.Scene(config.engine);
 		config.light = new BABYLON.PointLight(config.babylon_light.name, new BABYLON.Vector3(config.babylon_light.x, config.babylon_light.y, config.babylon_light.z), config.scene);
+
+		config.lightNight = new BABYLON.PointLight(config.babylon_lightNight.name, new BABYLON.Vector3(config.babylon_lightNight.x, config.babylon_lightNight.y, config.babylon_lightNight.z), config.scene);
+
+		config.lightNight.diffuse = new BABYLON.Color3(0.1, 0.1, 0.5);
+		config.lightNight.intensity = 0.8
+		//config.light.specular = new BABYLON.Color3(1, 1, 1);
+
+
+		createLensflare(config);
 		config.camera = new BABYLON.ArcRotateCamera(config.babylon_camera.name, config.babylon_camera.alpha, config.babylon_camera.beta, config.babylon_camera.radius, new BABYLON.Vector3(config.babylon_camera.x, config.babylon_camera.y, config.babylon_camera.z), config.scene);
 		var skybox = createSkybox(config);
 	}
@@ -40,6 +49,9 @@ function set_scene_run_loop (config)
 		var timeSinceLastFrame = Date.now() - config.oldTimestamp;
 		config.oldTimestamp = Date.now();
 		config.deltaTime = timeSinceLastFrame * 0.06;
+
+		dayNightCycle(config, -1, "X");
+
 		if (onOverResult.hit)
 		{
 			mouse.target_onOver_3D = {
@@ -53,7 +65,7 @@ function set_scene_run_loop (config)
 		{
 /*			if(config.scenes[config.mapActuelle].isFisrtTime)
 			{
-				pop up tuto
+				//displayPopUpGlobalTuto(config)
 				config.scenes[config.mapActuelle].isFisrtTime = false;
 			}*/
 			var nearestVillage = checkNearestVillage(config);
@@ -73,12 +85,12 @@ function set_scene_run_loop (config)
 			{
 				if (mouse.target_onOver_3D.targeted_mesh.name == config.villages[v].mesh.name)
 				{
-/*					if(config.isGlobalMap)
+					if(config.isGlobalMap)
 					{
-						pop up village
+						//displayPopUpGlobal(config)
 
 					}
-*/
+
 					if (config.isGlobalMap && (mouse.doubleClicks))
 					{
 						console.log("go to village : " + config.villages[v].mesh.name);
@@ -117,12 +129,12 @@ function set_scene_run_loop (config)
 		}
 
 
-		/*if (!config.isGlobalMap) // POPUP
+		if (!config.isGlobalMap) // POPUP
 		{
 			if(config.scenes[config.mapActuelle].isFisrtTime && config.firstlocal)
 			{
 				config.firstlocal = false;
-				pop up tuto local
+				//displayPopUpLocalTuto(config)
 			}
 
 			if (mouse.target_onClick_3D && !config.inputs.bPause)
@@ -131,7 +143,8 @@ function set_scene_run_loop (config)
 				{
 					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].name)
 					{
-						pop up click village
+						//displayPopUpLocal(config)
+						//mouse.target_onClick_3D = null;
 					}
 				}
 			}
@@ -140,11 +153,11 @@ function set_scene_run_loop (config)
 			{
 				for (var v in config.villages)
 				{
-					checkPlayerCollisions(config.player.mesh, config.villages[v].mesh, config);
+					//checkPlayerCollisions(config.player.mesh, config.villages[v].mesh, config);
 				}
 			}
 			
-		}*/
+		}
 	});
 }
 

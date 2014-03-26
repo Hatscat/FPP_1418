@@ -105,6 +105,7 @@ function getConfig ()
 			},
 			craonne :
 			{
+
 				isFisrtTime: true,
 				mapMaxHeight : 2,
 				mapWidth : 50,
@@ -433,6 +434,14 @@ function getConfig ()
 			y : 100,
 			z : 100
 		},
+
+		babylon_lightNight : {
+			name : "Omni",
+			x : 0,
+			y : -100,
+			z : 0
+		},
+		
 		babylon_camera : {
 			name : "Camera",
 			alpha : 199.5,
@@ -446,6 +455,15 @@ function getConfig ()
 			y : 11,
 			z : 0
 		},
+
+		amplitudeRotationX: 200,
+		amplitudeRotationY: 100,
+		tempoRotation: 10,
+		timeRotation: 30000,
+
+		wayOfTheSunY: -1,
+		wayOfTheSunX: -1,
+		updateTime: 0,
 		isGlobalMap : false, // ------------------------------------------------------------------------- NEW
 		mapActuelle : "globalMap",
 		mapSuivante : "globalMap",  // -------------------------------------------------------------------------------------- ???
