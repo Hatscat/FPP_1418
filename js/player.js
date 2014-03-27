@@ -109,8 +109,7 @@ function checkPlayerCollisions (player, veilleur, config)
 		if (config.playerCanCollide)
 		{
 			config.playerCanCollide = false;
-			config.inputs.bPause = true;
-			config.popUpCraonne = true;
+			displayPopUp("village", config.scenes[config.mapActuelle].popUps);
 			mouse.target_onClick_3D = null;
 			config.popUp = false;
 		}

@@ -7,9 +7,6 @@ window.onload = function ()
 	{
 		switch (e.keyCode)
 		{
-			case 32 : /* space button */
-				config.inputs.bPause = !config.inputs.bPause;
-			break;
 			case 81 : /* q key */
 				config.inputs.X_axis = -1;
 			break;
@@ -70,7 +67,7 @@ window.onload = function ()
 			config.engine = new BABYLON.Engine(config.canvas, true);
 			createScene(config, "globalMap");
 			config.scene.activeCamera.attachControl(config.canvas);
-
+			
 			config.engine.runRenderLoop(function ()
 			{
 				config.scene.render();

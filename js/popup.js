@@ -1,61 +1,105 @@
-function displayPopUp (config)
+// city fait référence aux données PopUp JSON de la ville actuelle
+// config.scenes[config.mapActuelle].popUps
+function displayPopUp (type, city)//type "globalmap"
 {
-	$("#go_button").fadeIn();
-	$("#pop_up").fadeIn();
-	mouse.target_onClick_3D = null;
-	config.inputs.bPause = true;
-	config.camera.detachControl(config.canvas);
+	initPopUp(type, city)
+
+	if(type == "preview")
+		$("#step_preview").fadeIn(400, function(){
+			bPause = true;
+			
+		});
+
+	else
+		$("#pop_up").fadeIn(400, function(){
+			bPause = true;
+			grosPopUp = true;
+			
+		});
+
+
 }
 
-function hidePopUp(config)
+function hidePopUp()
 {
+	popUpLauch = false;
+	// On cache les boutons qui ne pourraient potentiellement pas être dans la prochaine pop-up + la pop-up
 	$("#go_button").fadeOut();
-	$("#pop_up").fadeOut();
-	config.inputs.bPause = false;
-	config.camera.attachControl(config.canvas);
-	mouse.target_onClick_3D = null;
+	$("#link").fadeOut()
+	$("#pop_up").fadeOut(400, function(){
+		bPause = false;
+			
+	});
+
+	$("#step_preview").fadeOut(400, function(){
+		bPause = false;
+			
+	});
 }
+
+$("#quit_button").click(function()
+{
+	hidePopUp()
+	mouse.target_onClick_3D = null;
+	grosPopUp = false;
+})
 
 // Input : config (json)
 // Initialise la pop-Up en position et contenu
 // @author : Jules D.
-function initPopUp (config) // doit initialiser TOUTES les popups ! (pas juste Craonne)
+function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas juste Craonne)
 {
-	//$(".popup").hide()
-	centerPopUp();
-	var actualPopUp = config.scenes[config.mapActuelle].popUps || 0;
-	if (!actualPopUp) return;
-	$("#pop_content h1").text(actualPopUp.title);
-	$("#pop_content p").text(actualPopUp.description);
-	$("#pop_content #datas_one .number").text(actualPopUp.datas[0]);
-	$("#pop_content #datas_one .value").text(actualPopUp.datas[1]);
-	$("#pop_content #datas_two .number").text(actualPopUp.datas[2]);
-	$("#pop_content #datas_two .value").text(actualPopUp.datas[3]);
-	$("#pop_content p").css("margin-top", - $("#pop_content p").innerHeight() + "px");
-	
-	$("#go_button").hide();
-	$("#pop_up").hide();
+	if (!city) return;
 
-	$("#ville").text(actualPopUp.title);
-	$("#veilleur").text(actualPopUp.veilleur[0]);
-	$("#statut").text(actualPopUp.veilleur[1]);
-	$("#introduction").text(actualPopUp.baseline);
-	if(actualPopUp.video)
+	if(type == "preview")
 	{
-		$("#link").append("Voir la vidéo")
+		$("#step_preview h1").text(city.title);
+		$('#step_preview').css({
+		    top: mouse.y,
+		    left: mouse.x 
+		});
 	}
-	$("#veilleur_photo").css("background-image", "url(img/scenes/"+ actualPopUp.title + "/veilleur.png)");
-	//$("#pop_content #people").text(actualPopUp.people + "habitants");
-	$("#pop_content").css("background-image", "url(img/scenes/"+ actualPopUp.title + "/background.png)");
 
-	for(var i = actualPopUp.discussion.length; i--;)
+	else 
 	{
-		$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + actualPopUp.discussion[i][0] + "<div id='reponse_" + i + "'class='reponse'>" + actualPopUp.discussion[i][1] + "</div>")
+		centerPopUp();
+		// Contenu de la div #leftPart
+		// Nom de la ville
+		// Contenu de la div #rightPart
+		// Base line de la ville
+		$("#discussion").empty();
+		$("#introduction").text(city.baseline);
+		// Question réponses de la ville
+		for(var i = city.discussion.length; i--;)
+		{
+			$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + city.discussion[i][0] + "<div state='inactive' id='reponse_" + i + "'class='reponse'>" + city.discussion[i][1] + "</div>")
+		}
+
+		// Contenu de la div #linkToVideo
+		// Affichage du bouton adéquat si y'a une video
+		// Images de la popUp
+		$("#pop_content").css("background-image", "url(img/scenes/"+ city.title + "/background.png)");
+		$("#leftPart").hide();
+
+		if(type != "tuto")
+		{
+			$("#leftPart").show();
+			$("#ville").text(city.title);
+			// Nom du veilleur
+			$("#veilleur").text(city.veilleur[0]);
+			// Statut du veilleur (maire par exemple)
+			$("#statut").text(city.veilleur[1]);
+
+			if(city.video)
+			{
+				$("#link").show()
+			}
+
+			$("#veilleur_photo").css("background-image", "url(img/scenes/"+ city.title + "/veilleur.png)");
+		}
+
+
 	}
-	mouse.target_onClick_3D = null;
-	//config.scene.activeCamera.attachControl(config.canvas); 
-	config.inputs.bPause = false;
-	//config.popUp = false;
 }
 
 // Input : none
@@ -77,6 +121,11 @@ function centerPopUp()
 // @author : Youle
 function reponseToggle (index)
 {
-	$(".reponse").slideUp();
-	$("#reponse_" + index).slideDown();
+	var reponse = document.getElementById("reponse_" + index)
+	if(reponse.active == "active")
+		return;
+	// On instancie toutes les réponses inactives
+	$(".reponse").slideUp().attr('active', 'inactive')
+	// On instancie la réponse sélectionnée comme active
+	$("#reponse_" + index).slideDown().attr('active', 'active');
 }

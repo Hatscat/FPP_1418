@@ -1,22 +1,22 @@
 html, body, div
 {
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	overflow: hidden;
-	font-family: Helvetica;
-	cursor: default;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    font-family: Helvetica;
+    cursor: default;
 }
 #renderCanvas
 {
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	overflow: hidden;
-	font-family: Helvetica;
-	cursor: default;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    font-family: Helvetica;
+    cursor: default;
 }
 #iTvScroller {
     background:#000 url('img/black.png') repeat-x top left;
@@ -76,7 +76,6 @@ html, body, div
     width: 636px;
     height: 435px;
     color: #6b5b4a;
-
 }
 
 #pop_content
@@ -87,12 +86,33 @@ html, body, div
     background-color: #d8cdc0;
     margin-top: 10px;
     background: center center no-repeat;
-    
 }
+
 #step_preview
 {
-    font-weight: bold;
     display: none;
+    background-color: #d8cdc0;
+    width: 250px;
+    height: auto;
+    padding: 10px;
+    padding-left: 20px;
+    border: 6px solid #e23737;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#step_preview h1
+{
+    margin: 10 auto;
+    line-height: 20px;
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+#step_preview p
+{
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.3);
 }
 #pop_content h1, #pop_content p
 {
@@ -122,26 +142,7 @@ html, body, div
     margin: 0;
 }
 
-#pop_content .datas
-{
-    text-transform: uppercase;
-    margin-left: 20px
-}
-
-#pop_content .datas .number
-{
-    font-size: 80pt;
-    text-shadow: 0 5px 0 white;
-}
-
-#pop_content .datas .value
-{
-    font-size: 16pt;
-    text-shadow: 0 2px 0 white;
-    margin-top: -15px
-}
-
-#quit_button, #go_button
+#quit_button
 {
     position: absolute;
     background-color: #e23737;
@@ -159,15 +160,6 @@ html, body, div
     background: url(../img/misc/quit_cross.png) center center #e23737 no-repeat;
     top: 0px;
     left: 592px;
-}
-
-#go_button
-{
-    width: 60px;
-    height: auto;
-    padding: 20px 20px 20px 15px;
-    top: 180px;
-    left: 542px;
 }
 
 #go_button:hover, #quit_button:hover

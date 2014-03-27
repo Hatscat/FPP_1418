@@ -16,7 +16,7 @@ function createScene (config)
 		config.lightNight = new BABYLON.PointLight(config.babylon_lightNight.name, new BABYLON.Vector3(config.babylon_lightNight.x, config.babylon_lightNight.y, config.babylon_lightNight.z), config.scene);
 
 		config.lightNight.diffuse = new BABYLON.Color3(0.1, 0.1, 0.5);
-		config.lightNight.intensity = 0.8;
+		config.lightNight.intensity = 0.8
 		//config.light.specular = new BABYLON.Color3(1, 1, 1);
 
 
@@ -37,11 +37,12 @@ function createScene (config)
 		createForet(config);
 	
 	initPopUp(config);
-
 	config.meshes_white_list = [config.ground.mesh];
 
 	for (var i in config.villages)
 		config.meshes_white_list.push(config.villages[i].mesh);
+
+    createEvenement(config); // TODO if (evenement non init)
 }
 
 
@@ -67,11 +68,11 @@ function set_scene_run_loop (config)
 
 		if (config.isGlobalMap)
 		{
-/*			if(config.scenes[config.mapActuelle].isFisrtTime)
+			if(config.scenes[config.mapActuelle].isFisrtTime)
 			{
-				//displayPopUpGlobalTuto(config)
+				displayPopUp("tuto", config.scenes[config.mapActuelle].popUps.tuto)
 				config.scenes[config.mapActuelle].isFisrtTime = false;
-			}*/
+			}
 			var nearestVillage = checkNearestVillage(config);
 
 			if (config.camera.radius < config.babylon_camera.zoom_min)
@@ -89,11 +90,11 @@ function set_scene_run_loop (config)
 			{
 				if (mouse.target_onOver_3D.targeted_mesh.name == config.villages[v].mesh.name)
 				{
-					if(config.isGlobalMap)
+					if(config.isGlobalMap && !bPause && !grosPopUp && !config.ready2ChangeScene)
 					{
-						//displayPopUpGlobal(config)
-
+						displayPopUp("preview", config.scenes[config.mapActuelle].popUps[config.villages[v].mesh.name])
 					}
+
 					if (config.villages[v].mesh.material.emissiveColor.r < 1)
 					{
 						config.villages[v].mesh.material.emissiveColor.r += 0.05 * config.deltaTime;
@@ -102,10 +103,17 @@ function set_scene_run_loop (config)
 				else if (config.villages[v].mesh.material.emissiveColor.r > 0)
 				{
 					config.villages[v].mesh.material.emissiveColor.r -= 0.05 * config.deltaTime;
+					
+					if(bPause && !grosPopUp)
+					{
+						hidePopUp()
+						
+					}
 				}
 			}
+			mouse.doubleClicks = false;
 		}
-		if (!config.inputs.bPause && !config.ready2ChangeScene)
+		if (!bPause && !config.ready2ChangeScene)
 		{
 			cameraBordersFunction(config.camera, config.babylon_camera);
 			playerMove(config, config.camera, config.player);
@@ -117,13 +125,12 @@ function set_scene_run_loop (config)
 			if ((config.isGlobalMap && (config.camera.radius -= config.deltaTime*0.8) < 1)
 			||	(!config.isGlobalMap && (config.camera.radius += config.deltaTime*0.8) > config.babylon_camera.zoom_max * 1.5))
 			{
-				//console.log(config.light)
-				//config.light.diffuse = new BABYLON.Color3(0, 0, 0);
-				config.ready2ChangeScene = false;
-				disposeThings(config);
-				createScene(config);
 				config.camera.radius = config.babylon_camera.zoom_max * 0.8;
-				//config.light.diffuse = new BABYLON.Color3(1, 1, 1);
+				disposeThings(config)
+				
+
+				config.ready2ChangeScene = false;
+				createScene(config);
 			}
 		}
 
@@ -133,26 +140,27 @@ function set_scene_run_loop (config)
 			if(config.scenes[config.mapActuelle].isFisrtTime && config.firstlocal)
 			{
 				config.firstlocal = false;
-				//displayPopUpLocalTuto(config)
+				config.scenes[config.mapActuelle].isFisrtTime = false;
+				displayPopUp("tuto", config.scenes[config.mapActuelle].popUps.tuto);
 			}
 
-			if (mouse.target_onClick_3D && !config.inputs.bPause)
+			if (mouse.target_onClick_3D && !bPause)
 			{
 				for (v in config.villages)
 				{
-					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].name)
+					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].mesh.name)
 					{
-						//displayPopUpLocal(config)
-						//mouse.target_onClick_3D = null;
+						displayPopUp("village", config.scenes[config.mapActuelle].popUps)
+						mouse.target_onClick_3D = null;
 					}
 				}
 			}
 
-			else if(config.inputs.bPause == false)
+			else if(!bPause)
 			{
 				for (var v in config.villages)
 				{
-					//checkPlayerCollisions(config.player.mesh, config.villages[v].mesh, config);
+					checkPlayerCollisions(config.player.mesh, config.villages[v].mesh, config);
 				}
 			}
 			
@@ -164,6 +172,7 @@ function scene_transition (config, next_scene, village_position)
 {
 	config.ready2ChangeScene = true;
 	config.mapSuivante = next_scene;
+	hidePopUp();
 	config.player.mesh.position = village_position;
 	playerMove(config, config.camera, config.player);
 	mouse.target_onClick_3D = null;

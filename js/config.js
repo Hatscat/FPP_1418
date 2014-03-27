@@ -3,6 +3,9 @@ OUTPUT : variable fourre tout : config
 FONCTION : permet d'avoir toutes les variables de config
 AUTHOR : LUCIEN, MAX */
 
+bPause = false;
+grosPopUp = false;
+
 function getConfig ()
 {
 	var big_village = "create_mesh_39";
@@ -39,6 +42,61 @@ function getConfig ()
 					heightmap : "scenes/global/img/heightmap.jpg",
 					bumpmap : "img/misc/normal_leaves.jpg"
 				},
+				
+				popUps : 
+				{
+					tuto:
+					{
+						title : "craonne",
+						description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+						datas : ["8.9", "km²", "76", "habitants"],
+						discussion : [
+							["Déplacement", "Cliquez sur la carte pour vous déplacer, maintenez enfonçé pour déplacer la caméra"],
+							["Interaction", "Double cliquez sur un village pour vous y rendre"],
+							["But", "Trouvez les 5 veilleurs de mémoire pour en apprendre plus sur la première guerre mondiale"],
+						],
+						baseline : "Controles",
+						images : {
+							background : "scenes/craonne/img/background.png",
+						},
+						videos : {
+							arrivee : "scenes/craonne/videos/1.OGG",
+							//chanson : ""
+						}
+						
+					},
+
+					craonne:
+					{
+						title : "craonne",
+						
+					},
+
+					Pozieres:
+					{
+						title : "Pozieres",
+						
+					},
+
+					Vauquois:
+					{
+						title : "Vauquois",
+						
+					},
+
+					Verdun:
+					{
+						title : "Verdun",
+						
+					},
+
+					Eparges:
+					{
+						title : "Eparges",
+						
+					},
+				},
+
 				villages : 
 				[
 					{
@@ -144,7 +202,7 @@ function getConfig ()
 				villages : 
 				[
 					{
-						name : "globalMap",
+						name : "craonne",
 						x : -12,
 						z : -15,
 						y_margin : 0.4,
