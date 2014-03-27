@@ -70,7 +70,7 @@ window.onload = function ()
 			config.engine = new BABYLON.Engine(config.canvas, true);
 			createScene(config, "globalMap");
 			config.scene.activeCamera.attachControl(config.canvas);
-			
+
 			config.engine.runRenderLoop(function ()
 			{
 				config.scene.render();
@@ -84,6 +84,7 @@ window.onload = function ()
 
 			createPlayer(config, 1);
 			set_scene_run_loop(config);
+			createEvenement(config);
 		}	
 	}
 };

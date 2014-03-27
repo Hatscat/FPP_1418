@@ -458,6 +458,7 @@ function getConfig ()
 			z : 0
 		},
 
+		meshes_white_list: [],
 		amplitudeRotationX: 200,
 		amplitudeRotationY: 100,
 		tempoRotation: 10,

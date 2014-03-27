@@ -38,12 +38,10 @@ function createScene (config)
 	
 	initPopUp(config);
 
-	var white_list = [config.ground.mesh];
+	config.meshes_white_list = [config.ground.mesh];
 
 	for (var i in config.villages)
-		white_list.push(config.villages[i].mesh);
-
-    createEvenement(config, white_list); // TODO if (evenement non init)
+		config.meshes_white_list.push(config.villages[i].mesh);
 }
 
 
@@ -51,7 +49,7 @@ function set_scene_run_loop (config)
 {
 	config.scene.registerBeforeRender(function ()
 	{
-		var onOverResult = config.scene.pick(mouse.x, mouse.y);
+		var onOverResult = config.scene.pick(mouse.x, mouse.y, function(m){return is_in_white_list(m, config.meshes_white_list)});
 		var timeSinceLastFrame = Date.now() - config.oldTimestamp;
 		config.oldTimestamp = Date.now();
 		config.deltaTime = timeSinceLastFrame * 0.06;
@@ -96,14 +94,7 @@ function set_scene_run_loop (config)
 						//displayPopUpGlobal(config)
 
 					}
-
-					if (config.isGlobalMap && (mouse.doubleClicks))
-					{
-						console.log("go to village : " + config.villages[v].mesh.name);
-						scene_transition(config, config.villages[v].mesh.name, config.villages[v].mesh.position);
-						mouse.doubleClicks = false;
-					}
-					else if (config.villages[v].mesh.material.emissiveColor.r < 1)
+					if (config.villages[v].mesh.material.emissiveColor.r < 1)
 					{
 						config.villages[v].mesh.material.emissiveColor.r += 0.05 * config.deltaTime;
 					}
