@@ -4,13 +4,13 @@
 // --------------------- AUTEUR : Maxime ------------------------
 
 
-function createPas (config, x,y,z, bool, scene)
+function createPas (config, x, y, z, bool, scene)
 {
 
 	if(config.oldTimestamp - config.coolDown > 0 && bool) //  && !config.mapActuelle == "globalMap"
 	{
 		config.coolDown = config.oldTimestamp + 100;
-		var box1 = BABYLON.Mesh.CreateSphere("Trace" + config.cpt, 5.0, 0.5*(config.scenes[config.mapActuelle].mapWidth/100), scene);
+		var box1 = BABYLON.Mesh.CreateSphere("Trace" + config.cpt, 5.0, 0.5 * (config.scenes[config.mapActuelle].mapWidth/100), scene);
 		box1.position = new BABYLON.Vector3(x,y,z);
 		var materalPas = new BABYLON.StandardMaterial("texture1", scene);
 		materalPas.emissiveColor = new BABYLON.Color3(1, 1, 1, 1);

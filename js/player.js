@@ -3,20 +3,24 @@
 	FONCTION : crée la bouboule qui nous sert de perso
 	AUTHOR : LUCIEN, MAX*/
 
-function createPlayer (config, bool)
+function createPlayer (config, bool) // bool == config.isGlobalMap
 {
 	if(!config.player.mesh)
 	{
-		config.player.mesh = BABYLON.Mesh.CreateSphere("player", 5.0, 0.5, config.scene);
+		config.player.mesh = BABYLON.Mesh.CreateSphere("player", 5.0, config.player.size, config.scene);
 		var playerMaterial = new BABYLON.StandardMaterial("playerMaterial", config.scene);
 		playerMaterial.emissiveColor = new BABYLON.Color4(1, 1, 1, 1);
 		config.player.mesh.material = playerMaterial;
+
+		config.player.warfog_collider = BABYLON.Mesh.CreateSphere("player", 2.0, config.player.collider_size, config.scene);
+		var colliderMaterial = new BABYLON.StandardMaterial("colliderMaterial", config.scene);
+		colliderMaterial.alpha = 0.1;
+		config.player.warfog_collider.material = colliderMaterial;
 	}
 
 	config.player.mesh.material.alpha = +!bool;
 	config.player.mesh.position.x = config.player.origin_x;
 	config.player.mesh.position.z = config.player.origin_z;
-	//config.player.mesh.position.y = 10;
 
 	//console.log(getYFromMesh(config.scene, config.player.mesh.position, config.ground.mesh));
 };
@@ -31,43 +35,41 @@ function playerMove (config, camera, player)
 	{ /* keyboard inputs */
 		mouse.target_onClick_3D = null;
 
-		var direction = Math.atan2(camera.position.z - player.position.z, camera.position.x - player.position.x);
-		var distancesXY = normalize(config.inputs.X_axis, config.inputs.Y_axis); // --------------------------------------------------------------------------- ADDED
-		moveX = distancesXY.z * Math.cos(direction) + distancesXY.x * Math.cos(direction + Math.PI / 2); // --------------------------------------------------------------------------- CHANGED
-		moveZ = distancesXY.z * Math.sin(direction) + distancesXY.x * Math.sin(direction + Math.PI / 2); // --------------------------------------------------------------------------- CHANGED
+		var direction = Math.atan2(camera.position.z - player.mesh.position.z, camera.position.x - player.mesh.position.x);
+		var distancesXY = normalize(config.inputs.X_axis, config.inputs.Y_axis);
+		moveX = distancesXY.z * Math.cos(direction) + distancesXY.x * Math.cos(direction + Math.PI / 2);
+		moveZ = distancesXY.z * Math.sin(direction) + distancesXY.x * Math.sin(direction + Math.PI / 2);
 	}
 	else
 	{ /* mouse inputs */
-		var distanceX = mouse.target_onClick_3D.x - player.position.x + 0.5 | 0;
-		var distanceZ = mouse.target_onClick_3D.z - player.position.z + 0.5 | 0;
-		var distancesXZ = normalize(distanceX, distanceZ); // --------------------------------------------------------------------------- CHANGED
-		moveX = distancesXZ.x; // --------------------------------------------------------------------------- CHANGED
-		moveZ = distancesXZ.z; // --------------------------------------------------------------------------- CHANGED
+		var distanceX = mouse.target_onClick_3D.x - player.mesh.position.x + 0.5 | 0;
+		var distanceZ = mouse.target_onClick_3D.z - player.mesh.position.z + 0.5 | 0;
+		var distancesXZ = normalize(distanceX, distanceZ);
+		moveX = distancesXZ.x;
+		moveZ = distancesXZ.z;
 	}
 	if (!config.bReady && moveX + moveZ != 0) config.bReady = true;
 
 	var stepX = moveX * speed * config.deltaTime;
 	var stepZ = moveZ * speed * config.deltaTime;
-	var posHM = getPosOnHeightMap(player.position.x + stepX, player.position.z + stepZ, config.scenes[config.mapActuelle].mapData,
+	var posHM = getPosOnHeightMap(player.mesh.position.x + stepX, player.mesh.position.z + stepZ, config.scenes[config.mapActuelle].mapData,
 									 config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight);
 	if (posHM)
 	{
 		config.posHeightMap = posHM;
-		player.position.y = config.posHeightMap.y - config.player.y_margin;
-		//player.position.y = getYPosOnMesh(player.position.x, player.position.z, config.ground.data, config.scenes[config.mapActuelle].mapWidth,
-											 //config.scenes[config.mapActuelle].mapHeight, config.scenes[config.mapActuelle].subdivisions)
-							//+ config.player.y_margin;
-		//player.position.y = getYFromMesh(config.scene, config.player.mesh.position, config.ground.mesh);
-		//console.log(player.position.y);
-		player.position.x += stepX;
-		player.position.z += stepZ;
+		player.mesh.position.y = config.posHeightMap.y - config.player.y_margin;
+		player.mesh.position.x += stepX;
+		player.mesh.position.z += stepZ;
 	}
 	
-	createPas(config, player.position.x, player.position.y, player.position.z, ((moveX * speed * config.deltaTime != 0 || moveZ * speed * config.deltaTime != 0)), config.scene);
+	createPas(config, player.mesh.position.x, player.mesh.position.y - config.player.size / 3, player.mesh.position.z,
+				((moveX * speed * config.deltaTime != 0 || moveZ * speed * config.deltaTime != 0)), config.scene);
 
-	camera.target.x = player.position.x;
-	camera.target.z = player.position.z;
-	camera.target.y = player.position.y;
+	player.warfog_collider.position = player.mesh.position;
+
+	camera.target.x = player.mesh.position.x;
+	camera.target.z = player.mesh.position.z;
+	camera.target.y = player.mesh.position.y;
 };
 
 function cameraBordersFunction (camera, data)

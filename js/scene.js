@@ -111,7 +111,8 @@ function set_scene_run_loop (config)
 		if (!config.inputs.bPause && !config.ready2ChangeScene)
 		{
 			cameraBordersFunction(config.camera, config.babylon_camera);
-			playerMove(config, config.camera, config.player.mesh);
+			playerMove(config, config.camera, config.player);
+
 		}
 		else if (config.ready2ChangeScene)
 		{
@@ -166,6 +167,6 @@ function scene_transition (config, next_scene, village_position)
 	config.ready2ChangeScene = true;
 	config.mapSuivante = next_scene;
 	config.player.mesh.position = village_position;
-	playerMove(config, config.camera, config.player.mesh);
+	playerMove(config, config.camera, config.player);
 	mouse.target_onClick_3D = null;
 }

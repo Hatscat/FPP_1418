@@ -108,8 +108,8 @@ function getConfig ()
 
 				isFisrtTime: true,
 				mapMaxHeight : 2,
-				mapWidth : 50,
-				mapHeight : 50,
+				mapWidth : 50, // /!\ too low!
+				mapHeight : 50, // /!\ too low!
 				subdivisions : 50,
 				bump_width_subdivisions : 50,
 				bump_height_subdivisions : 50,
@@ -144,7 +144,7 @@ function getConfig ()
 				villages : 
 				[
 					{
-						name : "globalMap", // ------------------------------- CHANGED
+						name : "globalMap",
 						x : -12,
 						z : -15,
 						y_margin : 0.4,
@@ -206,7 +206,7 @@ function getConfig ()
 				villages : 
 				[
 					{
-						name : "globalMap", // ------------------------------- CHANGED
+						name : "globalMap",
 						x : 11,
 						z : 14,
 						y_margin : 1.3,
@@ -269,7 +269,7 @@ function getConfig ()
 				villages : 
 				[
 					{
-						name : "globalMap", // ------------------------------- CHANGED
+						name : "globalMap",
 						x : 5,
 						z : 5,
 						y_margin : 0.8,
@@ -332,7 +332,7 @@ function getConfig ()
 				villages : 
 				[
 					{
-						name : "globalMap", // ------------------------------- CHANGED
+						name : "globalMap",
 						x : 5,
 						z : -14,
 						y_margin : 0.6,
@@ -395,7 +395,7 @@ function getConfig ()
 				villages : 
 				[
 					{
-						name : "globalMap", // ------------------------------- CHANGED
+						name : "globalMap",
 						x : 0,
 						z : 0,
 						y_margin : 0.5,
@@ -425,6 +425,8 @@ function getConfig ()
 		player : {
 			speed : 0.1,
 			y_margin: -0.25,
+			size : 0.5,
+			collider_size : 5,
 			origin_x : 0,
 			origin_z : 0
 		},
@@ -464,9 +466,9 @@ function getConfig ()
 		wayOfTheSunY: -1,
 		wayOfTheSunX: -1,
 		updateTime: 0,
-		isGlobalMap : false, // ------------------------------------------------------------------------- NEW
+		isGlobalMap : false,
 		mapActuelle : "globalMap",
-		mapSuivante : "globalMap",  // -------------------------------------------------------------------------------------- ???
+		mapSuivante : "globalMap", // -------------------------------------------------------------------------------------- ???
 		moveToMouseUpSensitivity : 0.04,
 
 		oldTimestamp : Date.now(),
