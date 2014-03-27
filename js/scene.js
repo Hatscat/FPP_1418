@@ -4,7 +4,7 @@ OUTPUT : scene
 FONCTION : crée une map
 AUTHOR : LUCIEN, MAX */
 
-function createScene (config) // TODO en faire une scene globale (pions tout ça tout ça)
+function createScene (config)
 {
 	config.mapActuelle = config.mapSuivante;
 
@@ -16,7 +16,7 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 		config.lightNight = new BABYLON.PointLight(config.babylon_lightNight.name, new BABYLON.Vector3(config.babylon_lightNight.x, config.babylon_lightNight.y, config.babylon_lightNight.z), config.scene);
 
 		config.lightNight.diffuse = new BABYLON.Color3(0.1, 0.1, 0.5);
-		config.lightNight.intensity = 0.8
+		config.lightNight.intensity = 0.8;
 		//config.light.specular = new BABYLON.Color3(1, 1, 1);
 
 
@@ -37,7 +37,13 @@ function createScene (config) // TODO en faire une scene globale (pions tout ça
 		createForet(config);
 	
 	initPopUp(config);
-    createEvenement(config); // TODO if (evenement non init)
+
+	var white_list = [config.ground.mesh];
+
+	for (var i in config.villages)
+		white_list.push(config.villages[i].mesh);
+
+    createEvenement(config, white_list); // TODO if (evenement non init)
 }
 
 
@@ -120,12 +126,13 @@ function set_scene_run_loop (config)
 			if ((config.isGlobalMap && (config.camera.radius -= config.deltaTime*0.8) < 1)
 			||	(!config.isGlobalMap && (config.camera.radius += config.deltaTime*0.8) > config.babylon_camera.zoom_max * 1.5))
 			{
-				config.camera.radius = config.babylon_camera.zoom_max * 0.8;
-				disposeThings(config)
-				
-
+				//console.log(config.light)
+				//config.light.diffuse = new BABYLON.Color3(0, 0, 0);
 				config.ready2ChangeScene = false;
+				disposeThings(config);
 				createScene(config);
+				config.camera.radius = config.babylon_camera.zoom_max * 0.8;
+				//config.light.diffuse = new BABYLON.Color3(1, 1, 1);
 			}
 		}
 
