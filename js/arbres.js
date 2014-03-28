@@ -8,9 +8,9 @@ function createForet (config)  // ----------------------------------------------
 	var t = 0
 	for(k=0; k<config.scenes[config.mapActuelle].ArbresPos.length; k++)
 	{
-		for(i=config.scenes[config.mapActuelle].ArbresPos[k][0]; i<config.scenes[config.mapActuelle].ArbresPos[k][0]+config.scenes[config.mapActuelle].ArbresPos[k][2]; i+=((Math.random()*10)+2)*0.4*(config.scenes[config.mapActuelle].mapWidth/100))
+		for(i=config.scenes[config.mapActuelle].ArbresPos[k][0]; i<config.scenes[config.mapActuelle].ArbresPos[k][0]+config.scenes[config.mapActuelle].ArbresPos[k][2]; i+=((Math.random()*10)+2)*0.4*config.taille)
 		{
-			for(j=config.scenes[config.mapActuelle].ArbresPos[k][1]; j<config.scenes[config.mapActuelle].ArbresPos[k][1]+config.scenes[config.mapActuelle].ArbresPos[k][3]; j+=((Math.random()*15)+3)*0.4*(config.scenes[config.mapActuelle].mapWidth/100))
+			for(j=config.scenes[config.mapActuelle].ArbresPos[k][1]; j<config.scenes[config.mapActuelle].ArbresPos[k][1]+config.scenes[config.mapActuelle].ArbresPos[k][3]; j+=((Math.random()*15)+3)*0.4*config.taille)
 			{
 				if(t%2 == 0)
 					createArbreToufu(config, i, getPosOnHeightMap(i, j, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight).y, j, (Math.random()*5 + 3)/50);
@@ -38,16 +38,16 @@ function createArbreToufu (config, x, y, z, scale)
 	var colorFeuilles = Math.floor(Math.random()*4)
 
 	arbre.cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 60*scale, 10*scale, 6*scale, 5, config.scene, false);
-	arbre.cylinder.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
-	arbre.cylinder.scaling.y = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
-	arbre.cylinder.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+	arbre.cylinder.scaling.x = 0.4*config.taille;
+	arbre.cylinder.scaling.y = 0.4*config.taille;
+	arbre.cylinder.scaling.z = 0.4*config.taille;
 	arbre.cylinder.position = new BABYLON.Vector3(x,y,z);
 	
 	arbre.sphere = BABYLON.Mesh.CreateSphere("shpere", 5, 20*scale,config.scene);
 	arbre.sphere.position = new BABYLON.Vector3(arbre.cylinder.position.x,arbre.cylinder.position.y+(50*scale*arbre.cylinder.scaling.y),arbre.cylinder.position.z);
-	arbre.sphere.scaling.x = 1*(config.scenes[config.mapActuelle].mapWidth/100);
-	arbre.sphere.scaling.y = 1.04*(config.scenes[config.mapActuelle].mapWidth/100);
-	arbre.sphere.scaling.z = 0.84*(config.scenes[config.mapActuelle].mapWidth/100);
+	arbre.sphere.scaling.x = 1*config.taille;
+	arbre.sphere.scaling.y = 1.04*config.taille;
+	arbre.sphere.scaling.z = 0.84*config.taille;
 	
 	var materialtronc = new BABYLON.StandardMaterial("texture1", config.scene);
 	materialtronc.bumpTexture = new BABYLON.Texture(config.images.wood_normal, config.scene);  // ---------------------------------------------------------------------------
@@ -85,9 +85,9 @@ function createArbreSapin (config, x, y, z, scale)  // -------------------------
 	arbre.cylinder2 = BABYLON.Mesh.CreateCylinder("cylinder", 24*scale, 60*scale, 30*scale, 5, config.scene, false);
 	arbre.cylinder3 = BABYLON.Mesh.CreateCylinder("cylinder", 24*scale, 45*scale, 15*scale, 5, config.scene, false);
 	arbre.cylinder4 = BABYLON.Mesh.CreateCylinder("cylinder", 30*scale, 30*scale, 0*scale, 6, config.scene, false);
-	arbre.cylinder.scaling.x = arbre.cylinder2.scaling.x = arbre.cylinder3.scaling.x = arbre.cylinder4.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
-	arbre.cylinder.scaling.y = arbre.cylinder2.scaling.y = arbre.cylinder3.scaling.y = arbre.cylinder4.scaling.y = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
-	arbre.cylinder.scaling.z = arbre.cylinder2.scaling.z = arbre.cylinder3.scaling.z = arbre.cylinder4.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
+	arbre.cylinder.scaling.x = arbre.cylinder2.scaling.x = arbre.cylinder3.scaling.x = arbre.cylinder4.scaling.x = 0.4*config.taille;
+	arbre.cylinder.scaling.y = arbre.cylinder2.scaling.y = arbre.cylinder3.scaling.y = arbre.cylinder4.scaling.y = 0.4*config.taille;
+	arbre.cylinder.scaling.z = arbre.cylinder2.scaling.z = arbre.cylinder3.scaling.z = arbre.cylinder4.scaling.z = 0.4*config.taille;
 	arbre.cylinder.position = new BABYLON.Vector3(x,y,z);
 	arbre.cylinder2.position = new BABYLON.Vector3(arbre.cylinder.position.x,arbre.cylinder.position.y+(15*scale*arbre.cylinder.scaling.y),arbre.cylinder.position.z);
 	arbre.cylinder3.position = new BABYLON.Vector3(arbre.cylinder2.position.x,arbre.cylinder2.position.y+(24*scale*arbre.cylinder.scaling.y),arbre.cylinder.position.z);

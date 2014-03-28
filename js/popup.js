@@ -78,12 +78,15 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 		// Contenu de la div #linkToVideo
 		// Affichage du bouton adéquat si y'a une video
 		// Images de la popUp
-		$("#pop_content").css("background-image", "url(img/scenes/"+ city.title + "/background.png)");
+		$("#pop_content").css("background-image", "url(scenes/"+ city.title + "/img/background.png)");
 		$("#leftPart").hide();
+		$("#go_button").hide();
+
 
 		if(type != "tuto")
 		{
 			$("#leftPart").show();
+			$("#go_button").show();
 			$("#ville").text(city.title);
 			// Nom du veilleur
 			$("#veilleur").text(city.veilleur[0]);

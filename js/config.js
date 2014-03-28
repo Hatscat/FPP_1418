@@ -521,7 +521,7 @@ function getConfig ()
 		amplitudeRotationY: 100,
 		tempoRotation: 10,
 		timeRotation: 30000,
-
+		taille: 0.5,
 		wayOfTheSunY: -1,
 		wayOfTheSunX: -1,
 		updateTime: 0,
