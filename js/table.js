@@ -17,7 +17,7 @@ function createTable (config)
 		config.table.box1.position = new BABYLON.Vector3(0,0,-(config.scenes[config.mapActuelle].mapWidth/2));
 		config.table.box1.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
 		config.table.box1.scaling.y = 35*(config.scenes[config.mapActuelle].mapMaxHeight/100);
-		config.table.box1.scaling.x = config.scenes[config.mapActuelle].mapWidth/5;
+		config.table.box1.scaling.x = config.scenes[config.mapActuelle].mapWidth/4.9;
 	}
 
 
@@ -28,7 +28,7 @@ function createTable (config)
 		config.table.box2.position = new BABYLON.Vector3(-(config.scenes[config.mapActuelle].mapWidth/2),0,0);
 		config.table.box2.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
 		config.table.box2.scaling.y = 35*(config.scenes[config.mapActuelle].mapMaxHeight/100);
-		config.table.box2.scaling.z = config.scenes[config.mapActuelle].mapWidth/5;
+		config.table.box2.scaling.z = config.scenes[config.mapActuelle].mapWidth/5.1;
 	}
 
 	config.table.box3 = BABYLON.Mesh.CreateBox("Box3", 5.0, config.scene);
@@ -38,7 +38,7 @@ function createTable (config)
 		config.table.box3.position = new BABYLON.Vector3(0,0,(config.scenes[config.mapActuelle].mapWidth/2));
 		config.table.box3.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
 		config.table.box3.scaling.y = 35*(config.scenes[config.mapActuelle].mapMaxHeight/100);
-		config.table.box3.scaling.x = config.scenes[config.mapActuelle].mapWidth/5;
+		config.table.box3.scaling.x = config.scenes[config.mapActuelle].mapWidth/4.9;
 	}
 
 	config.table.box4 = BABYLON.Mesh.CreateBox("Box4", 5.0, config.scene);
@@ -48,7 +48,7 @@ function createTable (config)
 		config.table.box4.position = new BABYLON.Vector3((config.scenes[config.mapActuelle].mapWidth/2),0,0);
 		config.table.box4.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
 		config.table.box4.scaling.y = 35*(config.scenes[config.mapActuelle].mapMaxHeight/100);
-		config.table.box4.scaling.z = config.scenes[config.mapActuelle].mapWidth/5;
+		config.table.box4.scaling.z = config.scenes[config.mapActuelle].mapWidth/5.1;
 	}
 
 	config.table.box5 = BABYLON.Mesh.CreateBox("Box5", 150.0, config.scene);
