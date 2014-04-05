@@ -78,16 +78,16 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 		// Contenu de la div #linkToVideo
 		// Affichage du bouton adéquat si y'a une video
 		// Images de la popUp
+		$("#go_button").show();
 		$("#pop_content").css("background-image", "url(scenes/"+ city.title + "/img/background.png)");
 		$("#leftPart").hide();
-		$("#go_button").hide();
 
 
-		if(type != "tuto")
+		if(type == "village")
 		{
 			$("#leftPart").show();
-			$("#go_button").show();
 			$("#ville").text(city.title);
+			$("#go_button").hide();
 			// Nom du veilleur
 			$("#veilleur").text(city.veilleur[0]);
 			// Statut du veilleur (maire par exemple)
@@ -98,7 +98,7 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 				$("#link").show()
 			}
 
-			$("#veilleur_photo").css("background-image", "url(img/scenes/"+ city.title + "/veilleur.png)");
+			$("#veilleur_photo").css("background-image", "url(scenes/"+ city.title + "/img/veilleur.png)");
 		}
 
 

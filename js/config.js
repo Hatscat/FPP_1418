@@ -492,14 +492,18 @@ function getConfig ()
 			name : "Omni",
 			x : 0,
 			y : 100,
-			z : 100
+			z : 0,
+			angle: 0,
+			maxRed: 230/255,
+			maxGreen: 60/255,
+			maxBlue: 20/255,
 		},
 
 		babylon_lightNight : {
 			name : "Omni",
 			x : 0,
 			y : -100,
-			z : 0
+			angle: 4*(Math.PI/6),
 		},
 		
 		babylon_camera : {
@@ -507,8 +511,8 @@ function getConfig ()
 			alpha : 199.5,
 			beta : 0.5,
 			radius : 50,
-			beta_min : 0.1,
-			beta_max : (Math.PI / 2) * 0.75,
+			beta_min : 0,
+			beta_max : (Math.PI),
 			zoom_min : 10,
 			zoom_max : 50,
 			x : 0,
@@ -517,17 +521,14 @@ function getConfig ()
 		},
 
 		meshes_white_list: [],
-		amplitudeRotationX: 200,
-		amplitudeRotationY: 100,
 		tempoRotation: 10,
-		timeRotation: 30000,
+		timeRotation: 6000,
 		taille: 0.5,
-		wayOfTheSunY: -1,
-		wayOfTheSunX: -1,
+		wayOfTheSun: 1,
 		updateTime: 0,
 		isGlobalMap : false,
 		mapActuelle : "globalMap",
-		mapSuivante : "globalMap", // -------------------------------------------------------------------------------------- ???
+		mapSuivante : "globalMap", 
 		moveToMouseUpSensitivity : 0.04,
 
 		oldTimestamp : Date.now(),
