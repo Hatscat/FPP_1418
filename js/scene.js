@@ -27,6 +27,7 @@ function createScene (config)
 		var skybox = createSkybox(config);
 	}
 
+	createLife(config);
 	config.ground = createGroundMesh(config.scene, config.scenes[config.mapActuelle]);
 	createVillages(config);
 	config.isGlobalMap = config.mapActuelle == "globalMap";
@@ -58,6 +59,7 @@ function set_scene_run_loop (config)
 		config.deltaTime = timeSinceLastFrame * 0.06;
 
 		dayNightCycle(config);
+		moveAnimals(config)
 
 		if (onOverResult.hit)
 		{

@@ -33,7 +33,6 @@ function dayNightCycle(config)
 
 		}
 
-		console.log(config.lightNight.intensity)
 		if(config.babylon_light.angle%(2*Math.PI) > Math.PI%(2*Math.PI) && config.wayOfTheSun == 1)
 		{
 			config.timeRotation = config.timeRotation/4
