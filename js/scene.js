@@ -75,12 +75,12 @@ function set_scene_run_loop (config)
 			}
 			var nearestVillage = checkNearestVillage(config);
 
-			if (config.camera.radius < config.babylon_camera.zoom_min)
+			if (!bPause && config.camera.radius < config.babylon_camera.current_zoom_min * 1.5)
 				scene_transition(config, nearestVillage.mesh.name, nearestVillage.mesh.position);
 		}
 		else
 		{
-			if (config.camera.radius > config.babylon_camera.zoom_max)
+			if (!bPause && config.camera.radius > config.babylon_camera.current_zoom_max)
 				scene_transition(config, "globalMap", config.player.mesh.position);
 		}
 
@@ -104,40 +104,38 @@ function set_scene_run_loop (config)
 				{
 					config.villages[v].mesh.material.emissiveColor.r -= 0.05 * config.deltaTime;
 					
-					if(bPause && !grosPopUp)
+					if (bPause && !grosPopUp)
 					{
-						hidePopUp()
-						
+						hidePopUp();
 					}
 				}
 			}
 			mouse.doubleClicks = false;
 		}
-		if (!bPause && !config.ready2ChangeScene)
+		cameraBordersFunction(config.camera, config.babylon_camera, !config.ready2ChangeScene);
+
+		if (!bPause)
 		{
-			cameraBordersFunction(config.camera, config.babylon_camera);
 			playerMove(config, config.camera, config.player);
 
-		}
-		else if (config.ready2ChangeScene)
-		{
-			// ANIM de transition
-			if ((config.isGlobalMap && (config.camera.radius -= config.deltaTime*0.8) < 1)
-			||	(!config.isGlobalMap && (config.camera.radius += config.deltaTime*0.8) > config.babylon_camera.zoom_max * 1.5))
+			if (config.ready2ChangeScene) // ANIM de transition
 			{
-				config.camera.radius = config.babylon_camera.zoom_max * 0.8;
-				disposeThings(config)
-				
+				config.camera.radius = config.babylon_camera.current_zoom_min = config.babylon_camera.current_zoom_max;
 
-				config.ready2ChangeScene = false;
-				createScene(config);
+				if (config.isGlobalMap)
+				{
+					transition_in(config);
+				}
+				else
+				{
+					transition_out(config);
+				}
 			}
 		}
 
-
 		if (!config.isGlobalMap) // POPUP
 		{
-			if(config.scenes[config.mapActuelle].isFisrtTime && config.firstlocal)
+			if (config.scenes[config.mapActuelle].isFisrtTime && config.firstlocal)
 			{
 				config.firstlocal = false;
 				config.scenes[config.mapActuelle].isFisrtTime = false;
@@ -150,22 +148,53 @@ function set_scene_run_loop (config)
 				{
 					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].mesh.name)
 					{
-						displayPopUp("village", config.scenes[config.mapActuelle].popUps)
+						displayPopUp("village", config.scenes[config.mapActuelle].popUps);
 						mouse.target_onClick_3D = null;
 					}
 				}
 			}
-
-			else if(!bPause)
+			else if (!bPause)
 			{
 				for (var v in config.villages)
 				{
 					checkPlayerCollisions(config.player.mesh, config.villages[v].mesh, config);
 				}
 			}
-			
 		}
 	});
+}
+
+function transition_in (config)
+{
+	var nearestVillage = checkNearestVillage(config);
+	set_mouse_target_onClick_3D(nearestVillage.mesh.position.x, nearestVillage.mesh.position.z, nearestVillage.mesh);
+
+	if (config.player.mesh.intersectsMesh(nearestVillage.mesh, false)
+	&&	(config.babylon_camera.current_zoom_max -= config.deltaTime) < 1)
+	{
+		disposeThings(config);
+		config.babylon_camera.current_zoom_min = config.babylon_camera._fixed_zoom_min;
+		config.babylon_camera.current_zoom_max = config.babylon_camera._fixed_zoom_max;
+		config.camera.radius = config.babylon_camera._fixed_zoom_max * 0.7;
+		config.player.canCollide = false;
+		config.ready2ChangeScene = false;
+		createScene(config);
+	}
+}
+
+function transition_out (config)
+{
+	if ((config.babylon_camera.current_zoom_max += config.deltaTime * 16) > config.babylon_camera._fixed_zoom_max * 16)
+	{
+		mouse.target_onClick_3D = null;
+		disposeThings(config);
+		config.babylon_camera.current_zoom_min = config.babylon_camera._fixed_zoom_min;
+		config.babylon_camera.current_zoom_max = config.babylon_camera._fixed_zoom_max;
+		config.camera.radius = config.babylon_camera._fixed_zoom_max * 0.7;
+		config.player.canCollide = false;
+		config.ready2ChangeScene = false;
+		createScene(config);
+	}
 }
 
 function scene_transition (config, next_scene, village_position)
@@ -173,7 +202,5 @@ function scene_transition (config, next_scene, village_position)
 	config.ready2ChangeScene = true;
 	config.mapSuivante = next_scene;
 	hidePopUp();
-	config.player.mesh.position = village_position;
-	playerMove(config, config.camera, config.player);
-	mouse.target_onClick_3D = null;
 }
+

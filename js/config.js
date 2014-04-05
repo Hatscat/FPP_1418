@@ -509,8 +509,10 @@ function getConfig ()
 			radius : 50,
 			beta_min : 0.1,
 			beta_max : (Math.PI / 2) * 0.75,
-			zoom_min : 10,
-			zoom_max : 50,
+			current_zoom_min : 10,
+			current_zoom_max : 50,
+			_fixed_zoom_min : 10,
+			_fixed_zoom_max : 50,
 			x : 0,
 			y : 11,
 			z : 0
