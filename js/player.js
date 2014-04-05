@@ -72,17 +72,20 @@ function playerMove (config, camera, player)
 	camera.target.y = player.mesh.position.y;
 };
 
-function cameraBordersFunction (camera, data)
+function cameraBordersFunction (camera, data, is_active)
 {
-	if (camera.beta < data.beta_min)
-		camera.beta = data.beta_min;
-	else if (camera.beta > data.beta_max)
-		camera.beta = data.beta_max;
+	if (is_active)
+	{
+		if (camera.beta < data.beta_min)
+			camera.beta = data.beta_min;
+		else if (camera.beta > data.beta_max)
+			camera.beta = data.beta_max;
 
-	if (camera.radius < data.zoom_min)
-		camera.radius = data.zoom_min;
-	else if (camera.radius > data.zoom_max)
-		camera.radius = data.zoom_max;
+		if (camera.radius < data.current_zoom_min)
+			camera.radius = data.current_zoom_min;
+		else if (camera.radius > data.current_zoom_max)
+			camera.radius = data.current_zoom_max;
+	}	
 };
 
 function checkNearestVillage (config)

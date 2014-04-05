@@ -5,7 +5,7 @@ AUTHOR : LUCIEN, MAX */
 
 function createEvenement (config)
 {
-	addEventListener('mouseup', function (e)
+	addEventListener('mousedown', function (e)
 	{
 		var pickResult = config.scene.pick(e.clientX, e.clientY, function(m){return is_in_white_list(m, config.meshes_white_list)});
 		var normPosDown = mouse.target.x * mouse.target.x + mouse.target.y * mouse.target.y;
@@ -13,11 +13,7 @@ function createEvenement (config)
 		var marginRatio = config.moveToMouseUpSensitivity;
 		if (!config.popUp && pickResult.hit && Math.abs(normPosDown - normPosUp) < normPosUp * marginRatio)
 		{
-			mouse.target_onClick_3D = {
-				x : pickResult.pickedPoint.x,
-				z : pickResult.pickedPoint.z,
-				targeted_mesh : pickResult.pickedMesh
-			};
+			set_mouse_target_onClick_3D(pickResult.pickedPoint.x, pickResult.pickedPoint.z, pickResult.pickedMesh);
 			console.log(mouse.target_onClick_3D.targeted_mesh.name);
 		}
 	});
@@ -46,4 +42,13 @@ function is_in_white_list (m, white_list)
 		if (white_list[i] == m)
 			return true;
 	return false;
+}
+
+function set_mouse_target_onClick_3D (x, z, targeted_mesh)
+{
+	mouse.target_onClick_3D = {
+		x : x,
+		z : z,
+		targeted_mesh : targeted_mesh
+	};
 }
