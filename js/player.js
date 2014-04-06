@@ -25,13 +25,13 @@ function createPlayer (config, bool) // bool == config.isGlobalMap
 	//console.log(getYFromMesh(config.scene, config.player.mesh.position, config.ground.mesh));
 };
 
-function playerMove (config, camera, player)
+function playerMove (config, camera, player, is_active_keyboard)
 {
 	var speed = config.player.speed;
 	var moveX = 0;
 	var moveZ = 0;
 	
-	if (!mouse.target_onClick_3D || config.inputs.X_axis || config.inputs.Y_axis)
+	if (is_active_keyboard && (!mouse.target_onClick_3D || config.inputs.X_axis || config.inputs.Y_axis))
 	{ /* keyboard inputs */
 		mouse.target_onClick_3D = null;
 
@@ -40,7 +40,7 @@ function playerMove (config, camera, player)
 		moveX = distancesXY.z * Math.cos(direction) + distancesXY.x * Math.cos(direction + Math.PI / 2);
 		moveZ = distancesXY.z * Math.sin(direction) + distancesXY.x * Math.sin(direction + Math.PI / 2);
 	}
-	else
+	else if (mouse.target_onClick_3D)
 	{ /* mouse inputs */
 		var distanceX = mouse.target_onClick_3D.x - player.mesh.position.x + 0.5 | 0;
 		var distanceZ = mouse.target_onClick_3D.z - player.mesh.position.z + 0.5 | 0;
@@ -60,6 +60,10 @@ function playerMove (config, camera, player)
 		player.mesh.position.y = config.posHeightMap.y - config.player.y_margin;
 		player.mesh.position.x += stepX;
 		player.mesh.position.z += stepZ;
+	}
+	else if (!config.isGlobalMap)
+	{
+		scene_transition(config, "globalMap");
 	}
 	
 	createPas(config, player.mesh.position.x, player.mesh.position.y - config.player.size / 3, player.mesh.position.z,

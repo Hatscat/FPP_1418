@@ -18,7 +18,7 @@ function createScene (config)
 		config.lightNight.diffuse = new BABYLON.Color3(0.1, 0.1, 0.5);
 		config.light.diffuse = new BABYLON.Color3(config.babylon_light.maxRed, config.babylon_light.maxGreen, config.babylon_light.maxBlue);
 		config.light.intensity = 0;
-		config.lightNight.intensity = 0.8
+		config.lightNight.intensity = 0.8;
 		//config.light.specular = new BABYLON.Color3(1, 1, 1);
 
 
@@ -80,12 +80,12 @@ function set_scene_run_loop (config)
 			var nearestVillage = checkNearestVillage(config);
 
 			if (!bPause && config.camera.radius < config.babylon_camera.current_zoom_min * 1.5)
-				scene_transition(config, nearestVillage.mesh.name, nearestVillage.mesh.position);
+				scene_transition(config, nearestVillage.mesh.name);
 		}
 		else
 		{
 			if (!bPause && config.camera.radius > config.babylon_camera.current_zoom_max)
-				scene_transition(config, "globalMap", config.player.mesh.position);
+				scene_transition(config, "globalMap");
 		}
 
 		if (mouse.target_onOver_3D)
@@ -122,7 +122,7 @@ function set_scene_run_loop (config)
 
 		if (!bPause)
 		{
-			playerMove(config, config.camera, config.player);
+			playerMove(config, config.camera, config.player, !config.ready2ChangeScene);
 
 			if (config.ready2ChangeScene) // ANIM de transition
 			{
@@ -154,8 +154,7 @@ function set_scene_run_loop (config)
 				{
 					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].mesh.name && !grosPopUp)
 					{
-						displayPopUp("previewVillage", config.scenes[config.mapActuelle].popUps.previewVillage)
-
+						displayPopUp("previewVillage", config.scenes[config.mapActuelle].popUps.previewVillage);
 						mouse.target_onClick_3D = null;
 					}
 				}
@@ -175,8 +174,9 @@ function transition_in (config)
 {
 	var nearestVillage = checkNearestVillage(config);
 	set_mouse_target_onClick_3D(nearestVillage.mesh.position.x, nearestVillage.mesh.position.z, nearestVillage.mesh);
+	config.player.speed = config.player._fixed_original_speed * 3;
 
-	if (config.player.mesh.intersectsMesh(nearestVillage.mesh, false)
+	if (config.player.warfog_collider.intersectsMesh(nearestVillage.mesh, false)
 	&&	(config.babylon_camera.current_zoom_max -= config.deltaTime) < 1)
 	{
 		disposeThings(config);
@@ -185,6 +185,7 @@ function transition_in (config)
 		config.camera.radius = config.babylon_camera._fixed_zoom_max * 0.7;
 		config.player.canCollide = false;
 		config.ready2ChangeScene = false;
+		config.player.speed = config.player._fixed_original_speed;
 		createScene(config);
 	}
 }
@@ -204,7 +205,7 @@ function transition_out (config)
 	}
 }
 
-function scene_transition (config, next_scene, village_position)
+function scene_transition (config, next_scene)
 {
 	config.ready2ChangeScene = true;
 	config.mapSuivante = next_scene;

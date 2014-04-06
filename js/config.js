@@ -535,6 +535,7 @@ function getConfig ()
 		},
 		player : {
 			speed : 0.1,
+			_fixed_original_speed : 0.1,
 			y_margin: -0.25,
 			size : 0.5,
 			collider_size : 5,
