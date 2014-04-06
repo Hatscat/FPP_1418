@@ -90,11 +90,13 @@ function set_scene_run_loop (config)
 
 		if (mouse.target_onOver_3D)
 		{
+			var focus = false;
 			for (var v in config.villages)
 			{
 				if (mouse.target_onOver_3D.targeted_mesh.name == config.villages[v].mesh.name)
 				{
-					if(config.isGlobalMap && !bPause && !grosPopUp && !config.ready2ChangeScene)
+					focus = true;
+					if(config.isGlobalMap && !grosPopUp && !config.ready2ChangeScene && !smallPopUp)
 					{
 						displayPopUp("preview", config.scenes[config.mapActuelle].popUps[config.villages[v].mesh.name])
 					}
@@ -104,18 +106,18 @@ function set_scene_run_loop (config)
 						config.villages[v].mesh.material.emissiveColor.r += 0.05 * config.deltaTime;
 					}
 				}
-				else if (config.villages[v].mesh.material.emissiveColor.r > 0)
-				{
+				else if(config.villages[v].mesh.material.emissiveColor.r > 0)
 					config.villages[v].mesh.material.emissiveColor.r -= 0.05 * config.deltaTime;
+			}
+
+			if( (bPause && !grosPopUp  || smallPopUp) && focus == false)
+			{
+				hidePopUp();
 					
-					if (bPause && !grosPopUp)
-					{
-						hidePopUp();
-					}
-				}
 			}
 			mouse.doubleClicks = false;
 		}
+
 		cameraBordersFunction(config.camera, config.babylon_camera, !config.ready2ChangeScene);
 
 		if (!bPause)
@@ -150,9 +152,9 @@ function set_scene_run_loop (config)
 			{
 				for (v in config.villages)
 				{
-					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].mesh.name)
+					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].mesh.name && !grosPopUp)
 					{
-						displayPopUp("PreviewVillage", config.scenes[config.mapActuelle].popUps)
+						displayPopUp("previewVillage", config.scenes[config.mapActuelle].popUps.previewVillage)
 
 						mouse.target_onClick_3D = null;
 					}

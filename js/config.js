@@ -5,6 +5,7 @@ AUTHOR : LUCIEN, MAX */
 
 bPause = false;
 grosPopUp = false;
+smallPopUp = false;
 
 function getConfig ()
 {
@@ -179,25 +180,77 @@ function getConfig ()
 					bumpmap : "img/misc/normal_leaves.jpg"
 				},
 				popUps : {
-					title : "craonne",
-					description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
-					datas : ["8.9", "km²", "76", "habitants"],
-					discussion : [
-						["Question 1", "Réponse 1"],
-						["Question 2", "Réponse 2"],
-						["Question 3", "Réponse 3"],
-						["Question 4", "Réponse 4"]
-					],
-					veilleur : ["Noël Genteur", "maire"],
-					baseline : "Craonne a vécu de grandes choses durant la première guerre mondiale, que veux-tu savoir ?",
-					images : {
-						background : "scenes/craonne/img/background.png",
-						veilleur : "scenes/craonne/img/veilleur.png"
+
+					tuto:
+					{
+						title : "craonne",
+						description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+						datas : ["8.9", "km²", "76", "habitants"],
+						discussion : [
+							["Déplacement", "Cliquez sur la carte pour vous déplacer, maintenez enfonçé pour déplacer la caméra"],
+							["Interaction", "Double cliquez sur un village pour vous y rendre"],
+							["But", "Trouvez les 5 veilleurs de mémoire pour en apprendre plus sur la première guerre mondiale"],
+						],
+						baseline : "Controles",
+						images : {
+							background : "scenes/craonne/img/background.png",
+						},
+						videos : {
+							arrivee : "scenes/craonne/videos/1.OGG",
+							//chanson : ""
+						}
+						
 					},
-					videos : {
-						arrivee : "scenes/craonne/videos/1.OGG",
-						//chanson : ""
-					}
+
+					previewVillage:
+					{
+						title : "craonne",
+						description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+						datas : ["8.9", "km²", "76", "habitants"],
+						discussion : [
+							["Question 1", "Réponse 1"],
+							["Question 2", "Réponse 2"],
+							["Question 3", "Réponse 3"],
+							["Question 4", "Réponse 4"]
+						],
+						veilleur : ["Noël Genteur", "maire"],
+						baseline : "Craonne un village qui sent des pieds",
+						images : {
+							background : "scenes/craonne/img/background.png",
+							veilleur : "scenes/craonne/img/veilleur.png"
+						},
+						videos : {
+							arrivee : "scenes/craonne/videos/1.OGG",
+							//chanson : ""
+						}
+						
+					},
+
+					village:
+					{
+						title : "craonne",
+						description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
+						datas : ["8.9", "km²", "76", "habitants"],
+						discussion : [
+							["Question 1", "Réponse 1"],
+							["Question 2", "Réponse 2"],
+							["Question 3", "Réponse 3"],
+							["Question 4", "Réponse 4"]
+						],
+						veilleur : ["Noël Genteur", "maire"],
+						baseline : "Craonne un village qui rend marteau",
+						images : {
+							background : "scenes/craonne/img/background.png",
+							veilleur : "scenes/craonne/img/veilleur.png"
+						},
+						videos : {
+							arrivee : "scenes/craonne/videos/1.OGG",
+							//chanson : ""
+						}
+						
+					},
+
+
 				},
 				villages : 
 				[

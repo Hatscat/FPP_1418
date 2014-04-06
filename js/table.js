@@ -71,8 +71,9 @@ function createTable (config)
 
 	var materialSupport = new BABYLON.StandardMaterial("texture1", config.scene);
 	materialSupport.bumpTexture = new BABYLON.Texture(config.images.wood_normal, config.scene);
-	materialSupport.bumpTexture .uScale = 5;
-	materialSupport.bumpTexture .vScale = 5;
-	materialSupport.emissiveColor = new BABYLON.Color3(53/255, 65/255, 68/255);
+	materialSupport.bumpTexture .uScale = 10;
+	materialSupport.bumpTexture .vScale = 10;
+	materialSupport.emissiveColor = new BABYLON.Color3(48/255, 35/255, 10/255);
+	materalBois.specularColor = new BABYLON.Color3(0,0,0);
 	config.table.box5.material = materialSupport;	
 };

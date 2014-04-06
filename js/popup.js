@@ -6,16 +6,19 @@ function displayPopUp (type, city)//type "globalmap"
 
 	if(type == "preview")
 		$("#step_preview").fadeIn(400, function(){
-			bPause = true;
+			smallPopUp = true;
 			
 		});
 
 	else
+	{
+		grosPopUp = true;
 		$("#pop_up").fadeIn(400, function(){
 			bPause = true;
-			grosPopUp = true;
 			
 		});
+		
+	}
 
 
 }
@@ -32,7 +35,7 @@ function hidePopUp()
 	});
 
 	$("#step_preview").fadeOut(400, function(){
-		bPause = false;
+		smallPopUp = false;
 			
 	});
 }
@@ -70,22 +73,23 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 		$("#discussion").empty();
 		$("#introduction").text(city.baseline);
 		// Question réponses de la ville
-		for(var i = city.discussion.length; i--;)
-		{
-			$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + city.discussion[i][0] + "<div state='inactive' id='reponse_" + i + "'class='reponse'>" + city.discussion[i][1] + "</div>")
-		}
 
 		// Contenu de la div #linkToVideo
 		// Affichage du bouton adéquat si y'a une video
 		// Images de la popUp
-		$("#go_button").show();
 		$("#pop_content").css("background-image", "url(scenes/"+ city.title + "/img/background.png)");
 		$("#leftPart").hide();
-
+		$("#veilleur_photo").css("background-image", "url(scenes/"+ city.title + "/img/veilleur.png)");
+		
 
 		if(type == "village")
 		{
-			$("#leftPart").show();
+			
+			for(var i = city.discussion.length; i--;)
+			{
+				$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + city.discussion[i][0] + "<div state='inactive' id='reponse_" + i + "'class='reponse'>" + city.discussion[i][1] + "</div>")
+			}
+
 			$("#ville").text(city.title);
 			$("#go_button").hide();
 			// Nom du veilleur
@@ -98,7 +102,29 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 				$("#link").show()
 			}
 
-			$("#veilleur_photo").css("background-image", "url(scenes/"+ city.title + "/img/veilleur.png)");
+			$("#leftPart").show();
+		}
+		
+		if(type == "tuto")
+		{
+			$("#leftPart").show();
+			$("#rightPart").show();
+
+			for(var i = city.discussion.length; i--;)
+			{
+				$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + city.discussion[i][0] + "<div state='inactive' id='reponse_" + i + "'class='reponse'>" + city.discussion[i][1] + "</div>")
+			}
+
+			$("#discussion").show();
+
+
+		}
+
+		if(type == "previewVillage")
+		{
+			$("#go_button").show();
+			$("#leftPart").show();
+
 		}
 
 
