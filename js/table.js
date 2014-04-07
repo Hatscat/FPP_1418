@@ -16,7 +16,7 @@ function createTable (config)
 
 		config.table.box1.position = new BABYLON.Vector3(0,0,-(config.scenes[config.mapActuelle].mapWidth/2));
 		config.table.box1.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
-		config.table.box1.scaling.y = 35*(config.scenes[config.mapActuelle].mapMaxHeight/100);
+		config.table.box1.scaling.y = 40*(config.scenes[config.mapActuelle].mapMaxHeight/100);
 		config.table.box1.scaling.x = config.scenes[config.mapActuelle].mapWidth/4.9;
 	}
 
@@ -27,7 +27,7 @@ function createTable (config)
 	{
 		config.table.box2.position = new BABYLON.Vector3(-(config.scenes[config.mapActuelle].mapWidth/2),0,0);
 		config.table.box2.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
-		config.table.box2.scaling.y = 35*(config.scenes[config.mapActuelle].mapMaxHeight/100);
+		config.table.box2.scaling.y = 40*(config.scenes[config.mapActuelle].mapMaxHeight/100);
 		config.table.box2.scaling.z = config.scenes[config.mapActuelle].mapWidth/5.1;
 	}
 
@@ -37,7 +37,7 @@ function createTable (config)
 	{
 		config.table.box3.position = new BABYLON.Vector3(0,0,(config.scenes[config.mapActuelle].mapWidth/2));
 		config.table.box3.scaling.z = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
-		config.table.box3.scaling.y = 35*(config.scenes[config.mapActuelle].mapMaxHeight/100);
+		config.table.box3.scaling.y = 40*(config.scenes[config.mapActuelle].mapMaxHeight/100);
 		config.table.box3.scaling.x = config.scenes[config.mapActuelle].mapWidth/4.9;
 	}
 
@@ -47,7 +47,7 @@ function createTable (config)
 	{
 		config.table.box4.position = new BABYLON.Vector3((config.scenes[config.mapActuelle].mapWidth/2),0,0);
 		config.table.box4.scaling.x = 0.4*(config.scenes[config.mapActuelle].mapWidth/100);
-		config.table.box4.scaling.y = 35*(config.scenes[config.mapActuelle].mapMaxHeight/100);
+		config.table.box4.scaling.y = 40*(config.scenes[config.mapActuelle].mapMaxHeight/100);
 		config.table.box4.scaling.z = config.scenes[config.mapActuelle].mapWidth/5.1;
 	}
 
@@ -63,17 +63,17 @@ function createTable (config)
 	
 	var materalBois = new BABYLON.StandardMaterial("texture1", config.scene);
 	materalBois.bumpTexture = new BABYLON.Texture(config.images.wood_normal, config.scene);
-	materalBois.bumpTexture .uScale = 5;
-	materalBois.bumpTexture .vScale = 5;
-	materalBois.diffuseColor = new BABYLON.Color3(148/255, 130/255, 101/255);
+	materalBois.bumpTexture.uScale = 5;
+	materalBois.bumpTexture.vScale = 15;
+	materalBois.diffuseColor = new BABYLON.Color3(0.2, 0.15, 0.1);
 	materalBois.specularColor = new BABYLON.Color3(0,0,0);
 	config.table.box1.material = config.table.box2.material = config.table.box3.material = config.table.box4.material = materalBois;
 
 	var materialSupport = new BABYLON.StandardMaterial("texture1", config.scene);
 	materialSupport.bumpTexture = new BABYLON.Texture(config.images.wood_normal, config.scene);
-	materialSupport.bumpTexture .uScale = 10;
-	materialSupport.bumpTexture .vScale = 10;
-	materialSupport.emissiveColor = new BABYLON.Color3(48/255, 35/255, 10/255);
+	materialSupport.bumpTexture.uScale = 40;
+	materialSupport.bumpTexture.vScale = 60;
+	materialSupport.diffuseColor = new BABYLON.Color3(0.2, 0.15, 0.1);
 	materalBois.specularColor = new BABYLON.Color3(0,0,0);
 	config.table.box5.material = materialSupport;	
 };

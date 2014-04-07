@@ -14,7 +14,7 @@ function createPlayer (config, bool) // bool == config.isGlobalMap
 
 		config.player.warfog_collider = BABYLON.Mesh.CreateSphere("player", 2.0, config.player.collider_size, config.scene);
 		var colliderMaterial = new BABYLON.StandardMaterial("colliderMaterial", config.scene);
-		colliderMaterial.alpha = 0.1;
+		colliderMaterial.alpha = 0.0;
 		config.player.warfog_collider.material = colliderMaterial;
 	}
 

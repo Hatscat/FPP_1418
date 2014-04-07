@@ -35,8 +35,8 @@ function getConfig ()
 				mapWidth : 50,
 				mapHeight : 50,
 				subdivisions : 50,
-				bump_width_subdivisions : 50,
-				bump_height_subdivisions : 50,
+				bump_width_subdivisions : 75,
+				bump_height_subdivisions : 75,
 				y_margin: 0,
 				fogDensity : 0,
 				images : {
@@ -167,12 +167,12 @@ function getConfig ()
 			{
 
 				isFisrtTime: true,
-				mapMaxHeight : 2,
-				mapWidth : 50, // /!\ too low!
-				mapHeight : 50, // /!\ too low!
-				subdivisions : 50,
-				bump_width_subdivisions : 50,
-				bump_height_subdivisions : 50,
+				mapMaxHeight : 5,
+				mapWidth : 120, // /!\ too low!
+				mapHeight : 120, // /!\ too low!
+				subdivisions :200,
+				bump_width_subdivisions : 200,
+				bump_height_subdivisions : 200,
 				y_margin: 0,
 				fogDensity : 0.001,
 				images : {
@@ -257,10 +257,10 @@ function getConfig ()
 				[
 					{
 						name : "craonne",
-						x : -12,
-						z : -15,
-						y_margin : 0.4,
-						scale : 0.05,
+						x : -27,
+						z : -39,
+						y_margin : 1.5,
+						scale : 0.1,
 						collider_poly : 6.0,
 						collider_size : 50,
 						mesh_kind : big_village
@@ -268,14 +268,14 @@ function getConfig ()
 				],
 				ArbresPos :	
 				[
-					[-8 , -16, 5 , 9], 
-					[-3 , -20, 3 , 6], 
-					[-1 , -12, 7 , 8], 
-					[8 , -9, 6 , 4], 
-					[-9 , 4.5 , 7 , 4.5], 
-					[-23 , 13 , 5 , 7], 
-					[-17 , 17 , 2 , 4], 
-					[5 , 16 , 4 , 5], 
+					[-19, -38, 12, 21], 
+					[-7, -48, 7, 15], 
+					[-2, -29, 17, 19], 
+					[19, -22, 14, 10], 
+					[-22, 11, 17, 11], 
+					[-55, 31, 12, 17], 
+					[-41, 41, 5, 10], 
+					[12, 38, 10, 15], 
 				],
 			},
 			Pozieres :
@@ -580,7 +580,8 @@ function getConfig ()
 		meshes_white_list: [],
 		tempoRotation: 10,
 		timeRotation: 6000,
-		taille: 0.5,
+		taille: 0.6,
+		tree_dispersion : 0.8,
 		wayOfTheSun: 1,
 		updateTime: 0,
 		isGlobalMap : false,

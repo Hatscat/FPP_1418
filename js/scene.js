@@ -59,7 +59,7 @@ function set_scene_run_loop (config)
 		config.deltaTime = timeSinceLastFrame * 0.06;
 
 		dayNightCycle(config);
-		moveAnimals(config)
+		moveAnimals(config);
 
 		if (onOverResult.hit)
 		{
