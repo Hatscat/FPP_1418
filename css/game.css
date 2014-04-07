@@ -162,6 +162,26 @@ html, body, div
     left: 592px;
 }
 
+#go_button
+{
+    position: absolute;
+    background-color: #e23737;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14pt;
+    cursor: pointer;
+    -webkit-transition: background-color 0.3s;
+}
+
+#go_button
+{
+    width: 75px;
+    height: 44px;
+    top: 320px;
+    left: 561px;
+}
+
 #go_button:hover, #quit_button:hover
 {
     background-color: #bc2b2b;

@@ -6,6 +6,7 @@ AUTHOR : LUCIEN, MAX */
 bPause = false;
 grosPopUp = false;
 smallPopUp = false;
+yAller = false;
 
 function getConfig ()
 {
@@ -208,10 +209,10 @@ function getConfig ()
 						description : "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914.", 
 						datas : ["8.9", "km²", "76", "habitants"],
 						discussion : [
-							["Question 1", "Réponse 1"],
-							["Question 2", "Réponse 2"],
-							["Question 3", "Réponse 3"],
-							["Question 4", "Réponse 4"]
+							["Habitants", "76"],
+							["Surface", "8.9 km²"],
+							["Connue pour", "sa chanson"],
+							["Description", "village situé en picardie, lieu d'une bataille qui le détruisit complètement en 1914."]
 						],
 						veilleur : ["Noël Genteur", "maire"],
 						baseline : "Craonne un village qui sent des pieds",

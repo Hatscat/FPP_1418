@@ -47,6 +47,14 @@ $("#quit_button").click(function()
 	grosPopUp = false;
 })
 
+$("#go_button").click(function()
+{
+	yAller = true;
+	grosPopUp = false;
+	mouse.target_onClick_3D = null;
+	hidePopUp()
+})
+
 // Input : config (json)
 // Initialise la pop-Up en position et contenu
 // @author : Jules D.
@@ -79,8 +87,9 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 		// Images de la popUp
 		$("#pop_content").css("background-image", "url(scenes/"+ city.title + "/img/background.png)");
 		$("#leftPart").hide();
-		$("#veilleur_photo").css("background-image", "url(scenes/"+ city.title + "/img/veilleur.png)");
-		
+		$("#veilleur_photo").css("background-image", "url(scenes/"+ city.title + "/img/persona.jpg)");
+		$("#go_button").hide();
+		$("#link").hide()
 
 		if(type == "village")
 		{
@@ -91,16 +100,14 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 			}
 
 			$("#ville").text(city.title);
-			$("#go_button").hide();
 			// Nom du veilleur
+			$("#veilleur_photo").css("background-image", "url(scenes/"+ city.title + "/img/veilleur.png)");
+
 			$("#veilleur").text(city.veilleur[0]);
 			// Statut du veilleur (maire par exemple)
 			$("#statut").text(city.veilleur[1]);
+			$("#link").show()
 
-			if(city.video)
-			{
-				$("#link").show()
-			}
 
 			$("#leftPart").show();
 		}
@@ -124,6 +131,17 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 		{
 			$("#go_button").show();
 			$("#leftPart").show();
+			$("#link").show()
+			$("#veilleur").text(city.veilleur[0]);
+			$("#ville").text(city.title);
+			
+			$("#veilleur_photo").css("background-image", "url(scenes/"+ city.title + "/img/veilleur.png)");
+
+			for(var i = city.discussion.length; i--;)
+			{
+				$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + city.discussion[i][0] + "<div state='inactive' id='reponse_" + i + "'class='reponse'>" + city.discussion[i][1] + "</div>")
+			}
+			$("#rightPart").show();
 
 		}
 

@@ -40,17 +40,26 @@ window.onload = function ()
 		};
 	};
 
+	config.backSound = new Howl( // crée un son avec howler
+	{ 
+		urls: ['music/David_PalmeroOut_of_time.ogg','music/David_PalmeroOut_of_time.mp3' ],
+		autoplay: false,
+		loop: true,
+		volume: 0.4,
+	});
+
 	for (var s in config.scenes)
 	{
 		extractDataFromHeightMap(config.scenes[s].images.heightmap, config.scenes[s].mapMaxHeight, s, function (data, p_scene)
 		{
 			config.scenes[p_scene].mapData = data;
 			config.numberMapDataLoaded++;
-			if(config.numberMapDataLoaded === config.numberMapDataToLoad)
+			if(config.numberMapDataLoaded === config.numberMapDataToLoad )
 				init(config);
 		});
 	}
-
+/*	displayPopUp("previewVillage", config.scenes["craonne"].popUps.previewVillage)
+*/
 	/*INPUT : config
 	OUTPUT : NONE
 	FONCTION : initialise le jeu permet d'avoir tout de préparé

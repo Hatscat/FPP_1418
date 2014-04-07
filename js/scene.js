@@ -152,7 +152,7 @@ function set_scene_run_loop (config)
 			{
 				for (v in config.villages)
 				{
-					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].mesh.name && !grosPopUp)
+					if (mouse.target_onClick_3D.targeted_mesh.name == config.villages[v].mesh.name && !grosPopUp && !yAller)
 					{
 						displayPopUp("previewVillage", config.scenes[config.mapActuelle].popUps.previewVillage);
 						mouse.target_onClick_3D = null;
@@ -161,6 +161,13 @@ function set_scene_run_loop (config)
 			}
 			else if (!bPause)
 			{
+				if(yAller)
+				{
+
+					var nearestVillage = checkNearestVillage(config);
+					set_mouse_target_onClick_3D(nearestVillage.mesh.position.x, nearestVillage.mesh.position.z, nearestVillage.mesh);
+				}
+				
 				for (var v in config.villages)
 				{
 					checkPlayerCollisions(config.player.mesh, config.villages[v].mesh, config);

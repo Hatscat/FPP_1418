@@ -116,6 +116,7 @@ function checkPlayerCollisions (player, veilleur, config)
 		if (config.playerCanCollide)
 		{
 			config.playerCanCollide = false;
+			yAller = false;
 			displayPopUp("village", config.scenes[config.mapActuelle].popUps.village);
 			mouse.target_onClick_3D = null;
 			config.popUp = false;
