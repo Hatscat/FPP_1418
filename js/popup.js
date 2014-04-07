@@ -42,7 +42,7 @@ function hidePopUp()
 
 $("#quit_button").click(function()
 {
-	hidePopUp()
+	hidePopUp();
 	mouse.target_onClick_3D = null;
 	grosPopUp = false;
 })
@@ -52,7 +52,7 @@ $("#go_button").click(function()
 	yAller = true;
 	grosPopUp = false;
 	mouse.target_onClick_3D = null;
-	hidePopUp()
+	hidePopUp();
 })
 
 // Input : config (json)

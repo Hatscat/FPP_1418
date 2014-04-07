@@ -74,6 +74,8 @@ function playerMove (config, camera, player, is_active_keyboard)
 	camera.target.x = player.mesh.position.x;
 	camera.target.z = player.mesh.position.z;
 	camera.target.y = player.mesh.position.y;
+
+	//console.log(player.mesh.position.x, player.mesh.position.z)
 };
 
 function cameraBordersFunction (camera, data, is_active)

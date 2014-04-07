@@ -27,7 +27,7 @@ function createScene (config)
 		var skybox = createSkybox(config);
 	}
 
-	createLife(config);
+	
 	config.ground = createGroundMesh(config.scene, config.scenes[config.mapActuelle]);
 	createVillages(config);
 	config.isGlobalMap = config.mapActuelle == "globalMap";
@@ -37,8 +37,11 @@ function createScene (config)
 	createTable(config);
 	
 	if (config.scenes[config.mapActuelle].ArbresPos)
+	{
+		createLife(config);
 		createForet(config);
-	
+	}
+
 	initPopUp(config);
 	config.meshes_white_list = [config.ground.mesh];
 
@@ -59,8 +62,7 @@ function set_scene_run_loop (config)
 		config.deltaTime = timeSinceLastFrame * 0.06;
 
 		dayNightCycle(config);
-		moveAnimals(config);
-
+		
 		if (onOverResult.hit)
 		{
 			mouse.target_onOver_3D = {
@@ -72,7 +74,7 @@ function set_scene_run_loop (config)
 
 		if (config.isGlobalMap)
 		{
-			if(config.scenes[config.mapActuelle].isFisrtTime)
+			if (config.scenes[config.mapActuelle].isFisrtTime)
 			{
 				displayPopUp("tuto", config.scenes[config.mapActuelle].popUps.tuto)
 				config.scenes[config.mapActuelle].isFisrtTime = false;
@@ -84,6 +86,8 @@ function set_scene_run_loop (config)
 		}
 		else
 		{
+			moveAnimals(config);
+
 			if (!bPause && config.camera.radius > config.babylon_camera.current_zoom_max)
 				scene_transition(config, "globalMap");
 		}
@@ -159,19 +163,17 @@ function set_scene_run_loop (config)
 					}
 				}
 			}
-			else if (!bPause)
+			if (!bPause)
 			{
-				if(yAller)
-				{
-
-					var nearestVillage = checkNearestVillage(config);
-					set_mouse_target_onClick_3D(nearestVillage.mesh.position.x, nearestVillage.mesh.position.z, nearestVillage.mesh);
-				}
-				
 				for (var v in config.villages)
 				{
 					checkPlayerCollisions(config.player.mesh, config.villages[v].mesh, config);
 				}
+			}
+			if (yAller)
+			{
+				var nearestVillage = checkNearestVillage(config);
+				set_mouse_target_onClick_3D(nearestVillage.mesh.position.x, nearestVillage.mesh.position.z, nearestVillage.mesh);
 			}
 		}
 	});

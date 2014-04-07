@@ -1,41 +1,64 @@
-function createLife(config)
+function createLife (config)
 {
-	config.animals = []
-	var rand = Math.random()*30
+	config.animals 	= [];
+	var rand_nb 	= 20 + Math.random() * 6 | 0;
+	var map 		= config.scenes[config.mapActuelle];
+	var map_w 		= map.mapWidth;
+	var map_h 		= map.mapHeight;
 
-	for(var i=0; i<rand; i++)
+	for (var i = rand_nb; i--;)
 	{
-		var animal 	= {}
-		var randX 	= Math.min( Math.random()*2*config.scenes[config.mapActuelle].mapWidth-config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapWidth)
-		var randZ 	= Math.min( Math.random()*2*config.scenes[config.mapActuelle].mapHeight-config.scenes[config.mapActuelle].mapHeight, config.scenes[config.mapActuelle].mapHeight) 
+		rand_nb 					= Math.random();
+		var rand_nb_2 				= Math.random();
+		var animal 					= {};
+		var randX 					= rand_nb * map_w - map_w / 2;
+		var randZ 					= rand_nb_2 * map_h - map_h / 2;
+		var materiaAnimal 			= new BABYLON.StandardMaterial("texture1", config.scene);
 
-		animal.sphere 			= BABYLON.Mesh.CreateSphere("shpere", 5, 0.5, config.scene);
-		animal.sphere.position 	= new BABYLON.Vector3(randX,getPosOnHeightMap(randX, randZ, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight).y,randZ);
-		animal.speed = Math.random();
-		var materiaAnimal 		= new BABYLON.StandardMaterial("texture1", config.scene);
-		
-		materiaAnimal.diffuseColor 	= new BABYLON.Color3(Math.random(), Math.min(Math.random()+0.5, 1), Math.random());
+		animal.size 				= 0.3;
+		animal.margin_y 			= animal.size / 1.5;
+		animal.sphere 				= BABYLON.Mesh.CreateSphere("sphere", 4, animal.size, config.scene);
+		animal.sphere.position 		= new BABYLON.Vector3(randX, getPosOnHeightMap(randX, randZ, map.mapData, map_w, map_h).y + animal.margin_y, randZ);
+		animal.speed 				= rand_nb * 0.5;
+		animal.direction_x 			= (rand_nb > 0.5) * 2 - 1;
+		animal.direction_z 			= (rand_nb_2 > 0.5) * 2 - 1;
+
+		materiaAnimal.diffuseColor 	= new BABYLON.Color3(rand_nb, rand_nb_2, rand_nb * rand_nb_2);
 		materiaAnimal.specularColor = new BABYLON.Color3(0, 0, 0);
 		animal.sphere.material 		= materiaAnimal;
 		config.animals.push(animal);
 	}
 }
 
-function moveAnimals(config)
+function moveAnimals (config)
 {
-	for(var i=0; i<10; i++)
+	var rand_nb_1 			= Math.random();
+	var rand_nb_2 			= Math.random();
+	var rand_animal 		= rand_nb_1 * (config.animals.length - 1) | 0;
+
+	config.animals[rand_animal].direction_x = (rand_nb_1 > 0.5) * 2 - 1;
+	config.animals[rand_animal].direction_z = (rand_nb_2 > 0.5) * 2 - 1;
+
+	for (var i1 in config.animals)
 	{
-		var rand = Math.floor(Math.random()*(config.animals.length-1));
-		var directionX = Math.floor( (Math.random()*2) )-1; 
-		var directionY = Math.floor( (Math.random()*2) )-1;
+		var step_x = config.animals[i1].direction_x * config.animals[i1].speed * config.deltaTime;
+		var step_z = config.animals[i1].direction_z * config.animals[i1].speed * config.deltaTime;
+		var posHM = getPosOnHeightMap(	config.animals[i1].sphere.position.x + step_x,
+										config.animals[i1].sphere.position.z + step_z,
+										config.scenes[config.mapActuelle].mapData,
+										config.scenes[config.mapActuelle].mapWidth,
+										config.scenes[config.mapActuelle].mapHeight);
 
-		if(config.animals[rand].sphere.position.x + config.animals[rand].speed*directionX < config.scenes[config.mapActuelle].mapWidth && config.animals[rand].sphere.position.x + config.animals[rand].speed*directionX > 0)
-			config.animals[rand].sphere.position.x += config.animals[rand].speed*directionX;
-
-		if(config.animals[rand].sphere.position.z + config.animals[rand].speed*directionY < config.scenes[config.mapActuelle].mapHeight && config.animals[rand].sphere.position.z + config.animals[rand].speed*directionY > 0)
-			config.animals[rand].sphere.position.z += config.animals[rand].speed*directionY;
-
-		config.animals[rand].sphere.position.y = getPosOnHeightMap(config.animals[rand].sphere.position.x, config.animals[rand].sphere.position.z, config.scenes[config.mapActuelle].mapData, config.scenes[config.mapActuelle].mapWidth, config.scenes[config.mapActuelle].mapHeight).y
-
+		if (posHM)
+		{
+			config.animals[i1].sphere.position.y = posHM.y + config.animals[i1].margin_y;
+			config.animals[i1].sphere.position.x += step_x;
+			config.animals[i1].sphere.position.z += step_z;
+		}
+		else
+		{
+			config.animals[rand_animal].direction_x *= -1;
+			config.animals[rand_animal].direction_z *= -1;
+		}
 	}
 }
