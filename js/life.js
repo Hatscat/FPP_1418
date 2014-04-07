@@ -34,7 +34,7 @@ function moveAnimals (config)
 {
 	var rand_nb_1 			= Math.random();
 	var rand_nb_2 			= Math.random();
-	var rand_animal 		= rand_nb_1 * (config.animals.length - 1) | 0;
+	var rand_animal 		= rand_nb_1 * config.animals.length | 0;
 
 	config.animals[rand_animal].direction_x = (rand_nb_1 > 0.5) * 2 - 1;
 	config.animals[rand_animal].direction_z = (rand_nb_2 > 0.5) * 2 - 1;
