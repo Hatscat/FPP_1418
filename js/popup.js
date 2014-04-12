@@ -42,9 +42,15 @@ function hidePopUp()
 
 $("#quit_button").click(function()
 {
-	hidePopUp();
+	hidePopUp()
 	mouse.target_onClick_3D = null;
 	grosPopUp = false;
+})
+
+$("#quit_button2").click(function()
+{
+	$("#videos").fadeOut();
+	$("#pop_up").fadeIn();
 })
 
 $("#go_button").click(function()
@@ -52,7 +58,7 @@ $("#go_button").click(function()
 	yAller = true;
 	grosPopUp = false;
 	mouse.target_onClick_3D = null;
-	hidePopUp();
+	hidePopUp()
 })
 
 // Input : config (json)
@@ -93,10 +99,16 @@ function initPopUp (type, city) // doit initialiser TOUTES les popups ! (pas jus
 
 		if(type == "village")
 		{
-			
+			window.city = city;
 			for(var i = city.discussion.length; i--;)
 			{
 				$("#discussion").append("<div class='question' onclick='reponseToggle(" + i + ")'>" + city.discussion[i][0] + "<div state='inactive' id='reponse_" + i + "'class='reponse'>" + city.discussion[i][1] + "</div>")
+			}
+
+			for(var v in city.videos)
+			{
+				$("#discussion").append("<div class='question' onclick=showVideo('" + v + "')>" + v + "</div>")
+
 			}
 
 			$("#ville").text(city.title);
@@ -169,10 +181,32 @@ function centerPopUp()
 function reponseToggle (index)
 {
 	var reponse = document.getElementById("reponse_" + index)
+
 	if(reponse.active == "active")
-		return;
+	{
+		$("#reponse_" + index).slideDown().attr('active', 'inactive');
+	}
 	// On instancie toutes les réponses inactives
 	$(".reponse").slideUp().attr('active', 'inactive')
 	// On instancie la réponse sélectionnée comme active
 	$("#reponse_" + index).slideDown().attr('active', 'active');
+}
+
+function showVideo(index)
+{
+	if( document.getElementById("reponse_" + index) != null)
+	{
+		$("#pop_up").hide()
+		$("#videos").show();
+	}
+
+	else
+	{
+		$("#pop_up").hide()
+		$("#videos").append($("#quit_button2"))
+		$("#videos").append("<video controls='controls' src='"+ window.city.videos[index] + "' id='reponse_" + index + "' width='2000' height='900' ></video>")
+		$("#videos").show();
+
+	}
+
 }

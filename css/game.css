@@ -153,12 +153,23 @@ html, body, div
     cursor: pointer;
     -webkit-transition: background-color 0.3s;
 }
+
+
 #quit_button
 {
     width: 44px;
     height: 44px;
     background: url(../img/misc/quit_cross.png) center center #e23737 no-repeat;
     top: 0px;
+    left: 592px;
+}
+
+#quit_button2
+{
+    width: 44px;
+    height: 44px;
+    background: url(../img/misc/quit_cross.png) center center #e23737 no-repeat;
+    top: 20px;
     left: 592px;
 }
 
@@ -182,7 +193,7 @@ html, body, div
     left: 561px;
 }
 
-#go_button:hover, #quit_button:hover
+#go_button:hover, #quit_button:hover, #quit_button2:hover
 {
     background-color: #bc2b2b;
 }

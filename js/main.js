@@ -58,8 +58,9 @@ window.onload = function ()
 				init(config);
 		});
 	}
-/*	displayPopUp("previewVillage", config.scenes["craonne"].popUps.previewVillage)
-*/
+	$("#videos").hide();
+	//displayPopUp("village", config.scenes["craonne"].popUps.village)
+
 	/*INPUT : config
 	OUTPUT : NONE
 	FONCTION : initialise le jeu permet d'avoir tout de préparé
